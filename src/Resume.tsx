@@ -11,7 +11,7 @@ export default function RPC() {
   const [title, setTitle] = useState<Resume["title"]>('');
   const [resume, setResume] = useState<Resume["chapters"]>({});
 
-  axios.get(`/${params.resume}.json`).then((res) => {
+  !title && axios.get(`/${params.resume}.json`).then((res) => {
     const { title, chapters} = res.data;
     setTitle(title);
     setResume(chapters);

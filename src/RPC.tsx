@@ -9,7 +9,7 @@ export default function RPC() {
     return typeof resume.name === "string" && typeof resume.link === "string";
   }
 
-  axios.get('/resumes.json').then((res) => {
+  !resumes.length && axios.get('/resumes.json').then((res) => {
     const resumes = res.data;
     if (Array.isArray(resumes)) {
       const filteredResumes = resumes.filter(isResume);
