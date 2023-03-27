@@ -81,8 +81,10 @@ main()
 
 process.on("exit", () => {
   const resumes: { name: string, link: string }[] = []
-  rmdirSync("public/articles", { recursive: true })
-  mkdirSync("public/articles")
+  try {
+    rmdirSync("public/articles", { recursive: true })
+    mkdirSync("public/articles")
+  } catch {}
   cache.forEach(file => {
     const uuid = randomUUID()
     writeFileSync(`public/articles/${uuid}.json`, JSON.stringify(file))
