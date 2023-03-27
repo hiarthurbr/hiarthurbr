@@ -54,6 +54,8 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+      - name: Run get-resume
+        run: pnpm --package=typescript dlx tsc get-resume.ts && node get-resume.js
       - name: Build project
         run: pnpm build
       - name: Setup sketchy routing

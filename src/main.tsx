@@ -1,34 +1,60 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import './index.css'
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import RPC from './RPC';
-import Resume from './Resume';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  type LoaderFunction,
+  type ActionFunction,
+} from "react-router-dom";
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//   },
-//   {
-//     path: "/resumes",
-//     element: <RPC />,
-//   },
-//   {
-//     path: "/resume/:resume",
-//     element: <Resume />,
-//   }
-// ]);
+interface IRoute {
+  path: string;
+  Element: JSX.Element;
+  loader?: LoaderFunction;
+  action?: ActionFunction;
+  ErrorBoundary?: JSX.Element;
+}
+
+// @ts-ignore
+const pages = import.meta.glob("./pages/**/*.tsx", { eager: true });
+
+const routes: IRoute[] = [];
+for (const path of Object.keys(pages)) {
+  const fileName = path.match(/\.\/pages\/(.*)\.tsx$/)?.[1];
+  if (!fileName) {
+    continue;
+  }
+
+  const normalizedPathName = fileName.includes("$")
+    ? fileName.replace("$", ":")
+    : fileName.replace(/\/index/, "");
+
+  routes.push({
+    path: fileName === "index" ? "/" : `/${normalizedPathName.toLowerCase()}`,
+    // @ts-ignore
+    Element: pages[path].default,
+    // @ts-ignore
+    loader: pages[path]?.loader as unknown as LoaderFunction | undefined,
+    // @ts-ignore
+    action: pages[path]?.action as unknown as ActionFunction | undefined,
+    // @ts-ignore
+    ErrorBoundary: pages[path]?.ErrorBoundary as unknown as JSX.Element,
+  });
+}
+
+const router = createBrowserRouter(
+  routes.map(({ Element, ErrorBoundary, ...rest }) => ({
+    ...rest,
+    // @ts-ignore
+    element: <Element />,
+    // @ts-ignore
+    ...(ErrorBoundary && { errorElement: <ErrorBoundary /> }),
+  }))
+);
 
 ReactDOM.createRoot(document.getElementsByTagName('main')[0]).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" Component={App}/>
-        <Route path="/resumes" Component={RPC}/>
-        <Route path="/resume/:resume" Component={Resume}/>
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )

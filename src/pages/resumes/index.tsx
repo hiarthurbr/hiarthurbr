@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-type resumes = typeof import('../public/resumes.json');
+type resumes = typeof import('../../../public/resumes.json');
 
 export default function RPC() {
   const [resumes, setResumes] = useState<resumes>([]);
@@ -24,8 +24,8 @@ export default function RPC() {
       <ul>
         {
           resumes.map((resume) =>
-            <li key={resume.link}>
-              <a className='font-bold text-xl ease-in-out duration-200' href={`/resume/${resume.link}`}>{resume.name}</a>
+            <li key={resume.link} className='m-5'>
+              <a className='font-bold text-xl ease-in-out duration-200' href={`/resumes/${resume.link}`}>{resume.name}</a>
             </li>
           )
         }

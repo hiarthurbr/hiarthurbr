@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import reactLogo from '../assets/react.svg'
+import './index.css'
 import { redirect } from 'react-router-dom'
 
 function App() {
