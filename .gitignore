@@ -14,10 +14,10 @@ dist-ssr
 **/*.json
 public/resumes.json
 public/articles/*
+get-resume.js
+.env
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
 .idea
 .DS_Store
 *.suo

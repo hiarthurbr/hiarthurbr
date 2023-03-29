@@ -19,7 +19,7 @@ export default function RPC() {
 
   return <>
 
-    <article className='prose prose-invert select-none'>
+    <article className='prose dark:prose-invert select-none'>
       <h1 className='text-7xl'>Resumos</h1>
       <ul>
         {
