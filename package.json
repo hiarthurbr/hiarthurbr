@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "get-resume": "pnpm --package=typescript dlx tsc get-resume.ts && node get-resume.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",

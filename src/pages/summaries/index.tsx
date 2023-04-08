@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
-type resumes = typeof import('../../../public/resumes.json');
+interface resume {
+  name: string;
+  link: string;
+}
+type resumes = resume[]
 
 export default function RPC() {
   const [resumes, setResumes] = useState<resumes>([]);
