@@ -34,3 +34,9 @@ function App() {
 }
 
 export default App
+
+export const config: PageConfig = {
+  title: 'Home',
+  description: 'Pagina inicial',
+  showInHeader: true,
+}

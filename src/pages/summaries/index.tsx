@@ -25,11 +25,17 @@ export default function RPC() {
         {
           resumes.map((resume) =>
             <li key={resume.link} className='m-5'>
-              <a className='font-bold text-xl ease-in-out duration-200' href={`/resumes/${resume.link}`}>{resume.name}</a>
+              <a className='font-bold text-xl ease-in-out duration-200' href={`/summaries/${resume.link}`}>{resume.name}</a>
             </li>
           )
         }
       </ul>
     </article>
   </>
+}
+
+export const config: PageConfig = {
+  title: 'Resumos',
+  description: 'Resumos de livros e artigos',
+  showInHeader: true,
 }

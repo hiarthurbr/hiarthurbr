@@ -5,7 +5,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react'
 
 export interface HeaderProps {
-  active: -1 | 1 | 2 | 3 | 4 | 5
+  active: number
 }
 
 interface MenuItems {
@@ -16,13 +16,21 @@ interface MenuItems {
   active: HeaderProps['active'],
   className?: string
 }
-const Items: MenuItems['items'] = [
-  { href: '/', label: 'Home'},
-  { href: '/resumes', label: 'Resumos'},
-  { href: '/shop', label: 'Shopping'},
-  { href: '/curriculum', label: 'Currículo'},
-  //{ href: '/dev', label: 'Dev'},
-]
+
+// @ts-expect-error
+const pages = import.meta.glob<true, string, { default: React.FC, config?: PageConfig }>("../pages/**/*.tsx", { eager: true })
+
+const Items: MenuItems['items'] = Object.keys(pages).map((path) => {
+  const fileName = path.match(/\.\/pages\/(.*)\.([jt]sx|[jt]s)$/)?.[1]
+  if (!fileName || fileName.includes("$") || pages[path].config?.showInHeader == false) {
+    return null;
+  }
+
+  return {
+    href: `/${fileName.replace(/\/index/, "").replaceAll("index", "")}`,
+    label: pages[path].config?.title ?? "Unnamed"
+  }
+}).filter((p) => p !== null) as MenuItems["items"]
 
 function DropdownMenu(props: MenuItems) {
   return (
@@ -92,7 +100,8 @@ function Tabs(props: MenuItems) {
 }
 
 export default function Header(props: HeaderProps) {
-  const imgsrc='/logo.png', title='Arthur Bufalo'
+  // const imgsrc = '/logo.png'
+  const title = 'Arthur Bufalo'
   return <nav className="bg-zinc-200 px-2 sm:px-4 py-2.5 dark:bg-zinc-800 w-full z-20 top-0 left-0 border-b border-slate-200 dark:border-slate-600 sticky dark:bg-opacity-50 bg-opacity-50 backdrop-blur-[8px] rounded-3xl">
   <div className="container flex flex-wrap items-center justify-between mx-auto">
   <a href='/' className="flex items-center text-black dark:text-white">
