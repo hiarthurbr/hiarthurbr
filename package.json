@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "get-resume": "pnpm --package=typescript dlx tsc get-resume.ts && node get-resume.js"
+    "get-resume": "pnpm dlx ts-node get-resume.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
