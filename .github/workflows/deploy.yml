@@ -55,7 +55,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
       - name: Run get-resume
-        run: pnpm dlx ts-node get-resume.ts
+        run: pnpm exec ts-node get-resume.ts
       - name: Build project
         run: pnpm build
       - name: Setup sketchy routing
