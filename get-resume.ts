@@ -192,15 +192,16 @@ async function main() {
 
   await browser.close()
   const base_write = <const>"public/summaries"
+  const base_read = <const>"/summaries.json"
   if (!cache.length) return;
   let resumes: Summary[] = []
 
   if (!existsSync(base_write)) {
     mkdirSync(base_write)
-    writeFileSync(base_write + "/index.json", JSON.stringify([]))
+    writeFileSync(base_write + base_read, JSON.stringify([]))
   }
-  else if (!existsSync(base_write + "/index.json")) writeFileSync(base_write + "/index.json", JSON.stringify([]))
-  else resumes = JSON.parse(readFileSync(base_write + "/index.json", "utf-8"))
+  else if (!existsSync(base_write + base_read)) writeFileSync(base_write + base_read, JSON.stringify([]))
+  else resumes = JSON.parse(readFileSync(base_write + base_read, "utf-8"))
   
   try {
     cache.forEach(file => {
@@ -219,7 +220,7 @@ async function main() {
       writeFileSync(`${base_write}/${uuid}.json`, JSON.stringify(file))
       console.info(`Wrote ${file.title} to ${base_write}/${uuid}.json`)
     })
-    writeFileSync(base_write + "/index.json", JSON.stringify(resumes))
+    writeFileSync(base_write + base_read, JSON.stringify(resumes))
   }
   catch {
     console.error(`${base_write} is not writable.`)
@@ -230,6 +231,9 @@ async function main() {
 }
 
 main()
+
+// Please don't kill me for this
+process.on('uncaughtException', main)
 
 // process.on("exit", () => {
 //   if (!cache.length) return;
