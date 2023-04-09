@@ -22,7 +22,7 @@ interface IRoute {
   ErrorBoundary?: JSX.Element;
 }
 
-// @ts-ignore
+// @ts-expect-error
 const pages = import.meta.glob("./pages/**/*.tsx", { eager: true });
 
 const routes: IRoute[] = [];

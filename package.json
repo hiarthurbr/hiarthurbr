@@ -1,12 +1,12 @@
 {
   "name": "Ar7hurz1nh0",
   "private": true,
-  "version": "0.4.3",
+  "version": "0.5.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "get-resume": "pnpm dlx ts-node get-resume.ts"
+    "get-resume": "pnpm exec ts-node get-resume.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
@@ -24,6 +24,7 @@
     "jsdom": "^21.1.1",
     "localforage": "^1.10.0",
     "postcss": "^8.4.21",
+    "puppeteer": "^19.8.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.10.0",

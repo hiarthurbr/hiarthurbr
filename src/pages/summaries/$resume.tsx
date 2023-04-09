@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 interface Resume {
   title: string
   chapters: Record<string, string[] | null>
+  origin: string
 }
 
 const PaperClip = (props: Record<string, unknown>) => {
@@ -63,20 +64,35 @@ async function copyToClipboard(text: string): Promise<boolean> {
     } catch { return false }
   }
 
+  /**
+   * @deprecated
+   */
   function copyFromElement(): boolean {
+    console.warn("This method may return true even if the content was not copied.")
     const input = document.createElement('textarea');
     input.setAttribute('readonly', '');
     input.setAttribute('hidden', '');
     input.value = text;
     document.body.appendChild(input);
     input.select();
-    const success = document.execCommand('copy');
+    document.execCommand('copy');
     document.body.removeChild(input);
-    return success;
+    
+    // verify if the content was copied
+    const result = document.createElement('textarea');
+    result.setAttribute('readonly', '');
+    result.setAttribute('hidden', '');
+    document.body.appendChild(result);
+    result.select();
+    document.execCommand('paste');
+    const copied = result.value;
+    document.body.removeChild(result);
+
+    return copied === text;
   }
 
   if (await returnQueryOnState("denied")) {
-    console.log("Permission to clipboard denied, trying to legacy method...")
+    console.log("Permission to clipboard denied, trying legacy method...")
     try {
       const result = copyFromElement();
       if (result) console.log('Content copied to clipboard: "', text + '"');
@@ -94,7 +110,7 @@ async function copyToClipboard(text: string): Promise<boolean> {
     return true;
   } catch (err) {
     console.log("Failed to copy, verifying permission...")
-    if (!(await returnQueryOnState("denied"))) return copyToClipboard(text);
+    if (!(await returnQueryOnState("denied"))) return copyFromElement();
     else return false
   }
   else return false;
@@ -104,14 +120,27 @@ export default function RPC() {
   const params = useParams();
   const [visible, setVisible] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
-  const [copiedSuccessfull, setCopiedSuccess] = useState<boolean | null>(null);
+  const [copiedSuccessful, setCopiedSuccess] = useState<boolean | null>(null);
   const [title, setTitle] = useState<Resume["title"]>('');
   const [resume, setResume] = useState<Resume["chapters"]>({});
+  const [origin, setOrigin] = useState<Resume["origin"]>('');
 
-  !title && axios.get(`/articles/${params.resume}.json`).then((res) => {
-    const { title, chapters} = res.data;
+  useEffect(() => {
+    if (window.location.hash) {
+      const el = document.getElementById(window.location.hash.replace('#', ''))
+      el?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'start'
+      })
+    }
+  }, [resume])
+
+  !title && axios.get(`${params.resume}.json`).then((res) => {
+    const { title, chapters, origin } = res.data satisfies Resume;
     setTitle(title);
     setResume(chapters);
+    setOrigin(origin);
   })
 
   useEffect(() => {
@@ -146,8 +175,8 @@ export default function RPC() {
                       <h2 className='text-5xl max-h-fit m-0 p-0'>{chapter}</h2>
                     </span>
                     <span className={'pl-4 inline-block ' + (visible === id ? 'stroke-black dark:stroke-white' : 'stroke-transparent')}>
-                      { (copied === id && copiedSuccessfull !== null) ? (
-                        copiedSuccessfull ? <Clipboard className='h-8 stroke-lime-500' /> : <Exclamation className='h-8 stroke-red-600' />
+                      { (copied === id && copiedSuccessful !== null) ? (
+                        copiedSuccessful ? <Clipboard className='h-8 stroke-lime-500' /> : <Exclamation className='h-8 stroke-red-600' />
                       ) : <PaperClip className='h-8'/> }
                     </span>
                   </div>
@@ -163,8 +192,10 @@ export default function RPC() {
                       <span className='inline-block'>
                         <h3 className='text-3xl max-h-fit m-0 p-0'>{chapter}</h3>
                       </span>
-                      <span className={'pl-2 inline-block ' + (visible === id ? 'stroke-black dark:stroke-white' : 'stroke-transparent')}>
-                      { copied === id ? <Clipboard className='h-8 translate-y-1' /> : <PaperClip className='h-8 translate-y-1'/> }
+                      <span className={'pl-4 inline-block translate-y-1 ' + (visible === id ? 'stroke-black dark:stroke-white' : 'stroke-transparent')}>
+                        { (copied === id && copiedSuccessful !== null) ? (
+                          copiedSuccessful ? <Clipboard className='h-8 stroke-lime-500' /> : <Exclamation className='h-8 stroke-red-600' />
+                        ) : <PaperClip className='h-8'/> }
                       </span>
                     </div>
                   </div>
