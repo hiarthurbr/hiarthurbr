@@ -233,16 +233,16 @@ async function main() {
 main()
 
 // Please don't kill me for this
-let funCounter = 0;
-process.on('uncaughtException', async () => {
-  if (funCounter >= 10) {
-    console.error("Ending the fun as it's probably other people's fault")
-    return;
-  }
-  await browser.close()
-  console.log("Restarting thread for the", ++funCounter, "time")
-  main()
-})
+// let funCounter = 0;
+// process.on('uncaughtException', async () => {
+//   if (funCounter >= 10) {
+//     console.error("Ending the fun as it's probably other people's fault")
+//     return;
+//   }
+//   await browser.close()
+//   console.log("Restarting thread for the", ++funCounter, "time")
+//   main()
+// })
 
 // process.on("exit", () => {
 //   if (!cache.length) return;
