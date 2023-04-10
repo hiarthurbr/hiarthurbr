@@ -15,8 +15,12 @@ interface Summary {
   link: `${string}-${string}-${string}-${string}-${string}`;
   hash: string;
 }
-
-const base_pages: readonly string[] = [
+interface SummaryPage {
+  title: string;
+  chapters: cache;
+  origin: string;
+}
+const base_pages: string[] = [
   "https://www.resumoporcapitulo.com.br/triste-fim-de-policarpo-quaresma",
   "https://www.resumoporcapitulo.com.br/ang%C3%BAstia",
   "https://www.resumoporcapitulo.com.br/vidas-secas",
@@ -29,11 +33,6 @@ const chapter_selector = "p.mm8Nw._1j-51.roLFQS._1FoOD._1oG79.WJlzbz.roLFQS.publ
 const title_selector = "h2.eSWI6._1j-51._1FoOD._1oG79.WJlzbz.roLFQS.public-DraftStyleDefault-block-depth0.fixed-tab-size.public-DraftStyleDefault-text-ltr"
 
 type cache = Record<string, string[] | null>
-const cache: {
-  title: string,
-  chapters: cache,
-  origin: string
-}[] = []
 
 /**
  * Get all links, chapters and title from a summary page
@@ -111,21 +110,8 @@ async function getPage(value: [string[], false | [string, string][], string]) {
   };
 }
 
-async function main() {
-  // {
-  //   const links = await Promise.all(base_pages.map(getLinksChaptersAndTitle))
-  //   links.map(getPage).forEach(page => {
-  //     page.then(textCache => cache.push(textCache))
-  //   })
-  // }
-
-  browser = await launch()
-
-  const cache: {
-    title: string,
-    chapters: cache,
-    origin: string
-  }[] = await Promise.all(base_pages.map(async url => {
+async function scrapePages(urls: string[]): Promise<PromiseSettledResult<SummaryPage>[]> {
+  return await Promise.allSettled(base_pages.map(async url => {
     const page = await browser.newPage()
     await page.goto(url)
     console.log(`Fetching ${url}...`)
@@ -187,11 +173,33 @@ async function main() {
     return {
       title,
       chapters: textCache,
-      origin: new URL(url).origin
+      origin: url
     }
   }))
+}
 
-  await browser.close()
+async function main() {
+  // {
+  //   const links = await Promise.all(base_pages.map(getLinksChaptersAndTitle))
+  //   links.map(getPage).forEach(page => {
+  //     page.then(textCache => cache.push(textCache))
+  //   })
+  // }
+
+  const cache: SummaryPage[] = []
+
+  while(cache.length < base_pages.length) {
+    browser = await launch()
+    let build = await scrapePages(base_pages)
+    build.forEach(page => {
+      if (page.status === "fulfilled") {
+        cache.push(page.value)
+        base_pages.splice(base_pages.indexOf(page.value.origin), 1)
+      }
+    })
+    await browser.close()
+  }
+
   const base_write = <const>"public/summaries"
   const base_read = <const>"/summaries.json"
   if (!cache.length) return;
