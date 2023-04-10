@@ -18,7 +18,9 @@ interface Summary {
 
 const base_pages: readonly string[] = [
   "https://www.resumoporcapitulo.com.br/triste-fim-de-policarpo-quaresma",
-  "https://www.resumoporcapitulo.com.br/ang%C3%BAstia"
+  "https://www.resumoporcapitulo.com.br/ang%C3%BAstia",
+  "https://www.resumoporcapitulo.com.br/vidas-secas",
+  "https://www.resumoporcapitulo.com.br/macuna%C3%ADma",
 ]
 
 const link_selector = "a._3Bkfb._1lsz7"
