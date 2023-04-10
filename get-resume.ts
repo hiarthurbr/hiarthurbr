@@ -147,8 +147,6 @@ async function main() {
         ?.textContent !== 'Deixe seu comentário:'
       )
 
-      throw 'nah'
-
       const format = query.map(el => [
         el.textContent!,
         el.parentElement
