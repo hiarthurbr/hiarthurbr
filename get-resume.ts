@@ -191,11 +191,16 @@ async function main() {
   while(cache.length < base_pages.length) {
     browser = await launch()
     let build = await scrapePages(base_pages)
-    build.forEach(page => {
+    build.forEach((page, i) => {
       if (page.status === "fulfilled") {
         cache.push(page.value)
         base_pages.splice(base_pages.indexOf(page.value.origin), 1)
       }
+      else {
+        const error = page.reason.message
+        const width = base_pages[i].length > error.length ? base_pages[i].length : error.length
+        const error_padding = error.length < width ? " ".repeat(width - error.length) : ""
+        console.error(`${'-'.repeat(width +2)}\n|${base_pages[i]}${" ".repeat(width - base_pages[i].length)}|\n|${error}${error_padding}|\n${'-'.repeat(width +2)}`)}
     })
     await browser.close()
   }
