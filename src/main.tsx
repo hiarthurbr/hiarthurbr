@@ -74,6 +74,8 @@ const App = () => {
         signOut();
       }
     });
+
+    if (window.location.origin === "http://arthurbr.me") window.location.href = window.location.href.replace("http://arthurbr.me", "https://arthurbr.me")
   }, []);
 
   return <RouterProvider router={router} />;
