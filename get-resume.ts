@@ -178,6 +178,8 @@ async function scrapePages(urls: string[]): Promise<PromiseSettledResult<Summary
   }))
 }
 
+const Cache: SummaryPage[] = []
+
 async function main() {
   // {
   //   const links = await Promise.all(base_pages.map(getLinksChaptersAndTitle))
@@ -186,28 +188,27 @@ async function main() {
   //   })
   // }
 
-  const cache: SummaryPage[] = []
-
-  while(cache.length < base_pages.length) {
+  const cache_link_pages = [...base_pages] 
+  while(Cache.length < base_pages.length) {
     browser = await launch()
-    let build = await scrapePages(base_pages)
+    let build = await scrapePages(cache_link_pages)
     build.forEach((page, i) => {
       if (page.status === "fulfilled") {
-        cache.push(page.value)
-        base_pages.splice(base_pages.indexOf(page.value.origin), 1)
+        Cache.push(page.value)
+        cache_link_pages.splice(cache_link_pages.indexOf(page.value.origin), 1)
       }
       else {
         const error = page.reason.message
-        const width = base_pages[i].length > error.length ? base_pages[i].length : error.length
+        const width = cache_link_pages[i].length > error.length ? cache_link_pages[i].length : error.length
         const error_padding = error.length < width ? " ".repeat(width - error.length) : ""
-        console.error(`${'-'.repeat(width +2)}\n|${base_pages[i]}${" ".repeat(width - base_pages[i].length)}|\n|${error}${error_padding}|\n${'-'.repeat(width +2)}`)}
+        console.error(`${'-'.repeat(width +2)}\n|${cache_link_pages[i]}${" ".repeat(width - cache_link_pages[i].length)}|\n|${error}${error_padding}|\n${'-'.repeat(width +2)}`)}
     })
     await browser.close()
   }
 
   const base_write = <const>"public/summaries"
   const base_read = <const>"/summaries.json"
-  if (!cache.length) return;
+  if (!Cache.length) return;
   let resumes: Summary[] = []
 
   if (!existsSync(base_write)) {
@@ -218,7 +219,7 @@ async function main() {
   else resumes = JSON.parse(readFileSync(base_write + base_read, "utf-8"))
   
   try {
-    cache.forEach(file => {
+    Cache.forEach(file => {
       const i = resumes.findIndex(summary => summary.name === file.title)
       const hash = sha256(JSON.stringify(file))
       let uuid = randomUUID()
@@ -245,19 +246,6 @@ async function main() {
 }
 
 main()
-
-// Please don't kill me for this
-let funCounter = 0;
-process.on('uncaughtException', async e => {
-  if (funCounter >= 10) {
-    console.error("Ending the fun as it's probably other people's fault")
-    process.exit(69)
-  }
-  await browser.close()
-  console.error(e)
-  console.log("Restarting thread for the", ++funCounter, "time")
-  main()
-})
 
 // process.on("exit", () => {
 //   if (!cache.length) return;
