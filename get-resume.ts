@@ -2,7 +2,7 @@ import { JSDOM } from "jsdom"
 import axios from "axios"
 import { LinkHTMLAttributes } from "react"
 import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs'
-import { randomUUID, createHash } from 'crypto'
+import { createHash } from 'crypto'
 import { type Browser, launch } from 'puppeteer'
 
 const sha256 = (str: string) => createHash('sha256').update(str).digest('hex')
@@ -220,7 +220,7 @@ async function main() {
   
   try {
     Cache.forEach(file => {
-      const title_hash = sha256(file.title)
+      const title_hash = sha256(file.title).slice(0, 12)
       const i = resumes.findIndex(summary => summary.link === title_hash)
       const hash = sha256(JSON.stringify(file))
       if (i !== -1) {

@@ -158,9 +158,9 @@ export default function RPC() {
         Object.entries(resume).map(([chapter, paragraphs]) => {
           let id = chapter.toLowerCase().replaceAll(' ', '-').normalize('NFD').replace(/[\u0300-\u036f]/g, "");
           while (id.includes('--')) id = id.replaceAll('--', '-');
-          return <section key={chapter}>
+          return <div key={chapter}>
               { paragraphs === null ?
-                <div id={id} className='pt-12 pb-8 flex justify-center max-md:flex-col max-md:items-center'>
+                <div id={id} className='pt-12 md:pb-8 flex justify-center max-md:flex-col max-md:items-center'>
                   <div
                     className='p-1 md:ml-12 px-4 border-4 rounded-xl border-transparent hover:border-black dark:hover:border-white'
                     onMouseEnter={() => setVisible(id)}
@@ -177,8 +177,8 @@ export default function RPC() {
                     ) : <PaperClip className='h-10'/> }
                   </span>
                 </div> :
-                <>
-                  <div id={id} className='pt-12 pb-2 flex justify-center max-md:flex-col max-md:items-center'>
+                <section>
+                  <div id={id} className='max-md:pt-6 md:pt-12 md:pb-2 flex justify-center max-md:flex-col max-md:items-center'>
                     <div
                       className='p-1 md:ml-12 px-4 border-2 rounded-xl border-transparent hover:border-black dark:hover:border-white'
                       onMouseEnter={() => setVisible(id)}
@@ -196,9 +196,9 @@ export default function RPC() {
                     </span>
                   </div>
                   { paragraphs.map(paragraph => <p className='text-xl font-semibold' key={paragraph}>{paragraph}</p>) }
-                </>
+                </section>
               }
-            </section>
+            </div>
           }
         )
       }
