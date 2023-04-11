@@ -12,7 +12,7 @@ type linkName = string
 type chapterName = string
 interface Summary {
   name: string;
-  link: `${string}-${string}-${string}-${string}-${string}`;
+  link: string;
   hash: string;
 }
 interface SummaryPage {
@@ -114,7 +114,7 @@ async function scrapePages(urls: string[]): Promise<PromiseSettledResult<Summary
   return await Promise.allSettled(urls.map(async url => {
     const page = await browser.newPage()
     await page.goto(url)
-    console.log(`Fetching ${url}...`)
+    console.log(`Fetching base page: ${url}`)
     const links = await Promise.all(
       Array.from(await page.$$(link_selector))
         .map(async link => await (await link.getProperty('href')).jsonValue()))
@@ -220,20 +220,19 @@ async function main() {
   
   try {
     Cache.forEach(file => {
-      const i = resumes.findIndex(summary => summary.name === file.title)
+      const title_hash = sha256(file.title)
+      const i = resumes.findIndex(summary => summary.link === title_hash)
       const hash = sha256(JSON.stringify(file))
-      let uuid = randomUUID()
       if (i !== -1) {
         if (resumes[i].hash == hash) {
           console.info(`Skipping ${file.title}...`)
           return;
         }
-        uuid = resumes[i].link;
         resumes[i].hash = hash
       }
-      else resumes.push({ name: file.title, link: uuid, hash })
-      writeFileSync(`${base_write}/${uuid}.json`, JSON.stringify(file))
-      console.info(`Wrote ${file.title} to ${base_write}/${uuid}.json`)
+      else resumes.push({ name: file.title, link: title_hash, hash })
+      writeFileSync(`${base_write}/${title_hash}.json`, JSON.stringify(file))
+      console.info(`Wrote ${file.title} to ${base_write}/${title_hash}.json`)
     })
     writeFileSync(base_write + base_read, JSON.stringify(resumes))
   }
