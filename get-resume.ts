@@ -111,7 +111,7 @@ async function getPage(value: [string[], false | [string, string][], string]) {
 }
 
 async function scrapePages(urls: string[]): Promise<PromiseSettledResult<SummaryPage>[]> {
-  return await Promise.allSettled(base_pages.map(async url => {
+  return await Promise.allSettled(urls.map(async url => {
     const page = await browser.newPage()
     await page.goto(url)
     console.log(`Fetching ${url}...`)
@@ -199,9 +199,9 @@ async function main() {
       }
       else {
         const error = page.reason.message
-        const width = cache_link_pages[i].length > error.length ? cache_link_pages[i].length : error.length
-        const error_padding = error.length < width ? " ".repeat(width - error.length) : ""
-        console.error(`${'-'.repeat(width +2)}\n|${cache_link_pages[i]}${" ".repeat(width - cache_link_pages[i].length)}|\n|${error}${error_padding}|\n${'-'.repeat(width +2)}`)}
+        const width = cache_link_pages[i]?.length > error?.length ? cache_link_pages[i]?.length : error?.length
+        const error_padding = error?.length < width ? " ".repeat(width - error?.length) : ""
+        console.error(`${'-'.repeat(width +2)}\n|${cache_link_pages[i]}${" ".repeat(width - cache_link_pages[i]?.length)}|\n|${error}${error_padding}|\n${'-'.repeat(width +2)}`)}
     })
     await browser.close()
   }

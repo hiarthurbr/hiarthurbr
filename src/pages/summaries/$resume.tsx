@@ -128,11 +128,7 @@ export default function RPC() {
   useEffect(() => {
     if (window.location.hash) {
       const el = document.getElementById(window.location.hash.replace('#', ''))
-      el?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'start'
-      })
+      el?.scrollIntoView({ behavior: 'smooth' })
     }
   }, [resume])
 
@@ -164,9 +160,9 @@ export default function RPC() {
           while (id.includes('--')) id = id.replaceAll('--', '-');
           return <section key={chapter}>
               { paragraphs === null ?
-                <div id={id} className='pt-12 pb-8 flex justify-center'>
+                <div id={id} className='pt-12 pb-8 flex justify-center max-md:flex-col max-md:items-center'>
                   <div
-                    className='p-1 pl-12 border-2 rounded-xl border-transparent hover:border-black dark:hover:border-white'
+                    className='p-1 md:ml-12 px-4 border-4 rounded-xl border-transparent hover:border-black dark:hover:border-white'
                     onMouseEnter={() => setVisible(id)}
                     onMouseLeave={() => setVisible(null)}
                     onClick={() => setCopied(id)}
@@ -174,17 +170,17 @@ export default function RPC() {
                     <span className='inline-block'>
                       <h2 className='text-5xl max-h-fit m-0 p-0'>{chapter}</h2>
                     </span>
-                    <span className={'pl-4 inline-block ' + (visible === id ? 'stroke-black dark:stroke-white' : 'stroke-transparent')}>
-                      { (copied === id && copiedSuccessful !== null) ? (
-                        copiedSuccessful ? <Clipboard className='h-8 stroke-lime-500' /> : <Exclamation className='h-8 stroke-red-600' />
-                      ) : <PaperClip className='h-8'/> }
-                    </span>
                   </div>
+                  <span className={'pl-4 inline-block translate-y-3 ' + (visible === id ? 'stroke-black dark:stroke-white' : 'stroke-transparent')}>
+                    { (copied === id && copiedSuccessful !== null) ? (
+                      copiedSuccessful ? <Clipboard className='h-10 stroke-lime-500' /> : <Exclamation className='h-10 stroke-red-600' />
+                    ) : <PaperClip className='h-10'/> }
+                  </span>
                 </div> :
                 <>
-                  <div id={id} className='pt-12 pb-2 flex justify-center'>
+                  <div id={id} className='pt-12 pb-2 flex justify-center max-md:flex-col max-md:items-center'>
                     <div
-                      className='p-1 pl-9 border-2 rounded-xl border-transparent hover:border-black dark:hover:border-white'
+                      className='p-1 md:ml-12 px-4 border-2 rounded-xl border-transparent hover:border-black dark:hover:border-white'
                       onMouseEnter={() => setVisible(id)}
                       onMouseLeave={() => setVisible(null)}
                       onClick={() => setCopied(id)}
@@ -192,12 +188,12 @@ export default function RPC() {
                       <span className='inline-block'>
                         <h3 className='text-3xl max-h-fit m-0 p-0'>{chapter}</h3>
                       </span>
-                      <span className={'pl-4 inline-block translate-y-1 ' + (visible === id ? 'stroke-black dark:stroke-white' : 'stroke-transparent')}>
-                        { (copied === id && copiedSuccessful !== null) ? (
-                          copiedSuccessful ? <Clipboard className='h-8 stroke-lime-500' /> : <Exclamation className='h-8 stroke-red-600' />
-                        ) : <PaperClip className='h-8'/> }
-                      </span>
                     </div>
+                    <span className={'pl-4 inline-block translate-y-2 ' + (visible === id ? 'stroke-black dark:stroke-white' : 'stroke-transparent')}>
+                      { (copied === id && copiedSuccessful !== null) ? (
+                        copiedSuccessful ? <Clipboard className='h-8 stroke-lime-500' /> : <Exclamation className='h-8 stroke-red-600' />
+                      ) : <PaperClip className='h-8'/> }
+                    </span>
                   </div>
                   { paragraphs.map(paragraph => <p className='text-xl font-semibold' key={paragraph}>{paragraph}</p>) }
                 </>
