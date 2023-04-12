@@ -148,17 +148,26 @@ async function scrapePages(urls: string[]): Promise<PromiseSettledResult<Summary
     })
     await page.close();
 
-    const texts: [number, [string, string[] | null]][] = (await Promise.all(links.map(async (link, index) => {
-      const page = await browser.newPage()
-      console.log(`${title}: fetching ${link}...`)
-      await page.goto(link)
+    const texts: [number, [string, string[] | null]][] = [];
 
-      const chapter_title = await page.$$eval(title_selector, titles => titles.pop()!.textContent!)
-      const text = await page.$$eval(text_selector, texts => texts.map(text => text.textContent!))
+    let get_links = links.map((link, index) => [link, index] satisfies [string, number])
+    while (texts.length < links.length) {
+      const results = await Promise.allSettled(get_links.map(async ([link, index], i) => {
+        const page = await browser.newPage()
+        console.log(`${title}: fetching ${link}...`)
+        await page.goto(link)
+    
+        const chapter_title = await page.$$eval(title_selector, titles => titles.pop()!.textContent!)
+        const text = await page.$$eval(text_selector, texts => texts.map(text => text.textContent!))
+    
+        await page.close()
+        texts.push([ index, [ chapter_title, text ] ]);
+        get_links.slice(i, 0)
+      }))
+      results.filter(result => result.status === 'rejected')
+    }
 
-      await page.close()
-      return [ index, [ chapter_title, text ] ] satisfies [number, [string, string[] | null]]
-    }))).sort((a, b) => a[0] - b[0])
+    texts.sort((a, b) => a[0] - b[0])
 
     if (chapters) chapters
       .filter(chapter => !(texts.map(x => x[1][0]).includes(chapter[0])))
