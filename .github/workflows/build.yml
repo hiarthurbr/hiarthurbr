@@ -1,7 +1,11 @@
-name: Build, Test and Lint
+name: Lint and Test
 
 on:
-  - push
+  push:
+    branches:
+      - '**'
+      - '!master'
+      - '!content'
  
 concurrency:
   group: 'pages'
