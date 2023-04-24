@@ -47,7 +47,5 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Rebuild modules
         run: pnpm rebuild
-      - name: Run get-resume
-        run: pnpm exec ts-node get-resume.ts
       - name: Build project
         run: pnpm build
