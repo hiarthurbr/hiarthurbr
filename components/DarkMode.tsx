@@ -2,12 +2,16 @@ import { useEffect, useState } from 'react'
 import { Switch } from '@headlessui/react'
 
 export default function DarkMode() {
-  const [enabled, setEnabled] = useState(
-    (localStorage.getItem('dark-mode') ?
-      JSON.parse(localStorage.getItem('dark-mode') as string)
-        : null) ??
-      document.documentElement.classList.contains('dark')
-    )
+  const [enabled, setEnabled] = useState<boolean>(
+    typeof localStorage === 'undefined' ? true :
+    (localStorage.getItem('dark-mode') !== null ?
+      JSON.parse(
+        localStorage.getItem('dark-mode')
+          ?? 'null' satisfies string | null) as boolean | null
+          ?? document.documentElement.classList.contains('dark')
+        : true
+      )
+    );
   useEffect(() => {
     console.log(enabled ? 'Enabling dark mode' : 'Disabling dark mode')
     if (enabled) {
@@ -21,7 +25,7 @@ export default function DarkMode() {
   }, [enabled])
 
   return (
-    <div className="translate-y-2.5 mr-6 max-md:translate-y-3.5 max-md::mr-3">
+    <div className="translate-y-3 mr-6 max-md:translate-y-3 max-md::mr-3">
       <Switch
         checked={enabled}
         onChange={setEnabled}

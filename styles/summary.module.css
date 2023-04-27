@@ -1,0 +1,24 @@
+.scrollbar {
+  overflow-y: hidden;
+  overflow-x: scroll;
+  scrollbar-color: grey transparent;
+  scrollbar-width: auto;
+  scrollbar-gutter: stable;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+.scrollbar::-webkit-scrollbar {
+  height: .3rem;
+  background-color: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+  background-color: grey;
+}

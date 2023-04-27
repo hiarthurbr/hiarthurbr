@@ -1,4 +1,4 @@
-import { useAuth } from "../db";
+import { useAuth } from "@lib/db";
 
 type Props = {};
 

@@ -1,9 +1,7 @@
-import { useState } from 'react'
-import { Tab } from '@headlessui/react'
+import { useState, Fragment } from 'react'
+import { Menu, Transition, Tab } from '@headlessui/react';
 import Darkmode from './DarkMode';
-import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react'
-
+import Link from 'next/link';
 export interface HeaderProps {
   active: number
 }
@@ -17,24 +15,21 @@ interface MenuItems {
   className?: string
 }
 
-// @ts-expect-error
-const pages = import.meta.glob<true, string, { default: React.FC, config?: PageConfig }>("../pages/**/*.tsx", { eager: true })
+const pages: Array<{ title: string, href: string }> = [
+  { title: 'Home', href: '/' },
+  { title: 'Resumos', href: '/summaries' },
+]
 
-const Items: MenuItems['items'] = Object.keys(pages).map((path) => {
-  const fileName = path.match(/\.\/pages\/(.*)\.([jt]sx|[jt]s)$/)?.[1]
-  if (!fileName || fileName.includes("$") || pages[path].config?.showInHeader == false) {
-    return null;
-  }
-
+const Items: MenuItems['items'] = pages.map(({ href, title }) => {
   return {
-    href: `/${fileName.replace(/\/index/, "").replaceAll("index", "")}`,
-    label: pages[path].config?.title ?? "Unnamed"
+    href,
+    label: title
   }
-}).filter((p) => p !== null) as MenuItems["items"]
+})
 
 function DropdownMenu(props: MenuItems) {
   return (
-    <div className="text-right">
+    <div className="text-right my-0.5">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex items-center p-2 text-sm text-slate-500 rounded-lg lg:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600 py-2.5 px-2.5">
@@ -103,20 +98,20 @@ export default function Header(props: HeaderProps) {
   // const imgsrc = '/logo.png'
   const title = 'Arthur Bufalo'
   return <nav className="bg-zinc-200 px-2 sm:px-4 py-2.5 dark:bg-zinc-800 w-full z-20 top-0 left-0 border-b border-slate-200 dark:border-slate-600 sticky dark:bg-opacity-50 bg-opacity-50 backdrop-blur-[8px] rounded-3xl">
-  <div className="container flex flex-wrap items-center justify-between mx-auto">
-  <a href='/' className="flex items-center text-black dark:text-white">
+  <div className="flex flex-wrap items-center justify-between ml-4 max-sm:ml-1">
+  <Link href='/' className="flex items-center text-black dark:text-white order-1">
       {/* <img src={imgsrc} className="mr-3 h-10 pl-3 max-sm:h-9 max-sm:pl-0" alt={title + ' Logo'} /> */}
-      <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white block pl-6">{title}</span>
-  </a>
-  <div className="flex md:order-2 space-x-1">
+      <span className="self-start text-xl font-semibold whitespace-nowrap dark:text-white block">{title}</span>
+  </Link>
+  <div className="flex order-last space-x-1 ">
       <Darkmode />
-      <a type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 max-md:px-2 py-3 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden lg:block h-12" href='/register'>Registre-se</a>
-      <a type='button' className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-3 my-0.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 block lg:hidden h-12 aspect-1' href='/register'>
+      <Link type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 max-md:px-2 py-3 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden lg:block h-12" href='/register'>Registre-se</Link>
+      <Link type='button' className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-3 my-0.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 block lg:hidden h-12 aspect-1' href='/register'>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
         </svg>
-      </a>
-      <DropdownMenu className='inline-flex items-center p-2 text-sm text-slate-500 rounded-lg lg:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600' data-collapse-toggle="navbar-sticky" aria-controls="navbar-sticky" aria-expanded="false" items={Items} active={-1} />
+      </Link>
+      <DropdownMenu className='p-3 rounded-lg lg:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600 h-12 aspect-1' data-collapse-toggle="navbar-sticky" aria-controls="navbar-sticky" aria-expanded="false" items={Items} active={-1} />
   </div>
   <div className="items-center justify-between hidden w-full lg:flex md:w-auto md:order-1" id="navbar-sticky">
     <div className="flex flex-col mt-4 border border-slate-100 rounded-lg bg-slate-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 bg-transparent dark:bg-transparent">
