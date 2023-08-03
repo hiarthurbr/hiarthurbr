@@ -139,13 +139,7 @@ async function main() {
       const title_hash = sha256(file.title).slice(0, 12)
       const i = resumes.findIndex(summary => summary.link === title_hash)
       const hash = sha256(JSON.stringify(file))
-      if (i !== -1) {
-        if (resumes[i]?.hash == hash) {
-          console.info(`Skipping ${file.title}...`)
-          return;
-        }
-        resumes[i]!.hash = hash
-      }
+      if (i !== -1) resumes[i]!.hash = hash
       else resumes.push({ name: file.title, link: title_hash, hash })
       writeFileSync(`${base_write_chapters}/${title_hash}.json`, JSON.stringify(file))
       console.info(`Wrote ${file.title} to ${base_write_chapters}/${title_hash}.json`)
