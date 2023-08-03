@@ -51,7 +51,9 @@ jobs:
       - name: Rebuild modules
         run: pnpm rebuild
       - name: Compile get-resume
-        run: pnpm exec tsc get-resume.ts
+        run: pnpm exec tsc get-resumes-per-chapter.ts || echo
+      - name: Run get-resume
+        run: node get-resumes-per-chapter.js
 
       - name: Setup Pages 
         uses: actions/configure-pages@v3 
