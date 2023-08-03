@@ -48,6 +48,10 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Rebuild modules
+        run: pnpm rebuild
+      - name: Compile get-resume
+        run: pnpm exec tsc get-resume.ts
 
       - name: Setup Pages 
         uses: actions/configure-pages@v3 

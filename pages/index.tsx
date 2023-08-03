@@ -1,18 +1,19 @@
 import { useState } from 'react'
 import styles from '@styles/index.module.css'
 import Link from 'next/link'
+import Image from 'next/image'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className='px-auto'>
+    <div>
       <div>
         <Link href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className={styles.logo} alt="Vite logo" />
+          <Image src="/vite.svg" className={styles.logo} alt="Vite logo" />
         </Link>
         <Link href="https://reactjs.org" target="_blank">
-          <img src='/react.svg' className={[styles.logo, styles.react].join(' ')} alt="React logo" />
+          <Image src='/react.svg' className={[styles.logo, styles.react].join(' ')} alt="React logo" />
         </Link>
       </div>
       <h1>Vite + React</h1>

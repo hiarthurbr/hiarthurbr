@@ -18,6 +18,8 @@ export interface ResumeLinkIndex {
   hash: string
 }
 
-export type ResumeIndex = [string, ResumeLinkIndex[]]
+type hasWarning = [false] | [true, string]
+
+export type ResumeIndex = [string, ResumeLinkIndex[], ...hasWarning]
 
 export type ResumeLink = Record<string, ResumeIndex>

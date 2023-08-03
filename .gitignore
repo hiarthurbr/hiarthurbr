@@ -13,9 +13,11 @@ dist-ssr
 build
 .next
 *.local
-**/*.json
-public/resumes.json
-public/articles/*
+out
+public/summaries.json
+public/summaries/per-chapter/*
+!/public/summaries/per-chapter/per-chapter-dev-test.json
+/get-resumes-per-chapter.js
 get-resume.js
 .env
 

@@ -12,7 +12,7 @@ export default function RPC(props: StaticProps) {
     console.log(props)
     if (typeof props?.summaries !== "undefined")
       setResumes(props.summaries as ResumeLink);
-  }, [])
+  }, [props])
 
   return <>
     <article className='prose dark:prose-invert select-none'>
@@ -38,11 +38,23 @@ export default function RPC(props: StaticProps) {
 }
 
 export async function getStaticProps() {
-  const request = await axios.get('/summaries/summaries.json')
-  const summaries = JSON.parse(request.data) as ResumeLink
-  return {
-    props: {
-      summaries
+  try {
+    const summaries = require("public/summaries/summaries.json") as ResumeLink
+    return {
+      props: {
+        summaries
+      }
+    }
+  }
+  catch (e) {
+    console.error("Error while parsing summaries:", e)
+    console.log("Trying to fetch from latest deployed version")
+    const request = await axios.get('/summaries/summaries.json')
+    const summaries = JSON.parse(request.data) as ResumeLink
+    return {
+      props: {
+        summaries
+      }
     }
   }
 }
