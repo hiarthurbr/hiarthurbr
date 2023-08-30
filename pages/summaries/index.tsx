@@ -1,6 +1,6 @@
 import axios from '@lib/axios'
 import { useEffect, useState } from 'react';
-import type { ResumeLink } from '../../global'
+import type { ResumeIndex, ResumeLink, ResumeLinkIndex } from '../../global'
 import Link from 'next/link';
 
 type StaticProps = Awaited<ReturnType<typeof getStaticProps>>["props"]
@@ -39,7 +39,16 @@ export default function RPC(props: StaticProps) {
 
 export async function getStaticProps() {
   try {
-    const summaries = require("public/summaries/summaries.json") as ResumeLink
+    const summaries = (() => {
+      const json = require("public/summaries/summaries.json") as ResumeLink
+      const summaries = new Map<string, ResumeIndex>()
+      for (const key in json) {
+        const summary = json[key];
+        summary[1] = summary[1].filter(summary => summary.name !== "Local test");
+        summaries.set(key, summary);
+      }
+      return Object.fromEntries(summaries);
+    })();
     return {
       props: {
         summaries

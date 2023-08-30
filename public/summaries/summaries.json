@@ -1,1 +1,71 @@
-{"per-chapter":["Por capitulo",[{"name":"Local test","link":"per-chapter-dev-test"},{"name":"Triste Fim de Policarpo Quaresma","link":"eaa0726348ba","hash":"1c54e62ac9234535da4750ff9476e4bbf35c206e813b34f8cbe5cd5fd5102dce"},{"name":"Angústia","link":"dfb5f279ae6c","hash":"e3dc56e6474941fd1a04961edd9b59bbbfa608da29143e6b9ad035fbd67a678f"},{"name":"Vidas Secas","link":"35762ef849c2","hash":"224baf691585398c9f2308032bb64f44f6a535c2890a096da72679496f255e44"},{"name":"Macunaíma","link":"662a917c332c","hash":"c1d8f5c5f494ff020e0715e384ccd672a4540651e017b24869eac72e624c5121"},{"name":"A Hora da Estrela","link":"5d137a08459c","hash":"97d0e2fa14abdae0e0f1d9a82632aad2314e7fd957e7887b5626428f8b0cbf98"}],false],"by-ai":["Gerados por IA",[{"name":"Local test","link":"by-ai-dev-test"}],true,"Esse texto foi escrito por uma inteligência artificial e pode conter erros ou informações falsas."],"community":["Comunidade",[{"name":"Local test","link":"community-dev-test"}],true,"Esse texto foi escrito por um usuário da comunidade e pode conter erros ou informações falsas."]}
+{
+  "per-chapter": [
+    "Por capitulo",
+    [
+      {
+        "name": "Local test",
+        "link": "per-chapter-dev-test"
+      },
+      {
+        "name": "Triste Fim de Policarpo Quaresma",
+        "link": "eaa0726348ba",
+        "hash": "1c54e62ac9234535da4750ff9476e4bbf35c206e813b34f8cbe5cd5fd5102dce"
+      },
+      {
+        "name": "Angústia",
+        "link": "dfb5f279ae6c",
+        "hash": "e3dc56e6474941fd1a04961edd9b59bbbfa608da29143e6b9ad035fbd67a678f"
+      },
+      {
+        "name": "Vidas Secas",
+        "link": "35762ef849c2",
+        "hash": "224baf691585398c9f2308032bb64f44f6a535c2890a096da72679496f255e44"
+      },
+      {
+        "name": "Macunaíma",
+        "link": "662a917c332c",
+        "hash": "c1d8f5c5f494ff020e0715e384ccd672a4540651e017b24869eac72e624c5121"
+      },
+      {
+        "name": "A Hora da Estrela",
+        "link": "5d137a08459c",
+        "hash": "97d0e2fa14abdae0e0f1d9a82632aad2314e7fd957e7887b5626428f8b0cbf98"
+      }
+    ],
+    false
+  ],
+  "by-ai": [
+    "Gerados por IA",
+    [
+      {
+        "name": "Local test",
+        "link": "by-ai-dev-test"
+      },
+      {
+        "name": "Dois irmãos - Milton Hatoum | Bing Chat",
+        "link": "bing-dois-irmaos-milton-hatoum"
+      },
+      {
+        "name": "Dois irmãos - Milton Hatoum | Chat GPT",
+        "link": "gpt-dois-irmaos-milton-hatoum"
+      }
+    ],
+    true,
+    "Esse texto foi escrito por uma inteligência artificial e pode conter erros ou informações falsas."
+  ],
+  "community": [
+    "Comunidade",
+    [
+      {
+        "name": "Local test",
+        "link": "community-dev-test"
+      },
+      {
+        "name": "Dois irmãos - Milton Hatoum",
+        "link": "guiadoestudante-dois-irmaos-milton-hatoum"
+      }
+    ],
+    true,
+    "Esse texto foi escrito por um usuário da comunidade e pode conter erros ou informações falsas."
+  ]
+}
