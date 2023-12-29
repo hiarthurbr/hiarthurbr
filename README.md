@@ -6,7 +6,7 @@
 
 Yes, [Ar7hurz1nh0/Launcher](https://github.com/Ar7hurz1nh0/Launcher) is driving my coding rating to oblivion.
 
-![Snake](https://raw.githubusercontent.com/Ar7hurz1nh0/Ar7hurz1nh0/content/snake.svg)
+![Snake](https://raw.githubusercontent.com/Ar7hurz1nh0/Ar7hurz1nh0/output/snake.svg)
 <!--
   TODO: Make proper profile README
 !-->

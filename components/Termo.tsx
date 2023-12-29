@@ -247,7 +247,7 @@ export default function Termo({
             scalar: 1.2,
           })
         }, i * base_timer * 5)
-      }/*//                                 -
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [globalStatus])
