@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -25,22 +21,28 @@
       "@styles/*": ["styles/*"],
       "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],
+      "@assets/*": ["assets/*"],
       "@public/*": ["public/*"],
-      "@global": ["global.d.ts"],
-    }
+      "@global": ["global.d.ts"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "src",
     "global.d.ts",
     "next-env.d.ts",
-    "**/*.ts"
-, "public", "styles", "pages", "components", "lib"  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+    "**/*.ts",
+    "public",
+    "styles",
+    "pages",
+    "components",
+    "lib",
+    "pages/minigames",
+    ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

@@ -1,0 +1,29 @@
+.letter {
+  @apply w-14 h-14 rounded-lg uppercase font-bold text-3xl text-center;
+  perspective: 100rem;
+}
+
+.letterInner {
+  @apply relative w-full h-full text-center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.letterFront {
+  @apply flex flex-col items-center justify-center;
+}
+
+.letterBack {
+  @apply flex flex-col items-center justify-center;
+  transform: rotateX(180deg);
+}
+
+.letterFront, .letterBack {
+  @apply absolute w-full h-full;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip .letterInner {
+  transform: rotateX(180deg);
+}
