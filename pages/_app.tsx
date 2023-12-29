@@ -5,6 +5,8 @@ import Header from '@components/Header';
 import { NextUIProvider } from '@nextui-org/react';
 import '@styles/globals.css';
 import { useEffect } from "react";
+import { GeistSans } from 'geist/font/sans';
+
 const App: AppType = ({ Component, pageProps }) => {
   useEffect(() => {
     warnDevTools();
@@ -14,10 +16,10 @@ const App: AppType = ({ Component, pageProps }) => {
 
   return <>
     <NextUIProvider>
-      <header className='fixed top-8 max-sm:top-4 z-[999] flex w-full max-w-screen-2xl left-2/4 -translate-x-2/4 flex-wrap px-4'>
+      <header className={`fixed top-8 max-sm:top-4 z-[999] flex w-full max-w-screen-2xl left-2/4 -translate-x-2/4 flex-wrap px-4 ${GeistSans.className}`}>
         <Header active={2} />
       </header>
-      <main className='pt-32'>
+      <main className={`pt-32 ${GeistSans.className}`}>
         <Component {...pageProps} />
       </main>
     </NextUIProvider>

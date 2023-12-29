@@ -70,7 +70,7 @@ function DropdownMenu(props: MenuItems) {
 
 
 function Tabs(props: MenuItems) {
-  let [categories] = useState(props.items)
+  const [categories] = useState(props.items)
 
   return (
     <div className="max-h-min">
@@ -101,23 +101,23 @@ export default function Header(props: HeaderProps) {
   <div className="flex flex-wrap items-center justify-between ml-4 max-sm:ml-1">
   <Link href='/' className="flex items-center text-black dark:text-white order-1">
       {/* <img src={imgsrc} className="mr-3 h-10 pl-3 max-sm:h-9 max-sm:pl-0" alt={title + ' Logo'} /> */}
-      <span className="self-start text-xl font-semibold whitespace-nowrap dark:text-white block">{title}</span>
+        <span className="self-start text-xl font-extrabold whitespace-nowrap dark:text-white block">{title}</span>
   </Link>
   <div className="flex order-last space-x-1 ">
       <Darkmode />
-      <Link type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 max-md:px-2 py-3 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden lg:block h-12" href='/register'>Registre-se</Link>
-      <Link type='button' className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-3 my-0.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 block lg:hidden h-12 aspect-1' href='/register'>
+        <Link type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm px-5 max-md:px-2 pt-3.5 pb-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hidden lg:block h-12" href='/register'>Registre-se</Link>
+        <Link type='button' className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-sm p-3 my-0.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 block lg:hidden h-12 aspect-1' href='/register'>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
         </svg>
       </Link>
-      <DropdownMenu className='p-3 rounded-lg lg:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600 h-12 aspect-1' data-collapse-toggle="navbar-sticky" aria-controls="navbar-sticky" aria-expanded="false" items={Items} active={-1} />
+        {/* <DropdownMenu className='p-3 rounded-lg lg:hidden hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-slate-200 dark:text-slate-400 dark:hover:bg-slate-700 dark:focus:ring-slate-600 h-12 aspect-1' data-collapse-toggle="navbar-sticky" aria-controls="navbar-sticky" aria-expanded="false" items={Items} active={-1} /> */}
   </div>
-  <div className="items-center justify-between hidden w-full lg:flex md:w-auto md:order-1" id="navbar-sticky">
+      {/* <div className="items-center justify-between hidden w-full lg:flex md:w-auto md:order-1" id="navbar-sticky">
     <div className="flex flex-col mt-4 border border-slate-100 rounded-lg bg-slate-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 bg-transparent dark:bg-transparent">
       <Tabs items={Items} active={props.active} />
     </div>
-  </div>
+  </div> */}
   </div>
 </nav>
 }

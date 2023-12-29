@@ -10,6 +10,7 @@ const config = {
   },
   compress: true,
   crossOrigin: "anonymous",
+  transpilePackages: ["geist"],
   // generateBuildId: async () => {
   //   const { sha, commit } = await axios.get('https://api.github.com/repos/Ar7hurz1nh0/Ar7hurz1nh0/commits').then(d => d.data)
   //   const buildId = {

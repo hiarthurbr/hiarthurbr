@@ -1,5 +1,5 @@
 {
-  "name": "Ar7hurz1nh0",
+  "name": "ar7hurz1nh0",
   "private": true,
   "version": "0.6.0",
   "scripts": {
@@ -31,6 +31,7 @@
     "csso": "^5.0.5",
     "firebase": "^9.20.0",
     "framer-motion": "^10.16.4",
+    "geist": "^1.2.0",
     "html-minifier": "^4.0.0",
     "localforage": "^1.10.0",
     "next": "14",
