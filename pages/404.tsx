@@ -8,10 +8,9 @@ export default function Page404() {
     <h3>Você talvez queira ir para alguma dessas paginas:</h3>
     <ul>
       <li><Link href="/">Pagina Inicial</Link></li>
-      <li><Link href="/resumes">Resumos</Link></li>
-      <li><Link href="/curriculum">Currículo</Link></li>
+      <li><Link href="/summaries">Resumos</Link></li>
+      <li><Link href="/cv">Currículo</Link></li>
       <li><Link href="/about">Sobre mim</Link></li>
-      <li><Link href="/shop">Lista de compras</Link></li>
     </ul>
   </div>
 }

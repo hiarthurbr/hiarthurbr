@@ -101,7 +101,7 @@ export default function Header(props: HeaderProps) {
   <div className="flex flex-wrap items-center justify-between ml-4 max-sm:ml-1">
   <Link href='/' className="flex items-center text-black dark:text-white order-1">
       {/* <img src={imgsrc} className="mr-3 h-10 pl-3 max-sm:h-9 max-sm:pl-0" alt={title + ' Logo'} /> */}
-        <span className="self-start text-xl font-extrabold whitespace-nowrap dark:text-white block">{title}</span>
+        <span className="self-start text-xl font-extrabold whitespace-nowrap dark:text-white hover:text-black block">{title}</span>
   </Link>
   <div className="flex order-last space-x-1 ">
       <Darkmode />

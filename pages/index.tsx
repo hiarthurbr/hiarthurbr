@@ -14,10 +14,10 @@ const Index = () => {
           <h3 className="font-extrabold text-8xl opacity-20">Web Developer<br />System Engineer</h3>
         </div>
         <p className="text-justify text-xl w-full">
-          I am a 19 years old Brazilian programmer, I am a full-stack web developer and also a system engineer, where I make native apps. I also like photography, music, cinema, all sorts of paintings, and learn new things, and I am always looking for new challenges.
+          I am a 19 years old Brazilian programmer, a full-stack web developer and also a system engineer, where I make native apps. I also like photography, music, cinema, all sorts of paintings, and learn new things, and I am always looking for new challenges.
         </p>
         <div className="mt-12 mr-12 block text-right">
-          <Link href="/cv" className="py-4 px-8 rounded-lg dark:bg-zinc-200 bg-zinc-800 text-zinc-200 dark:text-zinc-800 font-bold group">
+          <Link href="/cv" className="py-4 px-8 rounded-lg dark:bg-zinc-200 bg-zinc-800 text-zinc-200 hover:text-zinc-200 dark:text-zinc-800 font-bold group">
             I am open to work
             <span className="ml-2 group-hover:ml-5 group-hover:-mr-3 transition-all duration-1000 ease-out">&#10095;</span>
           </Link>
