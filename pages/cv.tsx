@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import anime, { AnimeInstance } from "animejs";
 import Image from "next/image";
+import { CircularProgress, Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
+import { AnchorIcon } from "@components/svgs";
 
 enum CV_Page {
   About = 0,
@@ -94,7 +96,7 @@ const CV = () => {
         <div id="orb" className="w-96 h-96 rounded-full blur-md z-0" style={{
           backgroundImage: "linear-gradient(180deg, #FA05F0 0%, #AF00FA 100%)"
         }} />
-        <div className="my-8">
+        <div className="my-8 xl:mt-14 xl:mb-2">
           <h1 className="text-2xl font-bold">Arthur Bufalo Rodrigues</h1>
           <p className="dark:text-gray-300 text-gray-700 text-lg font-semibold">Self-taught Developer</p>
         </div>
@@ -166,17 +168,20 @@ const Experience = () => {
 
   return (
     <section className="p-4">
-      <h2 className="text-xl font-bold">Experience</h2>
-      <ul className="list-disc list-inside">
-        <li>{calcExp(js_exp)} years experience in TypeScript/JavaScript</li>
-        <li>{calcExp(react_exp)} years experience in React</li>
-        <li>{calcExp(nextjs_exp)} years experience in Next.js</li>
-        <li>{calcExp(rust_exp)} year experience in Rust</li>
-        <li>{calcExp(cpp_exp)} years experience in C++</li>
-        <li>{calcExp(python_exp)} years experience in Python</li>
-        <li>{calcExp(linux_exp)} years experience in Linux server</li>
-        <li>{calcExp(aws_exp)} years experience in AWS</li>
-      </ul>
+
+      <div className="">
+        <h2 className="text-2xl font-bold my-2">Experience</h2>
+        <ul className="list-disc list-inside text-left leading-snug font-semibold mx-4">
+          <li>{calcExp(js_exp)} year{calcExp(js_exp) > 1 ? 's' : ''} experience in TypeScript/JavaScript</li>
+          <li>{calcExp(react_exp)} year{calcExp(react_exp) > 1 ? 's' : ''} experience in React</li>
+          <li>{calcExp(nextjs_exp)} year{calcExp(nextjs_exp) > 1 ? 's' : ''} experience in Next.js</li>
+          <li>{calcExp(rust_exp)} year{calcExp(rust_exp) > 1 ? 's' : ''} experience in Rust</li>
+          <li>{calcExp(cpp_exp)} year{calcExp(cpp_exp) > 1 ? 's' : ''} experience in C++</li>
+          <li>{calcExp(python_exp)} year{calcExp(python_exp) > 1 ? 's' : ''} experience in Python</li>
+          <li>{calcExp(linux_exp)} year{calcExp(linux_exp) > 1 ? 's' : ''} experience in Linux server</li>
+          <li>{calcExp(aws_exp)} year{calcExp(aws_exp) > 1 ? 's' : ''} experience in AWS</li>
+        </ul>
+      </div>
     </section>
   )
 }
@@ -184,16 +189,37 @@ const Experience = () => {
 const Education = () => {
   return (
     <section className="p-4">
-      <h2 className="text-xl font-bold">Medals</h2>
-      <ul className="list-disc list-inside">
-        <li>Bronze medal in the Canguru Matemática 2018</li>
-        <li>Honorable mention medal in the Canguru Matemática 2019</li>
-        <li>Honorable mention medal in the Brazilian Mathematical Olympiad of Public Schools (OBMEP) 2022</li>
-        <li>Silver medal in the Brazilian Astronomy and Astronautics Olympiad (OBA) 2022</li>
-        <li>Silver medal in the Olympiad of Knowledge (OBA) 2023</li>
-      </ul>
-      <h2 className="text-xl font-bold">Education</h2>
-      <p>Systems Development Engineering Certificate at ETEC Rosa Perrone Scavone, São Paulo (2020-2023)</p>
+      <div className="">
+        <h2 className="text-2xl font-bold my-2">Academic Experience</h2>
+        <p className="leading-tight text-justify mx-4">Systems Development Engineering Certificate at ETEC Rosa Perrone Scavone (2020-2023)</p>
+      </div>
+      <div>
+        <h2 className="text-2xl font-bold my-2">Medals</h2>
+        <ul className="list-disc list-inside text-justify leading-snug mx-4">
+          <li>Bronze medal in the Canguru Matemática 2018</li>
+          <li>Honorable mention medal in the Canguru Matemática 2019</li>
+          <li>
+            <Link isExternal showAnchorIcon href="https://premiacao.obmep.org.br/17obmep/verRelatorioPremiadosMencao-SP.3.do.htm" target="_blank" rel="noopener noreferrer" className="text-white hover:text-slate-300 dark:hover:text-slate-400 transition-all duration-500 hover:underline font-semibold">
+              Honorable mention medal in the Brazilian Mathematical Olympiad of Public Schools (OBMEP) 2022
+            </Link>
+          </li>
+          <li>
+            <Link isExternal showAnchorIcon href="http://www.oba.org.br/site/index.php/zerouminforma.com.br/estudante-da-escola-do-sesi-de-dourados-recebe-medalha-de-ouro-na-olimpiada-brasileira-de-astronomia-e-astronautica/?p=conteudo&idcat=22&pag=conteudo&acao=mostra&idaluno=224983&olimp=oba&ed=2022" target="_blank" rel="noopener noreferrer" className="text-white hover:text-slate-300 dark:hover:text-slate-400 transition-all duration-500 hover:underline font-semibold">
+              Silver medal in the Brazilian Olympiad of Astronomy and Astronautics (OBA) 2022
+            </Link>
+          </li>
+          <li>
+            <Link isExternal showAnchorIcon href="https://drive.google.com/file/d/15Ec4AwZR9edky3y6SWlPDfFGXQbDUygY/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-white hover:text-slate-300 dark:hover:text-slate-400 transition-all duration-500 hover:underline font-semibold">
+              Silver medal in the Brazilian Olympiad of Knowledge (OBS) 2023
+            </Link>
+          </li>
+          <li>
+            <Link isExternal showAnchorIcon href="http://www.robotica.cpscetec.com.br/verEventos.php?pag=54" target="_blank" rel="noopener noreferrer" className="text-white hover:text-slate-300 dark:hover:text-slate-400 transition-all duration-500 hover:underline font-semibold">
+              Silver medal in the CEETEPS Programming Marathon 2023
+            </Link>
+          </li>
+        </ul>
+      </div>
     </section>
   )
 }
@@ -201,7 +227,65 @@ const Education = () => {
 const Skills = () => {
   return (
     <section className="p-4">
-      <p>My skills</p>
+      <h2 className="text-2xl font-bold mt-2 mb-4">Coding confidence</h2>
+      <div className="grid grid-flow-col grid-rows-2 gap-8 justify-evenly items-center">
+        <CircularProgress
+          label="TypeScript"
+          size="lg"
+          value={95}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="JavaScript"
+          size="lg"
+          value={90}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="React"
+          size="lg"
+          value={90}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="NextJS"
+          size="lg"
+          value={90}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="Rust"
+          size="lg"
+          value={85}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="C++"
+          size="lg"
+          value={70}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="Python"
+          size="lg"
+          value={75}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+      </div>
     </section>
   )
 }
@@ -209,19 +293,127 @@ const Skills = () => {
 const Projects = () => {
   return (
     <section className="p-4">
-      <p>My projects</p>
+      <h2 className="text-2xl font-bold mt-2 mb-4">Projects</h2>
+      <div className="grid grid-flow-row grid-cols-2 gap-8 justify-evenly items-center">
+        <Card className="w-full h-full">
+          <CardHeader>
+            <p>
+              <span className="text-default-300">cyrusium/</span>
+              <span className="text-md">hermes</span>
+            </p>
+          </CardHeader>
+          <Divider className="-my-1" />
+          <CardBody>
+            <p className="leading-snug">Open Source Community driven bus routing/mapping application.</p>
+          </CardBody>
+          <Divider className="-my-1" />
+          <CardFooter>
+            <Link
+              isExternal
+              showAnchorIcon
+              href="https://github.com/cyrusium/hermes"
+            >
+              Visit project on GitHub.
+            </Link>
+          </CardFooter>
+        </Card>
+        <Card className="w-full h-full">
+          <CardHeader>
+            <p>
+              <span className="text-default-300">Ar7hurz1nh0/</span>
+              <span className="text-md">redstone</span>
+            </p>
+          </CardHeader>
+          <Divider className="-my-1" />
+          <CardBody>
+            <p className="leading-snug">Minecraft Protocol implementation in rust.</p>
+          </CardBody>
+          <Divider className="-my-1" />
+          <CardFooter>
+            <Link
+              isExternal
+              showAnchorIcon
+              href="https://github.com/Ar7hurz1nh0/redstone"
+            >
+              Visit project on GitHub.
+            </Link>
+          </CardFooter>
+        </Card>
+        <Card className="w-full h-full">
+          <CardHeader>
+            <p>
+              <span className="text-default-300">Ar7hurz1nh0/</span>
+              <span className="text-md">mcmngr</span>
+            </p>
+          </CardHeader>
+          <Divider className="-my-1" />
+          <CardBody>
+            <p className="leading-snug">The ultimate remote minecraft server management tool.</p>
+          </CardBody>
+          <Divider className="-my-1" />
+          <CardFooter>
+            <Link
+              isExternal
+              showAnchorIcon
+              href="https://github.com/Ar7hurz1nh0/mcmngr"
+            >
+              Visit project on GitHub.
+            </Link>
+          </CardFooter>
+        </Card>
+        <Card className="w-full h-full">
+          <CardHeader>
+            <p>
+              <span className="text-default-300">Ar7hurz1nh0/</span>
+              <span className="text-md">utils</span>
+            </p>
+          </CardHeader>
+          <Divider className="-my-1" />
+          <CardBody>
+            <p className="leading-snug">Lifesaver functions & constants in multiple languages that I write over time.</p>
+          </CardBody>
+          <Divider className="-my-1" />
+          <CardFooter>
+            <Link
+              isExternal
+              showAnchorIcon
+              href="https://github.com/Ar7hurz1nh0/utils"
+            >
+              Visit project on GitHub.
+            </Link>
+          </CardFooter>
+        </Card>
+      </div>
     </section>
   )
 }
 
 const Contact = () => {
   return (
-    <section className="p-4">
-      <h2 className="text-xl font-bold">Contact Information</h2>
-      <p>Full Name: Arthur Bufalo Rodrigues</p>
-      <p>Phone: +55 11 95478-2329</p>
-      <p>Email: arthurbr@cdmd.dev or contact@arthurbr.me</p>
-      <p>Github: <a href="https://github.com/Ar7hurz1nh0">github.com/Ar7hurz1nh0</a></p>
+    <section className="p-4 text-justify mx-8">
+      <h2 className="text-2xl font-bold mt-2 mb-4 text-center">Contact Information</h2>
+      <p className="leading-snug">
+        <span className="font-bold">Full Name:{' '}</span>
+        Arthur Bufalo Rodrigues
+      </p>
+      <p className="leading-snug">
+        <span className="font-bold">Phone:{' '}</span>
+        <Link className="dark:text-cyan-600" showAnchorIcon anchorIcon={<AnchorIcon />} href="tel:+55 11 95478-2329">+55 11 95478-2329</Link>
+      </p>
+      <p className="leading-snug">
+        <span className="font-bold">E-Mail:{' '}</span>
+        <Link className="dark:text-cyan-600" showAnchorIcon anchorIcon={<AnchorIcon />} href="mailto:arthurbr@cdmd.dev">arthurbr@cdmd.dev</Link>
+        or{' '}
+        <Link className="dark:text-cyan-600" showAnchorIcon anchorIcon={<AnchorIcon />} href="mailto:contact@arthurbr.me">contact@arthurbr.me</Link>
+      </p>
+      <p className="leading-snug">
+        <span className="font-bold">GitHub:{' '}</span>
+        <Link className="dark:text-cyan-600" isExternal showAnchorIcon href="https://github.com/Ar7hurz1nh0">github.com/Ar7hurz1nh0</Link>
+      </p>
+      <p className="leading-snug">
+        <span className="font-bold">LinkIn:{' '}</span>
+        <Link className="dark:text-cyan-600" isExternal showAnchorIcon href="https://www.linkedin.com/in/ArthurBR">linkedin.com/in/ArthurBR</Link>
+      </p>
     </section>
   )
 }
