@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import anime, { AnimeInstance } from "animejs";
 import Image from "next/image";
-import { CircularProgress, Card, CardHeader, CardBody, CardFooter, Divider, Link } from "@nextui-org/react";
+import { CircularProgress, Card, CardHeader, CardBody, CardFooter, Divider, Link, Progress } from "@nextui-org/react";
 import { AnchorIcon } from "@components/svgs";
 
 enum CV_Page {
@@ -22,6 +22,24 @@ const keyframes = [
   { start: '#A8FA00', end: '#FAE700' },
   { start: '#FAA900', end: '#FA8A00' },
 ];
+
+
+const now = Date.now();
+const birth = (new Date(2004, 11, 28)).getTime();
+const js_exp = (new Date(2019, 10, 1)).getTime();
+const react_exp = (new Date(2020, 1, 1)).getTime();
+const nextjs_exp = (new Date(2021, 2, 1)).getTime();
+const rust_exp = (new Date(2022, 11, 1)).getTime();
+const cpp_exp = (new Date(2021, 2, 1)).getTime();
+const python_exp = (new Date(2020, 2, 1)).getTime();
+const linux_exp = (new Date(2020, 7, 1)).getTime();
+const aws_exp = (new Date(2022, 6, 1)).getTime();
+
+const calcYears = (startDate: number) => {
+  const diffTime = Math.abs(now - startDate);
+  const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365);
+  return Math.floor(diffYears);
+};
 
 const CV = () => {
   const [page, setPage] = useState(CV_Page.About);
@@ -98,7 +116,7 @@ const CV = () => {
         }} />
         <div className="my-8 xl:mt-14 xl:mb-2">
           <h1 className="text-2xl font-bold">Arthur Bufalo Rodrigues</h1>
-          <p className="dark:text-gray-300 text-gray-700 text-lg font-semibold">Self-taught Developer</p>
+          <p className="dark:text-gray-300 text-gray-700 text-lg font-semibold">Web/System Developer</p>
         </div>
       </div>
       <div className="h-full w-full mx-8 xl:self-start">
@@ -144,41 +162,38 @@ export default CV;
 const About = () => {
   return (
     <section className="p-4">
+      <h2 className="text-2xl font-bold my-2">About me</h2>
+      <p className="leading-snug py-1 text-lg">
+        Hi! My name is Arthur, I am {calcYears(birth)} years old and I am a self-taught Brazilian developer.
+      </p>
+      <p className="leading-none py-1 text-lg">
+        When I started programming, in web development, I liked backend more than frontend, but found myself frequently visiting the frontend side of things. I still think that backend is more interesting, but I do like to make pretty things in the frontend too.
+      </p>
+      <p className="leading-snug py-1 text-lg">
+        Other than programming, I really like all kinds of art, be it music, cinema, paintings, photography, even games. I do like to play games, but I have found myself playing less in favor of programming.
+      </p>
+      <p className="leading-snug py-1 text-lg">
+        Also, I really like challenges, and if I can&apos;t find one, I make one myself (I am looking at you, <Link isExternal showAnchorIcon href="https://ar7hurz1nh0/redstone" className="dark:text-cyan-600">ar7hurz1nh0/redstone</Link>).
+      </p>
     </section>
   )
 }
 
 const Experience = () => {
-  const now = Date.now();
-  const js_exp = (new Date(2019, 10, 1)).getTime();
-  const react_exp = (new Date(2020, 1, 1)).getTime();
-  const nextjs_exp = (new Date(2021, 2, 1)).getTime();
-  const rust_exp = (new Date(2022, 11, 1)).getTime();
-  const cpp_exp = (new Date(2021, 2, 1)).getTime();
-  const python_exp = (new Date(2020, 2, 1)).getTime();
-  const linux_exp = (new Date(2020, 7, 1)).getTime();
-  const aws_exp = (new Date(2022, 6, 1)).getTime();
-
-  const calcExp = (startDate: number) => {
-    const diffTime = Math.abs(now - startDate);
-    const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365);
-    return Math.floor(diffYears);
-  };
-
   return (
     <section className="p-4">
 
       <div>
         <h2 className="text-2xl font-bold my-2">Experience</h2>
         <ul className="list-disc list-inside text-left leading-snug font-semibold mx-4">
-          <li>{calcExp(js_exp)} year{calcExp(js_exp) > 1 ? 's' : ''} experience in TypeScript/JavaScript</li>
-          <li>{calcExp(react_exp)} year{calcExp(react_exp) > 1 ? 's' : ''} experience in React</li>
-          <li>{calcExp(nextjs_exp)} year{calcExp(nextjs_exp) > 1 ? 's' : ''} experience in Next.js</li>
-          <li>{calcExp(rust_exp)} year{calcExp(rust_exp) > 1 ? 's' : ''} experience in Rust</li>
-          <li>{calcExp(cpp_exp)} year{calcExp(cpp_exp) > 1 ? 's' : ''} experience in C++</li>
-          <li>{calcExp(python_exp)} year{calcExp(python_exp) > 1 ? 's' : ''} experience in Python</li>
-          <li>{calcExp(linux_exp)} year{calcExp(linux_exp) > 1 ? 's' : ''} experience in Linux server</li>
-          <li>{calcExp(aws_exp)} year{calcExp(aws_exp) > 1 ? 's' : ''} experience in AWS</li>
+          <li>{calcYears(js_exp)} year{calcYears(js_exp) > 1 ? 's' : ''} experience in TypeScript/JavaScript</li>
+          <li>{calcYears(react_exp)} year{calcYears(react_exp) > 1 ? 's' : ''} experience in React</li>
+          <li>{calcYears(nextjs_exp)} year{calcYears(nextjs_exp) > 1 ? 's' : ''} experience in Next.js</li>
+          <li>{calcYears(rust_exp)} year{calcYears(rust_exp) > 1 ? 's' : ''} experience in Rust</li>
+          <li>{calcYears(cpp_exp)} year{calcYears(cpp_exp) > 1 ? 's' : ''} experience in C++</li>
+          <li>{calcYears(python_exp)} year{calcYears(python_exp) > 1 ? 's' : ''} experience in Python</li>
+          <li>{calcYears(linux_exp)} year{calcYears(linux_exp) > 1 ? 's' : ''} experience in Linux server</li>
+          <li>{calcYears(aws_exp)} year{calcYears(aws_exp) > 1 ? 's' : ''} experience in AWS</li>
         </ul>
       </div>
     </section>
@@ -247,7 +262,7 @@ const Skills = () => {
         <CircularProgress
           label="React"
           size="lg"
-          value={90}
+          value={85}
           color="success"
           showValueLabel={true}
           className="scale-110 -translate-x-2 translate-y-1.5"
@@ -255,7 +270,7 @@ const Skills = () => {
         <CircularProgress
           label="NextJS"
           size="lg"
-          value={90}
+          value={85}
           color="success"
           showValueLabel={true}
           className="scale-110 -translate-x-2 translate-y-1.5"
@@ -263,7 +278,7 @@ const Skills = () => {
         <CircularProgress
           label="Rust"
           size="lg"
-          value={85}
+          value={80}
           color="success"
           showValueLabel={true}
           className="scale-110 -translate-x-2 translate-y-1.5"
@@ -271,7 +286,7 @@ const Skills = () => {
         <CircularProgress
           label="C++"
           size="lg"
-          value={70}
+          value={65}
           color="success"
           showValueLabel={true}
           className="scale-110 -translate-x-2 translate-y-1.5"
@@ -279,10 +294,69 @@ const Skills = () => {
         <CircularProgress
           label="Python"
           size="lg"
-          value={75}
+          value={70}
           color="success"
           showValueLabel={true}
           className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="Dart"
+          size="lg"
+          value={70}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="PHP"
+          size="lg"
+          value={50}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="C#"
+          size="lg"
+          value={70}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+        <CircularProgress
+          label="Java"
+          size="lg"
+          value={65}
+          color="success"
+          showValueLabel={true}
+          className="scale-110 -translate-x-2 translate-y-1.5"
+        />
+      </div>
+      <h2 className="text-2xl font-bold mt-6 my-4">Language Skills</h2>
+      <div className="grid grid-flow-row grid-cols-2 gap-8 justify-evenly items-center">
+        <Progress
+          label="Portuguese"
+          size="md"
+          value={100}
+          color="success"
+          showValueLabel={true}
+          className="w-full"
+        />
+        <Progress
+          label="English"
+          size="md"
+          value={80}
+          color="success"
+          showValueLabel={true}
+          className="w-full"
+        />
+        <Progress
+          label="Spanish"
+          size="md"
+          value={20}
+          color="success"
+          showValueLabel={true}
+          className="w-full"
         />
       </div>
     </section>
@@ -303,7 +377,7 @@ const Projects = () => {
           </CardHeader>
           <Divider />
           <CardBody>
-            <p className="leading-snug text-justify">Open Source Community driven bus routing/mapping application.</p>
+            <p className="leading-snug">Open Source Community driven bus routing/mapping application.</p>
           </CardBody>
           <Divider />
           <CardFooter>
@@ -325,7 +399,7 @@ const Projects = () => {
           </CardHeader>
           <Divider />
           <CardBody>
-            <p className="leading-snug text-justify">Minecraft Protocol implementation in Rust.</p>
+            <p className="leading-snug">Minecraft Protocol implementation in Rust.</p>
           </CardBody>
           <Divider />
           <CardFooter>
@@ -347,7 +421,7 @@ const Projects = () => {
           </CardHeader>
           <Divider />
           <CardBody>
-            <p className="leading-snug text-justify">The ultimate remote Minecraft server management tool.</p>
+            <p className="leading-snug">The ultimate remote Minecraft server management tool.</p>
           </CardBody>
           <Divider />
           <CardFooter>
@@ -369,7 +443,7 @@ const Projects = () => {
           </CardHeader>
           <Divider />
           <CardBody>
-            <p className="leading-snug text-justify">Lifesaver functions & constants in multiple languages that I write over time.</p>
+            <p className="leading-snug">Lifesaver functions & constants in multiple languages that I write over time.</p>
           </CardBody>
           <Divider />
           <CardFooter>
@@ -383,6 +457,7 @@ const Projects = () => {
           </CardFooter>
         </Card>
       </div>
+      <h3 className="py-4 font-bold">More projects available at my <Link isExternal showAnchorIcon href="https://github.com/ar7hurz1nh0">GitHub</Link></h3>
     </section>
   )
 }
@@ -410,7 +485,7 @@ const Contact = () => {
         <Link className="dark:text-cyan-600" isExternal showAnchorIcon href="https://github.com/Ar7hurz1nh0">github.com/Ar7hurz1nh0</Link>
       </p>
       <p className="leading-snug">
-        <span className="font-bold">LinkIn:{' '}</span>
+        <span className="font-bold">LinkedIn:{' '}</span>
         <Link className="dark:text-cyan-600" isExternal showAnchorIcon href="https://www.linkedin.com/in/ArthurBR">linkedin.com/in/ArthurBR</Link>
       </p>
     </section>

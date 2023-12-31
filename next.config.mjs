@@ -1,3 +1,4 @@
+import million from 'million/compiler';
 // @ts-check
 import axios from "axios";
 
@@ -21,4 +22,6 @@ const config = {
   // }
 };
 
-export default config;
+export default million.next(
+  config, { auto: true }
+);

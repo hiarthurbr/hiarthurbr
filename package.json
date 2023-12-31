@@ -36,6 +36,7 @@
     "geist": "^1.2.0",
     "html-minifier": "^4.0.0",
     "localforage": "^1.10.0",
+    "million": "latest",
     "next": "14",
     "postcss": "^8.4.23",
     "postcss-csso": "^6.0.1",

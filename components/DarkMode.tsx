@@ -16,9 +16,11 @@ export default function DarkMode() {
     console.debug(enabled ? 'Enabling dark mode' : 'Disabling dark mode')
     if (enabled) {
       document.documentElement.classList.add('dark')
+      document.documentElement.classList.remove('light')
       localStorage.setItem('dark-mode', 'true')
     }
     if (!enabled) {
+      document.documentElement.classList.add('light')
       document.documentElement.classList.remove('dark')
       localStorage.setItem('dark-mode', 'false')
     }
