@@ -120,7 +120,7 @@ const CV = () => {
         </div>
       </div>
       <div className="h-full w-full mx-8 xl:self-start">
-        <ul className="mb-4 -mt-8 py-4 px-5 max-sm:px-0 flex flex-row capitalize dark:bg-slate-700 bg-slate-400 bg-opacity-50 dark:bg-opacity-75 backdrop-blur-sm rounded-lg justify-evenly">
+        <ul className="mb-4 -mt-8 py-4 px-5 max-sm:px-0 flex flex-row max-sm:grid max-sm:grid-flow-row max-sm:grid-cols-3 max-sm:gap-6 capitalize dark:bg-slate-700 bg-slate-400 bg-opacity-50 dark:bg-opacity-75 backdrop-blur-sm rounded-lg justify-evenly">
           <li className="hover:-translate-y-1 transition-all duration-500" onClick={() => setPage(CV_Page.About)} onKeyDown={() => setPage(CV_Page.About)}>
             <a className="dark:text-white dark:hover:text-slate-300 hover:text-slate-700 text-slate-900 cursor-pointer font-bold" href={void 0}>About</a>
           </li>
