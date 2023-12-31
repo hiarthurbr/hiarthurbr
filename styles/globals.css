@@ -10,7 +10,7 @@ main {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  @apply leading-3 font-normal text-center p-10 w-screen flex justify-center
+  @apply leading-3 font-normal text-center md:p-10 w-screen flex justify-center
 }
 
 a {

@@ -81,7 +81,7 @@ const CV = () => {
   }, [update, orb]);
 
   return (
-    <div className="w-full max-w-7xl max-xl:max-w-2xl select-none flex flex-row max-xl:flex-col justify-center items-center gap-10 dark:bg-slate-900 bg-slate-300 max-xl:rounded-xl rounded-2xl shadow-2xl bg-opacity-75 backdrop-blur-sm p-16 transition-all duration-500">
+    <div className="w-full max-w-7xl max-xl:max-w-2xl max-sm:px-0 max-xl:px-8 max-sm:max-w-full select-none flex flex-row max-xl:flex-col justify-center items-center gap-10 dark:bg-slate-900 bg-slate-300 max-xl:rounded-xl rounded-2xl shadow-2xl bg-opacity-75 backdrop-blur-sm p-16 transition-all duration-500">
       <div className="relative w-fit h-fit">
         <div className="-animate-[spin_30s_linear_infinite] absolute top-0 left-0 z-10">
           <Image
@@ -102,7 +102,7 @@ const CV = () => {
         </div>
       </div>
       <div className="h-full w-full mx-8 xl:self-start">
-        <ul className="mb-4 -mt-8 py-4 px-5 flex flex-row capitalize dark:bg-slate-700 bg-slate-400 bg-opacity-50 dark:bg-opacity-75 backdrop-blur-sm rounded-lg justify-evenly">
+        <ul className="mb-4 -mt-8 py-4 px-5 max-sm:px-0 flex flex-row capitalize dark:bg-slate-700 bg-slate-400 bg-opacity-50 dark:bg-opacity-75 backdrop-blur-sm rounded-lg justify-evenly">
           <li className="hover:-translate-y-1 transition-all duration-500" onClick={() => setPage(CV_Page.About)} onKeyDown={() => setPage(CV_Page.About)}>
             <a className="dark:text-white dark:hover:text-slate-300 hover:text-slate-700 text-slate-900 cursor-pointer font-bold" href={void 0}>About</a>
           </li>
@@ -123,15 +123,14 @@ const CV = () => {
           </li>
         </ul>
         <div id="section" className="p-2.5 rounded-2xl max-xl:rounded-xl min-h-full h-96">
-          <div className="bg-slate-300 dark:bg-slate-700 rounded-lg bg-opacity-50 dark:bg-opacity-70 backdrop-blur-sm min-h-full text-white">
+          <div className="bg-slate-300 dark:bg-slate-700 rounded-lg bg-opacity-50 dark:bg-opacity-70 backdrop-blur-sm text-white overflow-scroll h-full">
             {
-              page === CV_Page.About ? <About /> :
-                page === CV_Page.Experience ? <Experience /> :
-                  page === CV_Page.Education ? <Education /> :
-                    page === CV_Page.Skills ? <Skills /> :
-                      page === CV_Page.Projects ? <Projects /> :
-                        page === CV_Page.Contact ? <Contact /> :
-                          <>You somehow broke my cv, congrats</>
+              page === CV_Page.Experience ? <Experience /> :
+                page === CV_Page.Education ? <Education /> :
+                  page === CV_Page.Skills ? <Skills /> :
+                    page === CV_Page.Projects ? <Projects /> :
+                      page === CV_Page.Contact ? <Contact /> :
+                        <About />
             }
           </div>
         </div>
@@ -169,7 +168,7 @@ const Experience = () => {
   return (
     <section className="p-4">
 
-      <div className="">
+      <div>
         <h2 className="text-2xl font-bold my-2">Experience</h2>
         <ul className="list-disc list-inside text-left leading-snug font-semibold mx-4">
           <li>{calcExp(js_exp)} year{calcExp(js_exp) > 1 ? 's' : ''} experience in TypeScript/JavaScript</li>
@@ -294,7 +293,7 @@ const Projects = () => {
   return (
     <section className="p-4">
       <h2 className="text-2xl font-bold mt-2 mb-4">Projects</h2>
-      <div className="grid grid-flow-row grid-cols-2 gap-8 justify-evenly items-center">
+      <div className="grid grid-flow-row grid-cols-2 max-sm:grid-cols-1 gap-8 justify-evenly items-center max-sm:mx-12">
         <Card className="w-full h-full">
           <CardHeader>
             <p>
@@ -302,11 +301,11 @@ const Projects = () => {
               <span className="text-md">hermes</span>
             </p>
           </CardHeader>
-          <Divider className="-my-1" />
+          <Divider />
           <CardBody>
-            <p className="leading-snug">Open Source Community driven bus routing/mapping application.</p>
+            <p className="leading-snug text-justify">Open Source Community driven bus routing/mapping application.</p>
           </CardBody>
-          <Divider className="-my-1" />
+          <Divider />
           <CardFooter>
             <Link
               isExternal
@@ -324,11 +323,11 @@ const Projects = () => {
               <span className="text-md">redstone</span>
             </p>
           </CardHeader>
-          <Divider className="-my-1" />
+          <Divider />
           <CardBody>
-            <p className="leading-snug">Minecraft Protocol implementation in rust.</p>
+            <p className="leading-snug text-justify">Minecraft Protocol implementation in Rust.</p>
           </CardBody>
-          <Divider className="-my-1" />
+          <Divider />
           <CardFooter>
             <Link
               isExternal
@@ -346,11 +345,11 @@ const Projects = () => {
               <span className="text-md">mcmngr</span>
             </p>
           </CardHeader>
-          <Divider className="-my-1" />
+          <Divider />
           <CardBody>
-            <p className="leading-snug">The ultimate remote minecraft server management tool.</p>
+            <p className="leading-snug text-justify">The ultimate remote Minecraft server management tool.</p>
           </CardBody>
-          <Divider className="-my-1" />
+          <Divider />
           <CardFooter>
             <Link
               isExternal
@@ -368,11 +367,11 @@ const Projects = () => {
               <span className="text-md">utils</span>
             </p>
           </CardHeader>
-          <Divider className="-my-1" />
+          <Divider />
           <CardBody>
-            <p className="leading-snug">Lifesaver functions & constants in multiple languages that I write over time.</p>
+            <p className="leading-snug text-justify">Lifesaver functions & constants in multiple languages that I write over time.</p>
           </CardBody>
-          <Divider className="-my-1" />
+          <Divider />
           <CardFooter>
             <Link
               isExternal
