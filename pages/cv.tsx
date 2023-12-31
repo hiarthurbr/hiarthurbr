@@ -229,7 +229,7 @@ const Education = () => {
           </li>
           <li>
             <Link isExternal showAnchorIcon href="http://www.robotica.cpscetec.com.br/verEventos.php?pag=54" target="_blank" rel="noopener noreferrer" className="text-white hover:text-slate-300 dark:hover:text-slate-400 transition-all duration-500 hover:underline font-semibold">
-              Silver medal in the CEETEPS Programming Marathon 2023
+              Second place in the CEETEPS Programming Marathon 2023
             </Link>
           </li>
         </ul>
@@ -242,7 +242,7 @@ const Skills = () => {
   return (
     <section className="p-4">
       <h2 className="text-2xl font-bold mt-2 mb-4">Coding confidence</h2>
-      <div className="grid grid-flow-col grid-rows-2 gap-8 justify-evenly items-center">
+      <div className="grid grid-flow-row md:grid-cols-5 grid-cols-3 gap-8 justify-evenly justify-items-center">
         <CircularProgress
           label="TypeScript"
           size="lg"
