@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import anime, { AnimeInstance } from "animejs";
 import Image from "next/image";
 import { CircularProgress, Card, CardHeader, CardBody, CardFooter, Divider, Link, Progress } from "@nextui-org/react";
 import { AnchorIcon } from "@components/svgs";
+import { match } from "ts-pattern"
 
 enum CV_Page {
   About = 0,
@@ -23,9 +24,15 @@ const keyframes = [
   { start: '#FAA900', end: '#FA8A00' },
 ];
 
+const calcYears = (startDate: number) => {
+  const diffTime = Math.abs(now - startDate);
+  const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365);
+  return Math.floor(diffYears);
+};
 
 const now = Date.now();
 const birth = (new Date(2004, 11, 28)).getTime();
+
 const js_exp = (new Date(2019, 10, 1)).getTime();
 const react_exp = (new Date(2020, 1, 1)).getTime();
 const nextjs_exp = (new Date(2021, 2, 1)).getTime();
@@ -35,13 +42,26 @@ const python_exp = (new Date(2020, 2, 1)).getTime();
 const linux_exp = (new Date(2020, 7, 1)).getTime();
 const aws_exp = (new Date(2022, 6, 1)).getTime();
 
-const calcYears = (startDate: number) => {
-  const diffTime = Math.abs(now - startDate);
-  const diffYears = diffTime / (1000 * 60 * 60 * 24 * 365);
-  return Math.floor(diffYears);
-};
+const js_years = calcYears(js_exp);
+const react_years = calcYears(react_exp);
+const nextjs_years = calcYears(nextjs_exp);
+const rust_years = calcYears(rust_exp);
+const cpp_years = calcYears(cpp_exp);
+const python_years = calcYears(python_exp);
+const linux_years = calcYears(linux_exp);
+const aws_years = calcYears(aws_exp);
+
+const js_text = js_years > 1 ? 'years' : 'year';
+const react_text = react_years > 1 ? 'years' : 'year';
+const nextjs_text = nextjs_years > 1 ? 'years' : 'year';
+const rust_text = rust_years > 1 ? 'years' : 'year';
+const cpp_text = cpp_years > 1 ? 'years' : 'year';
+const python_text = python_years > 1 ? 'years' : 'year';
+const linux_text = linux_years > 1 ? 'years' : 'year';
+const aws_text = aws_years > 1 ? 'years' : 'year';
 
 const CV = () => {
+  console.log(new Date(now).toLocaleString());
   const [page, setPage] = useState(CV_Page.About);
   const [orb, setOrb] = useState<AnimeInstance | null>(null);
 
@@ -98,6 +118,15 @@ const CV = () => {
     }
   }, [update, orb]);
 
+  const Page = match(page)
+    .with(CV_Page.About, () => <About />)
+    .with(CV_Page.Experience, () => <Experience />)
+    .with(CV_Page.Education, () => <Education />)
+    .with(CV_Page.Skills, () => <Skills />)
+    .with(CV_Page.Projects, () => <Projects />)
+    .with(CV_Page.Contact, () => <Contact />)
+    .otherwise(() => <About />)
+
   return (
     <div className="w-full max-w-7xl max-xl:max-w-2xl max-sm:px-0 max-xl:px-8 max-sm:max-w-full select-none flex flex-row max-xl:flex-col justify-center items-center gap-10 dark:bg-slate-900 bg-slate-300 max-xl:rounded-xl rounded-2xl shadow-2xl bg-opacity-75 backdrop-blur-sm p-16 transition-all duration-500">
       <div className="relative w-fit h-fit">
@@ -142,14 +171,7 @@ const CV = () => {
         </ul>
         <div id="section" className="p-2.5 rounded-2xl max-xl:rounded-xl min-h-full h-96">
           <div className="bg-slate-300 dark:bg-slate-700 rounded-lg bg-opacity-50 dark:bg-opacity-70 backdrop-blur-sm text-white overflow-scroll h-full">
-            {
-              page === CV_Page.Experience ? <Experience /> :
-                page === CV_Page.Education ? <Education /> :
-                  page === CV_Page.Skills ? <Skills /> :
-                    page === CV_Page.Projects ? <Projects /> :
-                      page === CV_Page.Contact ? <Contact /> :
-                        <About />
-            }
+            {Page}
           </div>
         </div>
       </div>
@@ -180,20 +202,21 @@ const About = () => {
 }
 
 const Experience = () => {
+
   return (
     <section className="p-4">
 
       <div>
         <h2 className="text-2xl font-bold my-2">Experience</h2>
         <ul className="list-disc list-inside text-left leading-snug font-semibold mx-4">
-          <li>{calcYears(js_exp)} year{calcYears(js_exp) > 1 ? 's' : ''} experience in TypeScript/JavaScript</li>
-          <li>{calcYears(react_exp)} year{calcYears(react_exp) > 1 ? 's' : ''} experience in React</li>
-          <li>{calcYears(nextjs_exp)} year{calcYears(nextjs_exp) > 1 ? 's' : ''} experience in Next.js</li>
-          <li>{calcYears(rust_exp)} year{calcYears(rust_exp) > 1 ? 's' : ''} experience in Rust</li>
-          <li>{calcYears(cpp_exp)} year{calcYears(cpp_exp) > 1 ? 's' : ''} experience in C++</li>
-          <li>{calcYears(python_exp)} year{calcYears(python_exp) > 1 ? 's' : ''} experience in Python</li>
-          <li>{calcYears(linux_exp)} year{calcYears(linux_exp) > 1 ? 's' : ''} experience in Linux server</li>
-          <li>{calcYears(aws_exp)} year{calcYears(aws_exp) > 1 ? 's' : ''} experience in AWS</li>
+          <li>{js_years} {js_text} experience in TypeScript/JavaScript</li>
+          <li>{react_years} {react_text} experience in React</li>
+          <li>{nextjs_years} {nextjs_text} experience in Next.js</li>
+          <li>{rust_years} {rust_text} experience in Rust</li>
+          <li>{cpp_years} {cpp_text} experience in C++</li>
+          <li>{python_years} {python_text} experience in Python</li>
+          <li>{linux_years} {linux_text} experience in Linux server</li>
+          <li>{aws_years} {aws_text} experience in AWS</li>
         </ul>
       </div>
     </section>

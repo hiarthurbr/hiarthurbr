@@ -1,9 +1,9 @@
 "use client"
-import { type Status, type Letter, LetterStatus } from "@lib/types";
+import { type Status, type Letter as Letters, LetterStatus } from "@lib/types";
 import { useRef } from "react";
 import { nullptr } from "@lib/null";
 
-export default function Letter({ keyValue: key, available_letters }: { keyValue: Letter, available_letters: Status['available_letters'] }) {
+export default function Letter({ keyValue: key, available_letters }: { keyValue: Letters, available_letters: Status['available_letters'] }) {
   const letterStatus = "text-zinc-700 dark:text-zinc-200".split(" ");
   const span = useRef<HTMLSpanElement>(nullptr())
 
@@ -11,7 +11,7 @@ export default function Letter({ keyValue: key, available_letters }: { keyValue:
     <div className="absolute top-0 left-0 w-full h-full z-20">
       <span className={`w-full h-full text-2xl font-bold flex items-center justify-center uppercase rounded-lg ${letterStatus.join(" ")}`} ref={span}>{key}</span>
     </div>
-    <div className={`absolute top-0 left-0 grid w-full h-full rounded-lg z-10`}>
+    <div className={"absolute top-0 left-0 grid w-full h-full rounded-lg z-10"}>
       {
         available_letters.map((grid, i) => {
           let status: string;
