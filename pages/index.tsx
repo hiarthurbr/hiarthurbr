@@ -26,7 +26,7 @@ const Index = () => {
           </div>
         </div>
       </div>
-      <Gaming className="fill-black dark:fill-white sticky bottom-0 right-0 w-20 h-20 bg-slate-800 p-4 rounded-2xl" />
+      {/* <Gaming className="fill-black dark:fill-white sticky bottom-0 right-0 w-20 h-20 bg-slate-800 p-4 rounded-2xl" /> */}
     </>
   );
 };
