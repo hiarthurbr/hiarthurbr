@@ -14,7 +14,7 @@ const Termo = () => {
             content: "drop-shadow shadow-black dark:shadow-white text-white font-extrabold",
           }}
         >
-          Pre-Alpha
+          Alpha
         </Chip>
       </h1>
       <p className="px-5 py-3 mt-6 bg-red-600 bg-opacity-20 border-red-600 border-3 border-opacity-70 rounded-xl font-semibold"><span className="font-extrabold">Aviso: </span>Termo atualmente não é compatível com dispositivos móveis.</p>

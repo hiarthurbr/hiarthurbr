@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import anime, { AnimeInstance } from "animejs";
 import Image from "next/image";
 import { CircularProgress, Card, CardHeader, CardBody, CardFooter, Divider, Link, Progress } from "@nextui-org/react";
-import { AnchorIcon } from "@components/svgs";
+import { Anchor } from "@components/svgs";
 import { match } from "ts-pattern"
 
 enum CV_Page {
@@ -491,25 +491,25 @@ const Contact = () => {
       <h2 className="text-2xl font-bold mt-2 mb-4 text-center">Contact Information</h2>
       <p className="leading-snug">
         <span className="font-bold">Full Name:{' '}</span>
-        Arthur Bufalo Rodrigues
+        <span className="select-text">Arthur Bufalo Rodrigues</span>
       </p>
       <p className="leading-snug">
         <span className="font-bold">Phone:{' '}</span>
-        <Link className="dark:text-cyan-600" showAnchorIcon anchorIcon={<AnchorIcon />} href="tel:+55 11 95478-2329">+55 11 95478-2329</Link>
+        <Link className="dark:text-cyan-600 select-text" showAnchorIcon anchorIcon={<Anchor />} href="tel:+55 11 95478-2329">+55 11 95478-2329</Link>
       </p>
       <p className="leading-snug">
         <span className="font-bold">E-Mail:{' '}</span>
-        <Link className="dark:text-cyan-600" showAnchorIcon anchorIcon={<AnchorIcon />} href="mailto:arthurbr@cdmd.dev">arthurbr@cdmd.dev</Link>
+        <Link className="dark:text-cyan-600 select-text" showAnchorIcon anchorIcon={<Anchor />} href="mailto:arthurbr@cdmd.dev">arthurbr@cdmd.dev</Link>
         or{' '}
-        <Link className="dark:text-cyan-600" showAnchorIcon anchorIcon={<AnchorIcon />} href="mailto:contact@arthurbr.me">contact@arthurbr.me</Link>
+        <Link className="dark:text-cyan-600 select-text" showAnchorIcon anchorIcon={<Anchor />} href="mailto:contact@arthurbr.me">contact@arthurbr.me</Link>
       </p>
       <p className="leading-snug">
         <span className="font-bold">GitHub:{' '}</span>
-        <Link className="dark:text-cyan-600" isExternal showAnchorIcon href="https://github.com/Ar7hurz1nh0">github.com/Ar7hurz1nh0</Link>
+        <Link className="dark:text-cyan-600 select-text" isExternal showAnchorIcon href="https://github.com/Ar7hurz1nh0">github.com/Ar7hurz1nh0</Link>
       </p>
       <p className="leading-snug">
         <span className="font-bold">LinkedIn:{' '}</span>
-        <Link className="dark:text-cyan-600" isExternal showAnchorIcon href="https://www.linkedin.com/in/ArthurBR">linkedin.com/in/ArthurBR</Link>
+        <Link className="dark:text-cyan-600 select-text" isExternal showAnchorIcon href="https://www.linkedin.com/in/ArthurBR">linkedin.com/in/ArthurBR</Link>
       </p>
     </section>
   )

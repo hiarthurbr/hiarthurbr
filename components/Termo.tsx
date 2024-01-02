@@ -1,14 +1,15 @@
 "use client"
 import { useLayoutEffect, useReducer, useRef, useState } from "react";
-import { Tabs, Tab } from "@nextui-org/react";
+import { Tabs, Tab, Link } from "@nextui-org/react";
 import confetti, { create } from "canvas-confetti"
 import styles from "@styles/termo.module.css";
 import {
   type Status, type Letter, type TermoProps, type NonEmptyArray,
-  LetterStatus, Error, isError
+  LetterStatus, Error as IError, isError
 } from "@lib/types"
 import LetterKey from "@components/letter"
 import { nullptr } from "@lib/null";
+import { Info as InfoIcon } from "./svgs";
 
 type Payload = {
   attempt: string,
@@ -51,7 +52,7 @@ export default function Termo({
     return JSON.stringify(status)
   }
 
-  function executeTry(_status: Status, payload: Payload | null): Status | Error {
+  function executeTry(_status: Status, payload: Payload | null): Status | IError {
     if (!payload) {
       _status.error = null;
       return _status;
@@ -67,25 +68,24 @@ export default function Termo({
     }
     const w_try = payload.attempt.toUpperCase().split('')
     if (w_try.length !== _status.final_word[0].length) {
-      return Error.INVALID_WORD_LENGTH;
+      return IError.INVALID_WORD_LENGTH;
     }
     const _word_with_accent: string | undefined = _status.available_words[payload.attempt];
     if (typeof _word_with_accent === "undefined") {
-      return Error.INVALID_WORD;
+      return IError.INVALID_WORD;
     }
     const word_with_accent = _word_with_accent.split('');
     const statuses: [string, LetterStatus, ...LetterStatus[]][] = []
     const gridLength = _status.final_word.length
 
-    w_try.forEach((res, i) => {
+    for (const res of w_try) 
       statuses.push([
         res,
         ...Array<LetterStatus>(gridLength)
           .fill(LetterStatus.UNTESTED) as NonEmptyArray<LetterStatus>
       ])
-    })
 
-    _status.final_word.forEach((res, gridIndex) => {
+    for (const [gridIndex, res] of _status.final_word.entries()) {
       const w_res = res.toUpperCase().split('');
       const letters = new Map<string, number>()
       for (let i = 0; i < _status.WORD_LENGTH; i++) {
@@ -112,8 +112,8 @@ export default function Termo({
         statuses[i][gridIndex + 1] = status
       }
 
-      statuses.forEach((v, i) => {
-        if (v[gridIndex + 1] !== LetterStatus.UNTESTED) return;
+      for (const [i, v] of statuses.entries()) {
+        if (v[gridIndex + 1] !== LetterStatus.UNTESTED) continue;
         const n = letters.get(v[0]);
         let status = LetterStatus.WRONG_LETTER;
         if (typeof n !== "undefined" && n > 0) {
@@ -121,12 +121,11 @@ export default function Termo({
           letters.set(v[0], n - 1);
         }
         statuses[i][gridIndex + 1] = status;
-      })
-    })
+      }
+    }
 
-    word_with_accent.forEach((l, i) => {
-      statuses[i][0] = l
-    })
+    for (const [i, l] of word_with_accent.entries())
+      statuses[i][0] = l;
 
     _status.grid[_status.round_num] = statuses;
 
@@ -193,15 +192,16 @@ export default function Termo({
   const gameFinished = globalStatus.round_num >= globalStatus.MAX_TRIES || gotAllRight;
   const gameFinishedWithSuccess = gameFinished && gotAllRight;
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useLayoutEffect(() => {
     const base_timer = 300;
     if (globalStatus.error !== null) {
       switch (globalStatus.error) {
-        case Error.INVALID_WORD: {
+        case IError.INVALID_WORD: {
           alert("Palavra inválida")
           break;
         }
-        case Error.INVALID_WORD_LENGTH: {
+        case IError.INVALID_WORD_LENGTH: {
           alert("Palavra incompleta")
           break;
         }
@@ -214,14 +214,17 @@ export default function Termo({
       if (globalStatus.round_num > 0) {
         for (let i = 0; i < globalStatus.WORD_LENGTH; i++)
           setTimeout(() => {
-            document.querySelectorAll(`[item-card=CARD-${globalStatus.round_num - 1}-${i}]`).forEach(el => el.classList.add(styles.flip))
+            for (const el of document.querySelectorAll(`[item-card=CARD-${globalStatus.round_num - 1}-${i}]`))
+              el.classList.add(styles.flip);
           }, base_timer * (i + 1))
       }
     }
-    canvasRefs.forEach((c, i) => {
+
+    for (const [i, c] of canvasRefs.entries()) {
       (c.current).confetti = c.current.confetti || create(c.current, { resize: false })
       if (globalStatus.won[i][0] && globalStatus.won[i][1] === globalStatus.round_num - 1) {
         setTimeout(() => {
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           c.current.confetti!({
             spread: 100,
             origin: { y: 1 },
@@ -232,7 +235,8 @@ export default function Termo({
           });
         }, (globalStatus.WORD_LENGTH + 1) * base_timer)
       }
-    })
+    }
+
     if (gameFinishedWithSuccess) {
       for (let i = 1; i < 5; i++) {
         setTimeout(() => {
@@ -260,17 +264,22 @@ export default function Termo({
   }
 
   return <div className="flex flex-col items-center">
-    <div>
+    <div className="w-screen grid grid-flow-row grid-cols-3 justify-items-center">
+      <div />
       <Tabs
         isDisabled={globalStatus.round_num > 0}
         size="lg"
         selectedKey={difficulty}
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         onSelectionChange={changeDifficulty as any}
       >
         <Tab key="easy" title="Fácil" />
         <Tab key="normal" title="Normal" />
         <Tab key="hard" title="Difícil" />
       </Tabs>
+      <div className="justify-self-end mr-8">
+        <Info />
+      </div>
     </div>
     <div>
       {
@@ -278,7 +287,7 @@ export default function Termo({
           const rowLength = row.length;
           return <div
             key={row.toString()}
-            className={`grid gap-12 my-12`}
+            className={"grid gap-12 my-12"}
             style={{
               gridTemplateColumns: `repeat(${rowLength}, 1fr)`
             }}
@@ -297,7 +306,7 @@ export default function Termo({
 
                       return <form
                         key={i.toString()}
-                        className={`grid gap-1`}
+                        className={"grid gap-1"}
                         style={{
                           gridTemplateColumns: `repeat(${globalStatus.WORD_LENGTH}, 1fr)`
                         }}
@@ -314,7 +323,7 @@ export default function Termo({
                               case LetterStatus.UNTESTED: {
                                 status = untested;
                                 if (!disabled)
-                                  status += " " + enabled;
+                                  status += ` ${enabled}`;
                                 break
                               }
                               case LetterStatus.RIGHT_POSITION: {
@@ -331,13 +340,13 @@ export default function Termo({
                               }
                             }
 
-                            function next<P extends Element>(loopOver: boolean = true) {
+                            function next<P extends Element>(loopOver = true) {
                               if (l === globalStatus.WORD_LENGTH - 1 && loopOver)
                                 return document.querySelector<P>(`[item-input=INPUT-${i}-0][item-grid-index=GRID-${gridIndex}]`)
                               return document.querySelector<P>(`[item-input=INPUT-${i}-${l + 1}][item-grid-index=GRID-${gridIndex}]`)
                             }
 
-                            function previous<P extends Element>(loopOver: boolean = true) {
+                            function previous<P extends Element>(loopOver = true) {
                               if (l === 0 && loopOver)
                                 return document.querySelector<P>(`[item-input=INPUT-${globalStatus.WORD_LENGTH - 1}][item-grid-index=GRID-${gridIndex}]`)
                               return document.querySelector<P>(`[item-input=INPUT-${i}-${l - 1}][item-grid-index=GRID-${gridIndex}]`)
@@ -370,13 +379,11 @@ export default function Termo({
                                     onInput={e => {
                                       const input = e.currentTarget.value.replace(/[^a-zA-Z]+/g, "");
                                       if (input.length > 1)
-                                        document
-                                          .querySelectorAll<HTMLInputElement>(`[item-input=INPUT-${i}-${l}]`)
-                                          .forEach(el => { el.value = input[1] });
+                                        for (const el of document.querySelectorAll<HTMLInputElement>(`[item-input=INPUT-${i}-${l}]`))
+                                          el.value = input[1];
                                       else
-                                        document
-                                          .querySelectorAll<HTMLInputElement>(`[item-input=INPUT-${i}-${l}]`)
-                                          .forEach(el => { el.value = input });
+                                        for (const el of document.querySelectorAll<HTMLInputElement>(`[item-input=INPUT-${i}-${l}]`))
+                                          el.value = input;
                                       if (wasEmpty || input !== e.currentTarget.value)
                                         next<HTMLInputElement>()?.focus()
                                       wasEmpty = false;
@@ -410,26 +417,22 @@ export default function Termo({
                                             if (e.currentTarget.value.length === 0) {
                                               const p = previous<HTMLInputElement>(false);
                                               p?.focus();
-                                              document
-                                                .querySelectorAll<HTMLInputElement>(`[item-input=${p?.getAttribute("item-input")}]`)
-                                                .forEach(el => { el.value = "" });
+                                              for (const el of document.querySelectorAll<HTMLInputElement>(`[item-input=${p?.getAttribute("item-input")}]`))
+                                                el.value = "";
                                             }
-                                            document
-                                              .querySelectorAll<HTMLInputElement>(`[item-input=INPUT-${i}-${l}]`)
-                                              .forEach(el => { el.value = "" });
+                                            for (const el of document.querySelectorAll<HTMLInputElement>(`[item-input=INPUT-${i}-${l}]`))
+                                              el.value = "";
                                             break;
                                           }
                                           case "delete": {
                                             if (e.currentTarget.value.length === 0) {
                                               const n = next<HTMLInputElement>(false);
                                               n?.focus();
-                                              document
-                                                .querySelectorAll<HTMLInputElement>(`[item-input=${n?.getAttribute("item-input")}]`)
-                                                .forEach(el => { el.value = "" });
+                                              for (const el of document.querySelectorAll<HTMLInputElement>(`[item-input=${n?.getAttribute("item-input")}]`))
+                                                el.value = "";
                                             }
-                                            document
-                                              .querySelectorAll<HTMLInputElement>(`[item-input=INPUT-${i}-${l}]`)
-                                              .forEach(el => { el.value = "" });
+                                            for (const el of document.querySelectorAll<HTMLInputElement>(`[item-input=INPUT-${i}-${l}]`))
+                                              el.value = "";
                                             break;
                                           }
                                           case "space":
@@ -450,7 +453,7 @@ export default function Termo({
                                     }}
                                     className={
                                       `w-full h-full read-only:border-0 caret-transparent text-center dark:text-white text-black font-extrabolt text-3xl uppercase rounded-lg ${untested}`
-                                      + (!disabled ? " " + enabled : "")
+                                      + (!disabled ? ` ${enabled}` : "")
                                     }
                                   />
                                 </div>
@@ -500,4 +503,51 @@ export default function Termo({
       </div>
     </div>
   </div>
+}
+
+import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
+import { Exclamation } from "./svgs";
+
+const Info = () => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  return (
+    <>
+      <Button onPress={onOpen} isIconOnly><InfoIcon className="w-8 h-8 p-1 dark:fill-white fill-black" /></Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">Informações</ModalHeader>
+              <ModalBody>
+                <p>
+                  Esta versão do Termo foi criada por mim, Arthur Bufalo, e foi grandemente inspirada pelo trabalho do{' '}
+                  <Link isExternal showAnchorIcon href="https://fserb.com/">Fernando Seboncini</Link> e seu jogo{' '}
+                  <Link isExternal showAnchorIcon href="https://term.ooo/">Termooo</Link>.<br />
+                  Apesar de ser bem similar, minha intenção não é lucrar em cima deste projeto, nem defamar o criador original.<br />
+                  Este projeto foi criado com intenções de aprendizado e diversão, e espero que você se divirta jogando tanto quanto eu me diverti criando!
+                </p>
+                <p>
+                  As palavras usadas nesse modelo foram retiradas das seguintes fontes:
+                  <ul className="list-disc list-insidelist-disc list-inside ml-2">
+                    <li>
+                      <Link isExternal showAnchorIcon href="https://www.ime.usp.br/~pf/dicios/">IME da USP</Link>, disponivel na licença <Link isExternal showAnchorIcon href="https://www.gnu.org/licenses/old-licenses/gpl-1.0.html">GPL</Link>
+                    </li>
+                    <li>
+                      <Link isExternal showAnchorIcon href="https://github.com/fserb/pt-br">Léxico PT-BR</Link>, disponível na licença <Link isExternal showAnchorIcon href="https://raw.githubusercontent.com/fserb/pt-br/master/LICENSE">MIT</Link>
+                    </li>
+                  </ul>
+                </p>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="danger" onPress={onClose} className="font-bold">
+                  Close
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
 }
