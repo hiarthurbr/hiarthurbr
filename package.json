@@ -65,5 +65,8 @@
   },
   "resolutions": {
     "puppeteer": "latest"
-  }
+  },
+  "trustedDependencies": [
+    "@vercel/speed-insights"
+  ]
 }

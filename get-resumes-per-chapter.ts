@@ -1,5 +1,5 @@
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs'
-import { createHash } from 'crypto'
+import { writeFileSync, mkdirSync, existsSync } from 'node:fs'
+import { createHash } from 'node:crypto'
 import { type Browser, launch } from 'puppeteer'
 import type { ResumeLink, ResumeLinkIndex as Summary, Resume as SummaryPage } from "global"
 
@@ -55,7 +55,7 @@ async function scrapePages(urls: string[]): Promise<PromiseSettledResult<Summary
 
     const texts: [number, [string, string[] | null]][] = [];
 
-    let get_links = links.map((link, index) => [link, index, false as boolean] satisfies [string, number, boolean])
+    const get_links = links.map((link, index) => [link, index, false as boolean] satisfies [string, number, boolean])
     while (texts.length < links.length) {
       const results = await Promise.allSettled(get_links.filter(a => !a[2]).map(async ([link, index]) => {
         const page = await browser.newPage()
@@ -82,11 +82,11 @@ async function scrapePages(urls: string[]): Promise<PromiseSettledResult<Summary
       .filter(chapter => !(texts.map(x => x[1][0]).includes(chapter[0])))
       .forEach(([chapter, link]) => {
         const index = texts.findIndex(([, [title,]]) => link === title)
-        texts.splice(index, 0, [NaN, [chapter, null]])
+        texts.splice(index, 0, [Number.NaN, [chapter, null]])
       })
 
     const textCache: cache = {}
-    texts.forEach(([, [title, text]]) => textCache[title] = text)
+    texts.forEach(([, [title, text]]) => { textCache[title] = text })
 
     return {
       title,
@@ -101,8 +101,8 @@ const Cache: SummaryPage[] = []
 async function main() {
   const cache_link_pages = [...base_pages]
   while (Cache.length < base_pages.length) {
-    browser = await launch({ headless: "new" })
-    let build = await scrapePages(cache_link_pages)
+    browser = await launch({ headless: true })
+    const build = await scrapePages(cache_link_pages)
     build.forEach((page, i) => {
       if (page.status === "fulfilled") {
         Cache.push(page.value)

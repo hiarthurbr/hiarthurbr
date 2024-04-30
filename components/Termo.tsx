@@ -9,7 +9,6 @@ import {
 } from "@lib/types"
 import LetterKey from "@components/letter"
 import { nullptr } from "@lib/null";
-import { Info as InfoIcon } from "./svgs";
 
 type Payload = {
   attempt: string,
@@ -224,7 +223,6 @@ export default function Termo({
       (c.current).confetti = c.current.confetti || create(c.current, { resize: false })
       if (globalStatus.won[i][0] && globalStatus.won[i][1] === globalStatus.round_num - 1) {
         setTimeout(() => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           c.current.confetti!({
             spread: 100,
             origin: { y: 1 },
@@ -363,6 +361,7 @@ export default function Termo({
                             let wasEmpty = true;
 
                             return <div
+                              // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                               key={`${i}-${l}`}
                               className={`${styles.letter}`}
                               item-card={(globalStatus.won[gridIndex][0] && i > globalStatus.won[gridIndex][1]) ? undefined : `CARD-${i}-${l}`}
@@ -452,8 +451,7 @@ export default function Termo({
                                       }
                                     }}
                                     className={
-                                      `w-full h-full read-only:border-0 caret-transparent text-center dark:text-white text-black font-extrabolt text-3xl uppercase rounded-lg ${untested}`
-                                      + (!disabled ? ` ${enabled}` : "")
+                                      `w-full h-full read-only:border-0 caret-transparent text-center dark:text-white text-black font-extrabolt text-3xl uppercase rounded-lg ${untested}${!disabled ? ` ${enabled}` : ""}`
                                     }
                                   />
                                 </div>
@@ -506,7 +504,7 @@ export default function Termo({
 }
 
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from "@nextui-org/react";
-import { Exclamation } from "./svgs";
+import { Info as InfoIcon, Exclamation } from "./svgs";
 
 const Info = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

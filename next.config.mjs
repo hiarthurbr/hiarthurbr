@@ -23,5 +23,5 @@ const config = {
 };
 
 export default million.next(
-  config, { auto: true }
+  config, { auto: { threshold: 0.005 }, rsc: true, optimize: true }
 );

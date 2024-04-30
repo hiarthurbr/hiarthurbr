@@ -1,6 +1,7 @@
-import { Gaming } from "@components/svgs";
+// import { Gaming } from "@components/svgs";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect, useReducer } from "react";
 // import { GeistMono } from 'geist/font/mono';
 
 const now = Date.now();
@@ -12,11 +13,63 @@ const calcYears = (startDate: number) => {
   return Math.floor(diffYears);
 };
 
+enum Keys {
+  UP = "ArrowUp",
+  DOWN = "ArrowDown",
+  LEFT = "ArrowLeft",
+  RIGHT = "ArrowRight",
+  A = "KeyA",
+  B = "KeyB",
+}
+
+const konami_code = [
+  Keys.UP, Keys.UP,
+  Keys.DOWN, Keys.DOWN,
+  Keys.LEFT, Keys.RIGHT,
+  Keys.LEFT, Keys.RIGHT,
+  Keys.B, Keys.A,
+];
+const konami_code_serial = konami_code.join("")
+
+declare global {
+  interface Window {
+    konami: boolean;
+  }
+}
 
 const Index = () => {
+  const router = useRouter();
+  const [{ konami, keys }, dispatch_key] = useReducer((state: { konami: boolean, keys: Keys[] }, action: { type: Keys }) => {
+    if (state.konami) return state;
+    const keys = [...state.keys, action.type];
+    if (action.type !== konami_code[keys.length - 1]) return { ...state, keys: [] };
+    if (keys.length > konami_code.length) return { ...state, keys: [] };
+    if (keys.length < konami_code.length) return { ...state, keys };
+    if (keys.join("") === konami_code_serial) {
+      return { konami: true, keys: [] };
+    }
+    return { ...state, keys };
+  }, (() => {
+    return { konami: false, keys: [] }
+  })())
+
+  useEffect(() => {
+    if (window.konami) return;
+    document.addEventListener("keydown", (e) => {
+      dispatch_key({ type: e.code as Keys });
+    });
+    window.konami = true;
+  }, [])
+
+  useEffect(() => {
+    if (konami) {
+      router.push("/minigames");
+    }
+  }, [konami, router.push])
+
   return (
     <>
-      <div className="w-full select-none transition-all duration-700">
+      <div className="w-full select-none transition-all duration-700" onLoad={() => console.log("a")}>
         <div className="text-left relative max-w-3xl 2xl:ml-12">
           <div className="md:py-8 py-4 max-md:pl-4">
             <h2 className="font-extrabold md:text-5xl pl-4 text-3xl">Hi! I am</h2>
