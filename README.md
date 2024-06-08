@@ -11,4 +11,4 @@ Yes, [Ar7hurz1nh0/Launcher](https://github.com/Ar7hurz1nh0/Launcher) is driving 
   TODO: Make proper profile README
 !-->
 ```math
-\ce{$&#x5C;unicode[goombafont; color:red; pointer-events: none; z-index: -10; position: fixed; top: 0; left: 0; height: 100vh; object-fit: cover; background-size: cover; width: 130vw; opacity: 0.5; background: url('https://minecraft.wiki/images/Dirt_%28texture%29_JE1_BE1.png');]{x0000}$}
+\ce{$&#x5C;unicode[goombafont; color:red; pointer-events: none; z-index: -10; position: fixed; top: 0; left: 0; height: 100vh; object-fit: cover; background-size: cover; width: 130vw; opacity: 0.5; background: url('https://github.com/Ar7hurz1nh0/Ar7hurz1nh0/blob/master/dirt.webp?raw=true');]{x0000}$}
