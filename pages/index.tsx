@@ -189,12 +189,12 @@ const Index = () => {
         </div>
         <div className="flex flex-col col-span-3">
           <h2 className="pb-8 text-2xl font-black">Some projects I made</h2>
-          <div className="grid grid-cols-[repeat(auto-fit,_minmax(20rem,_1fr))] place-items-center">
+          <div className="grid grid-cols-[repeat(auto-fit,_minmax(20rem,_1fr))] place-items-center gap-3">
             {PROJECTS.map(({ link, image, delay, title, description }) => (
               <Card
-                className={`w-80 h-max animate-swing delay my-3 dark:hover:text-white hover:text-black ${delay}`}
+                className={`w-80 h-max animate-swing delay my-5 dark:hover:text-white hover:text-black ${delay}`}
                 style={{
-                  animationDelay: `${(Date.now() * Math.random()) % 1000}ms`,
+                  animationDelay: `${(performance.now() * Math.random()) % 3500}ms`,
                 }}
                 as={NextLink}
                 href={link}

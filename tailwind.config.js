@@ -31,7 +31,7 @@ module.exports = {
         },
       },
       animation: {
-        swing: "swing 5s ease-in-out infinite",
+        swing: "swing 7.5s ease-in-out infinite",
       },
     },
   },
