@@ -215,21 +215,19 @@ function Question({
     const answers = [];
 
     for (let i = 0; i < 3; i++) {
-      answers.push(
-        incorrect[
-          Math.floor((Math.random() * performance.now()) % incorrect.length)
-        ],
-      );
+      const index =
+        Math.floor(Math.random() * performance.now()) % incorrect.length;
+      answers.push(incorrect.splice(index, 1)[0]);
     }
 
     answers.push(
-      correct[Math.floor((Math.random() * performance.now()) % correct.length)],
+      correct[Math.floor(Math.random() * performance.now()) % correct.length],
     );
 
     let i = 4;
 
     while (i > 0) {
-      const random = Math.floor((Math.random() * performance.now()) % i--);
+      const random = Math.floor(Math.random() * performance.now()) % i--;
       [answers[i], answers[random]] = [answers[random], answers[i]];
     }
 
