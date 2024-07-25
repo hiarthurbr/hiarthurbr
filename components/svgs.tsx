@@ -141,3 +141,69 @@ export const Gaming = (props: SvgProps) => (
     <path d="M480-654Zm174 174Zm-347 0Zm173 173Zm0-235L352-670v-239h257v239L480-542Zm190 190L542-480l128-129h239v257H670Zm-619 0v-257h239l129 129-129 128H51ZM352-51v-239l128-129 129 129v239H352Zm128-603 48-46.192V-829h-94v128l46 47ZM132-434h128l47-46-45.918-48H132v94Zm302 302h94v-128l-48-47-46 45.918V-132Zm266.192-302H829v-94H701l-47 48 46.192 46Z" />
   </svg>
 );
+
+export const ArrowDown = (props: SvgProps) => (
+  // biome-ignore lint/a11y/noInteractiveElementToNoninteractiveRole: <explanation>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24px"
+    viewBox="0 -960 960 960"
+    width="24px"
+    role="presentation"
+    {...props}
+  >
+    <path d="M480-322 212-589h536L480-322Z" />
+  </svg>
+);
+
+export const Triangle = (props: SvgProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24px"
+    viewBox="0 -960 960 960"
+    width="24px"
+    role="button"
+    {...props}
+  >
+    <path d="m-1-111 481-770 481 770H-1Z" />
+  </svg>
+);
+
+export const Square = (props: SvgProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24px"
+    viewBox="0 -960 960 960"
+    width="24px"
+    role="button"
+    {...props}
+  >
+    <path d="M74-74v-812h812v812H74Z" />
+  </svg>
+);
+
+export const Circle = (props: SvgProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24px"
+    viewBox="0 -960 960 960"
+    width="24px"
+    role="button"
+    {...props}
+  >
+    <path d="M480-34q-92.64 0-174.47-34.6-81.82-34.61-142.07-94.86T68.6-305.53Q34-387.36 34-480q0-92.9 34.66-174.45 34.67-81.55 95.18-141.94 60.51-60.39 142.07-95Q387.48-926 480-926q92.89 0 174.48 34.59 81.59 34.6 141.96 94.97 60.37 60.37 94.97 141.99Q926-572.83 926-479.92q0 92.92-34.61 174.25-34.61 81.32-95 141.83Q736-103.33 654.45-68.66 572.9-34 480-34Z" />
+  </svg>
+);
+
+export const Diamond = (props: SvgProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24px"
+    viewBox="0 -960 960 960"
+    width="24px"
+    role="button"
+    {...props}
+  >
+    <path d="M480-137 137-480l343-343 343 343-343 343Z" />
+  </svg>
+);

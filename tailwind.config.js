@@ -29,9 +29,18 @@ module.exports = {
             transform: "translateY(-20px) ",
           },
         },
+        gradient: {
+          "0%": {
+            "background-position": "0% 50%",
+          },
+          "100%": {
+            "background-position": "100% 50%",
+          },
+        },
       },
       animation: {
         swing: "swing 7.5s ease-in-out infinite",
+        gradient: "gradient 2.5s ease-out 2",
       },
     },
   },
