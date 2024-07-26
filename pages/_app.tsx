@@ -16,13 +16,11 @@ const App: AppType = ({ Component, pageProps }) => {
 
   return (
     <>
-      <NextUIProvider>
-        <header
-          className={`fixed top-8 max-sm:top-4 z-[999] flex w-full max-w-screen-2xl left-2/4 -translate-x-2/4 flex-wrap px-4 ${GeistSans.className}`}
-        >
+      <NextUIProvider className="h-full min-h-screen">
+        <div className="sticky top-0 w-screen z-[999]">
           <Header />
-        </header>
-        <main className={`pt-32 ${GeistSans.className}`}>
+        </div>
+        <main className={`${GeistSans.className} min-h-[93vh]`}>
           <Component {...pageProps} />
         </main>
       </NextUIProvider>

@@ -139,7 +139,7 @@ const Index = () => {
 
   return (
     <>
-      <div className="w-full select-none transition-all duration-700 grid max-4xl:grid-flow-row grid-flow-col">
+      <div className="w-full min-h-full select-none transition-all duration-700 grid max-4xl:grid-flow-row grid-flow-col">
         <div className="flex flex-col justify-center">
           <div className="text-left relative max-w-3xl 2xl:ml-12 mb-12">
             <div className="md:py-8 py-4 max-md:pl-4">
@@ -178,7 +178,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col col-span-3">
+        <div className="flex flex-col col-span-3 4xl:pt-24">
           <h2 className="pb-8 text-2xl font-black">Some projects I made</h2>
           <div className="grid grid-cols-[repeat(auto-fit,_minmax(20rem,_1fr))] place-items-center gap-3">
             {PROJECTS.map(({ link, image, delay, title, description }) => (

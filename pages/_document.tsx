@@ -8,7 +8,7 @@ export default function Document() {
         <link rel="dns-prefetch" href="https://arthurbr.me" />
         <NextScript />
       </Head>
-      <body className="dark:bg-zinc-900 dark:text-slate-100 m-0 p-0 max-w-full transition-colors duration-300 w-screen">
+      <body className="dark:bg-zinc-950 dark:text-zinc-100 bg-zinc-100 text-zinc-800 m-0 p-0 transition-colors duration-1000 w-screen">
         <Main />
       </body>
     </Html>

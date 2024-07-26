@@ -1,12 +1,25 @@
-import { Button } from "@nextui-org/react";
+import {
+  Button,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from "@nextui-org/react";
 import NextLink from "next/link";
 import Darkmode from "./DarkMode";
 
 export default function Header() {
   const title = "Arthur Bufalo";
   return (
-    <nav className="bg-zinc-200 px-2 sm:px-4 py-2.5 dark:bg-zinc-800 w-full z-20 top-0 left-0 border-b border-slate-200 dark:border-slate-600 sticky dark:bg-opacity-50 bg-opacity-50 backdrop-blur-[8px] rounded-3xl">
-      <div className="flex flex-wrap items-center justify-between ml-4 max-sm:ml-1">
+    <Navbar
+      classNames={{
+        base: "w-5/6 mx-auto max-w-[96rem] bg-transparent backdrop-blur-none pt-2",
+        wrapper:
+          "dark:bg-zinc-900 bg-zinc-200 bg-opacity-70 dark:bg-opacity-70 rounded-2xl px-16 max-w-full backdrop-blur-md",
+      }}
+      shouldHideOnScroll
+    >
+      <NavbarBrand>
         <NextLink
           href="/"
           className="flex items-center text-black dark:text-white order-1"
@@ -16,8 +29,12 @@ export default function Header() {
             {title}
           </span>
         </NextLink>
-        <div className="flex order-last space-x-1 ">
+      </NavbarBrand>
+      <NavbarContent justify="end">
+        <NavbarItem>
           <Darkmode />
+        </NavbarItem>
+        <NavbarItem>
           <Button
             as={NextLink}
             href="/register"
@@ -54,8 +71,8 @@ export default function Header() {
             isIconOnly
             isDisabled
           />
-        </div>
-      </div>
-    </nav>
+        </NavbarItem>
+      </NavbarContent>
+    </Navbar>
   );
 }
