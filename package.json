@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "preview": "next start",
-    "get-resume": "pnpm exec ts-node get-resume.ts"
+    "get-resume": "pnpm exec ts-node get-resume.ts",
+    "format": "biome format --write ./pages ./lib ./components",
+    "fix": "biome check --write ./pages ./lib ./components",
+    "check": "biome check ./pages ./lib ./components"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
@@ -38,9 +41,9 @@
     "localforage": "^1.10.0",
     "million": "latest",
     "next": "^14.2.5",
-    "postcss": "^8.4.39",
+    "postcss": "^8.4.40",
     "postcss-csso": "^6.0.1",
-    "puppeteer": "^22.13.1",
+    "puppeteer": "^22.14.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-query": "^3.39.3",
@@ -50,15 +53,15 @@
     "ts-pattern": "^5.2.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.4.1",
+    "@biomejs/biome": "^1.8.3",
     "@types/node": "18.16.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
-    "tailwindcss": "^3.4.6",
+    "tailwindcss": "^3.4.7",
     "typed-css-modules": "^0.7.2",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "reactSnap": {
     "source": "dist"
@@ -67,6 +70,7 @@
     "puppeteer": "latest"
   },
   "trustedDependencies": [
+    "@biomejs/biome",
     "@vercel/speed-insights",
     "puppeteer"
   ]

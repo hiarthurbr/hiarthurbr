@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/react";
-import Darkmode from "./DarkMode";
 import NextLink from "next/link";
+import Darkmode from "./DarkMode";
 
 export default function Header() {
   const title = "Arthur Bufalo";
@@ -41,7 +41,7 @@ export default function Header() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                role="button"
+                role="presentation"
                 className="size-5 scale-110"
               >
                 <path

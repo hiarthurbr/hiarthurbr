@@ -1,16 +1,7 @@
-import { Gaming } from "@components/svgs";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Image,
-  Link,
-} from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 // import { GeistMono } from 'geist/font/mono';
 
 const now = Date.now();
@@ -194,7 +185,9 @@ const Index = () => {
               <Card
                 className={`w-80 h-max animate-swing delay my-5 dark:hover:text-white hover:text-black ${delay}`}
                 style={{
-                  animationDelay: `${(performance.now() * Math.random()) % 3500}ms`,
+                  animationDelay: `${
+                    (performance.now() * Math.random()) % 3500
+                  }ms`,
                 }}
                 as={NextLink}
                 href={link}

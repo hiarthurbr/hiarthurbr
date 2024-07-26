@@ -1,7 +1,7 @@
 "use client";
-import { type Status, type Letter as Letters, LetterStatus } from "@lib/types";
-import { useRef } from "react";
 import { nullptr } from "@lib/null";
+import { LetterStatus, type Letter as Letters, type Status } from "@lib/types";
+import { useRef } from "react";
 
 export default function Letter({
   keyValue: key,
@@ -17,7 +17,9 @@ export default function Letter({
     <div className="w-12 h-12 relative">
       <div className="absolute top-0 left-0 w-full h-full z-20">
         <span
-          className={`w-full h-full text-2xl font-bold flex items-center justify-center uppercase rounded-lg ${letterStatus.join(" ")}`}
+          className={`w-full h-full text-2xl font-bold flex items-center justify-center uppercase rounded-lg ${letterStatus.join(
+            " ",
+          )}`}
           ref={span}
         >
           {key}

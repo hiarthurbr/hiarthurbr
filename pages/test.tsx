@@ -387,10 +387,10 @@ function Question({
   }
 
   const icon = [
-    <Circle className={`size-16 ${getClassName(0)} scale-95`} />,
-    <Square className={`size-16 ${getClassName(1)} scale-95`} />,
-    <Triangle className={`size-16 ${getClassName(2)} scale-95`} />,
-    <Diamond className={`size-16 ${getClassName(3)} scale-125`} />,
+    <Circle key={1} className={`size-16 ${getClassName(0)} scale-95`} />,
+    <Square key={2} className={`size-16 ${getClassName(1)} scale-95`} />,
+    <Triangle key={3} className={`size-16 ${getClassName(2)} scale-95`} />,
+    <Diamond key={4} className={`size-16 ${getClassName(3)} scale-125`} />,
   ];
 
   return (
@@ -465,6 +465,7 @@ function Question({
           .map((str) =>
             str.map((str, i) => (
               <span
+                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation
                 key={`${str}/${i}`}
                 className="hover:bg-red-500 hover:bg-opacity-50"
               >

@@ -1,11 +1,11 @@
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
-import { type AppType } from "next/app";
 import Header from "@components/Header";
 import { NextUIProvider } from "@nextui-org/react";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { AppType } from "next/app";
 import "@styles/globals.css";
-import { useEffect } from "react";
 import { GeistSans } from "geist/font/sans";
+import { useEffect } from "react";
 
 const App: AppType = ({ Component, pageProps }) => {
   useEffect(() => {

@@ -1,17 +1,17 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import anime, { AnimeInstance } from "animejs";
-import Image from "next/image";
+import { Anchor } from "@components/svgs";
 import {
-  CircularProgress,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
+  CardHeader,
+  CircularProgress,
   Divider,
   Link,
   Progress,
 } from "@nextui-org/react";
-import { Anchor } from "@components/svgs";
+import anime, { type AnimeInstance } from "animejs";
+import Image from "next/image";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { match } from "ts-pattern";
 
 enum CV_Page {

@@ -1,19 +1,19 @@
 "use client";
-import { useLayoutEffect, useReducer, useRef, useState } from "react";
-import { Tabs, Tab, Link } from "@nextui-org/react";
-import confetti, { create } from "canvas-confetti";
-import styles from "@styles/termo.module.css";
-import {
-  type Status,
-  type Letter,
-  type TermoProps,
-  type NonEmptyArray,
-  LetterStatus,
-  Error as IError,
-  isError,
-} from "@lib/types";
 import LetterKey from "@components/letter";
 import { nullptr } from "@lib/null";
+import {
+  WordError as IError,
+  type Letter,
+  LetterStatus,
+  type NonEmptyArray,
+  type Status,
+  type TermoProps,
+  isError,
+} from "@lib/types";
+import { Link, Tab, Tabs } from "@nextui-org/react";
+import styles from "@styles/termo.module.css";
+import confetti, { create } from "canvas-confetti";
+import { useLayoutEffect, useReducer, useRef, useState } from "react";
 
 type Payload =
   | {
@@ -412,7 +412,9 @@ export default function Termo({
                                   `[item-input=INPUT-${i}-0][item-grid-index=GRID-${gridIndex}]`,
                                 );
                               return document.querySelector<P>(
-                                `[item-input=INPUT-${i}-${l + 1}][item-grid-index=GRID-${gridIndex}]`,
+                                `[item-input=INPUT-${i}-${
+                                  l + 1
+                                }][item-grid-index=GRID-${gridIndex}]`,
                               );
                             }
 
@@ -421,10 +423,14 @@ export default function Termo({
                             ) {
                               if (l === 0 && loopOver)
                                 return document.querySelector<P>(
-                                  `[item-input=INPUT-${globalStatus.WORD_LENGTH - 1}][item-grid-index=GRID-${gridIndex}]`,
+                                  `[item-input=INPUT-${
+                                    globalStatus.WORD_LENGTH - 1
+                                  }][item-grid-index=GRID-${gridIndex}]`,
                                 );
                               return document.querySelector<P>(
-                                `[item-input=INPUT-${i}-${l - 1}][item-grid-index=GRID-${gridIndex}]`,
+                                `[item-input=INPUT-${i}-${
+                                  l - 1
+                                }][item-grid-index=GRID-${gridIndex}]`,
                               );
                             }
 
@@ -443,6 +449,7 @@ export default function Termo({
 
                             return (
                               <div
+                                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                                 key={`${i}-${l}`}
                                 className={`${styles.letter}`}
                                 item-card={
@@ -535,7 +542,9 @@ export default function Termo({
                                                   );
                                                 p?.focus();
                                                 for (const el of document.querySelectorAll<HTMLInputElement>(
-                                                  `[item-input=${p?.getAttribute("item-input")}]`,
+                                                  `[item-input=${p?.getAttribute(
+                                                    "item-input",
+                                                  )}]`,
                                                 ))
                                                   el.value = "";
                                               }
@@ -554,7 +563,9 @@ export default function Termo({
                                                   next<HTMLInputElement>(false);
                                                 n?.focus();
                                                 for (const el of document.querySelectorAll<HTMLInputElement>(
-                                                  `[item-input=${n?.getAttribute("item-input")}]`,
+                                                  `[item-input=${n?.getAttribute(
+                                                    "item-input",
+                                                  )}]`,
                                                 ))
                                                   el.value = "";
                                               }
@@ -587,7 +598,9 @@ export default function Termo({
                                           }
                                         }
                                       }}
-                                      className={`w-full h-full read-only:border-0 caret-transparent text-center dark:text-white text-black font-extrabolt text-3xl uppercase rounded-lg ${untested}${!disabled ? ` ${enabled}` : ""}`}
+                                      className={`w-full h-full read-only:border-0 caret-transparent text-center dark:text-white text-black font-extrabolt text-3xl uppercase rounded-lg ${untested}${
+                                        !disabled ? ` ${enabled}` : ""
+                                      }`}
                                     />
                                   </div>
                                   <div
@@ -605,7 +618,9 @@ export default function Termo({
                       );
                     })}
                     <canvas
-                      className={`absolute top-0 left-0 h-full w-full${globalStatus.won[gridIndex][0] ? "" : " hidden"}`}
+                      className={`absolute top-0 left-0 h-full w-full${
+                        globalStatus.won[gridIndex][0] ? "" : " hidden"
+                      }`}
                       ref={canvasRefs[gridIndex]}
                     />
                   </div>
@@ -653,15 +668,15 @@ export default function Termo({
 }
 
 import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import { Info as InfoIcon, Exclamation } from "./svgs";
+import { Exclamation, Info as InfoIcon } from "./svgs";
 
 const Info = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

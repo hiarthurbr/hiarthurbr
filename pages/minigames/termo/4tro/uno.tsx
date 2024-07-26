@@ -1,45 +1,31 @@
-import Termo from "@components/Termo"
-import available_words from "@assets/4-letter-words.json"
+import available_words from "@assets/4-letter-words.json";
+import Termo from "@components/Termo";
+import { shuffle_array } from "@lib/shuffle";
 
-function shuffle_array(array: string[]) {
-  let currentIndex = array.length;
-  let randomIndex;
-
-  while (currentIndex > 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]];
-  }
-
-  return array;
-}
-
-
-export default function TermoUno(props: ReturnType<typeof getStaticProps>["props"]) {
-  return <Termo
-    available_words={available_words}
-    default_difficulty="normal"
-    final_word={props.final_word}
-    layout={[
-      [null],
-    ]}
-    max_tries={{
-      easy: 8,
-      normal: 6,
-      hard: 4,
-    }}
-  />
+export default function TermoUno(
+  props: ReturnType<typeof getStaticProps>["props"],
+) {
+  return (
+    <Termo
+      available_words={available_words}
+      default_difficulty="normal"
+      final_word={props.final_word}
+      layout={[[null]]}
+      max_tries={{
+        easy: 8,
+        normal: 6,
+        hard: 4,
+      }}
+    />
+  );
 }
 
 export function getStaticProps() {
-  const final_word = shuffle_array(Object.keys(available_words))
+  const final_word = shuffle_array(Object.keys(available_words));
   return {
     props: {
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       final_word: [final_word.pop()!] satisfies [string, ...string[]],
     },
     revalidate: 43200,
-  }
+  };
 }

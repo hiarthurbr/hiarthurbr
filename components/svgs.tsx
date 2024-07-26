@@ -143,7 +143,6 @@ export const Gaming = (props: SvgProps) => (
 );
 
 export const ArrowDown = (props: SvgProps) => (
-  // biome-ignore lint/a11y/noInteractiveElementToNoninteractiveRole: <explanation>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     height="24px"
@@ -162,7 +161,7 @@ export const Triangle = (props: SvgProps) => (
     height="24px"
     viewBox="0 -960 960 960"
     width="24px"
-    role="button"
+    role="presentation"
     {...props}
   >
     <path d="m-1-111 481-770 481 770H-1Z" />
@@ -175,7 +174,7 @@ export const Square = (props: SvgProps) => (
     height="24px"
     viewBox="0 -960 960 960"
     width="24px"
-    role="button"
+    role="presentation"
     {...props}
   >
     <path d="M74-74v-812h812v812H74Z" />
@@ -188,7 +187,7 @@ export const Circle = (props: SvgProps) => (
     height="24px"
     viewBox="0 -960 960 960"
     width="24px"
-    role="button"
+    role="presentation"
     {...props}
   >
     <path d="M480-34q-92.64 0-174.47-34.6-81.82-34.61-142.07-94.86T68.6-305.53Q34-387.36 34-480q0-92.9 34.66-174.45 34.67-81.55 95.18-141.94 60.51-60.39 142.07-95Q387.48-926 480-926q92.89 0 174.48 34.59 81.59 34.6 141.96 94.97 60.37 60.37 94.97 141.99Q926-572.83 926-479.92q0 92.92-34.61 174.25-34.61 81.32-95 141.83Q736-103.33 654.45-68.66 572.9-34 480-34Z" />
@@ -201,7 +200,7 @@ export const Diamond = (props: SvgProps) => (
     height="24px"
     viewBox="0 -960 960 960"
     width="24px"
-    role="button"
+    role="presentation"
     {...props}
   >
     <path d="M480-137 137-480l343-343 343 343-343 343Z" />
@@ -214,7 +213,7 @@ export const HelpPopup = (props: SvgProps) => (
     height="24px"
     viewBox="0 -960 960 960"
     width="24px"
-    role="button"
+    role="presentation"
     {...props}
   >
     <path d="M589-394q19 0 32.5-13t13.5-32q0-19-13.5-32T589-484q-18 0-31.5 13T544-439q0 19 13.5 32t31.5 13Zm-33-115h67q-1-19 6.65-34.55Q637.29-559.1 652-575q30-31 41-50.5t11-43.27q0-48.19-31.76-76.71Q640.47-774 585.89-774q-42.71 0-74.8 23.5Q479-727 468-686l59 24q8-24 23.2-37 15.19-13 35.71-13Q610-712 624-700q14 12 14 33 0 14.48-8 27.41T603-608q-30 27-38.5 45.5T556-509ZM358-217q-55.73 0-95.86-40.14Q222-297.27 222-353v-460q0-55.72 40.14-95.86Q302.27-949 358-949h460q55.72 0 95.36 40.14T953-813v460q0 55.73-39.64 95.86Q873.72-217 818-217H358ZM142-2Q86.28-2 46.64-41.64T7-137v-596h135v596h596V-2H142Z" />
@@ -225,7 +224,7 @@ export const Moon = (props: SvgProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    role="button"
+    role="presentation"
     {...props}
   >
     <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" />
@@ -236,7 +235,7 @@ export const Sun = (props: SvgProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    role="button"
+    role="presentation"
     {...props}
   >
     <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
