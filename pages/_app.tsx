@@ -20,7 +20,7 @@ const App: AppType = ({ Component, pageProps }) => {
         <header
           className={`fixed top-8 max-sm:top-4 z-[999] flex w-full max-w-screen-2xl left-2/4 -translate-x-2/4 flex-wrap px-4 ${GeistSans.className}`}
         >
-          <Header active={2} />
+          <Header />
         </header>
         <main className={`pt-32 ${GeistSans.className}`}>
           <Component {...pageProps} />
