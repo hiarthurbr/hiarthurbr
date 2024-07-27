@@ -141,23 +141,23 @@ const Index = () => {
     <>
       <div className="w-full min-h-full select-none transition-all duration-700 grid max-4xl:grid-flow-row grid-flow-col">
         <div className="flex flex-col justify-center">
-          <div className="text-left relative max-w-3xl 2xl:ml-12 mb-12">
-            <div className="md:py-8 py-4 max-md:pl-4">
-              <h2 className="font-extrabold md:text-5xl pl-4 text-3xl">
+          <div className="text-left relative max-w-3xl 2xl:ml-12 mb-12 mt-24 transition-all duration-1000 *:transition-all *:duration-1000">
+            <div className="md:py-8 py-4 max-md:pl-4 max-md:-translate-y-2 max-lg:-translate-y-4">
+              <h2 className="font-extrabold pl-4 text-3xl md:text-5xl">
                 Hi! I am
               </h2>
-              <h1 className="font-extrabold md:text-8xl min-w-max text-6xl">
+              <h1 className="font-extrabold min-w-max text-5xl md:text-7xl lg:text-8xl">
                 Arthur Bufalo
               </h1>
             </div>
-            <div className="absolute top-0 left-0 min-w-max">
-              <h3 className="font-extrabold md:text-8xl text-6xl opacity-20">
+            <div className="absolute top-0 left-0 min-w-max max-md:translate-x-3">
+              <h3 className="font-extrabold opacity-20 text-5xl md:text-7xl lg:text-8xl">
                 Web Developer
                 <br />
                 System Engineer
               </h3>
             </div>
-            <p className="text-justify text-xl md:w-full w-2/3 max-md:pl-3 max-sm:w-11/12">
+            <p className="text-justify text-xl max-md:pl-3 w-11/12 md:w-full">
               I am a {calcYears(BIRTH)} years old Brazilian programmer, a
               full-stack web developer and a system engineer, making native
               apps. I also like photography, music, cinema, all sorts of
