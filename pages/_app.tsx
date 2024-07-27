@@ -20,7 +20,7 @@ const App: AppType = ({ Component, pageProps }) => {
         <div className="sticky top-0 w-screen z-[999]">
           <Header />
         </div>
-        <main className={`${GeistSans.className} min-h-[93vh]`}>
+        <main className={`${GeistSans.className} min-h-[93vh] pt-24`}>
           <Component {...pageProps} />
         </main>
       </NextUIProvider>

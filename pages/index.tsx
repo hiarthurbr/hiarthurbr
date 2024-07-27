@@ -141,7 +141,7 @@ const Index = () => {
     <>
       <div className="w-full min-h-full select-none transition-all duration-700 grid max-4xl:grid-flow-row grid-flow-col">
         <div className="flex flex-col justify-center">
-          <div className="text-left relative max-w-3xl 2xl:ml-12 mb-12 mt-24 transition-all duration-1000 *:transition-all *:duration-1000">
+          <div className="text-left relative max-w-3xl 2xl:ml-12 mb-12">
             <div className="md:py-8 py-4 max-md:pl-4 max-md:-translate-y-2 max-lg:-translate-y-4">
               <h2 className="font-extrabold pl-4 text-3xl md:text-5xl">
                 Hi! I am
