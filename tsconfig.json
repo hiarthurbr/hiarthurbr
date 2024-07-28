@@ -18,11 +18,11 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@styles/*": ["styles/*"],
-      "@components/*": ["components/*"],
-      "@lib/*": ["lib/*"],
-      "@assets/*": ["assets/*"],
-      "@public/*": ["public/*"],
+      "@styles/*": ["src/styles/*"],
+      "@components/*": ["src/components/*"],
+      "@lib/*": ["src/lib/*"],
+      "@assets/*": ["src/assets/*"],
+      "@public/*": ["src/public/*"],
       "@global": ["global.d.ts"]
     },
     "plugins": [
@@ -31,18 +31,6 @@
       }
     ]
   },
-  "include": [
-    "src",
-    "global.d.ts",
-    "next-env.d.ts",
-    "**/*.ts",
-    "public",
-    "styles",
-    "pages",
-    "components",
-    "lib",
-    "pages/minigames",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["src", "global.d.ts", "next-env.d.ts", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
