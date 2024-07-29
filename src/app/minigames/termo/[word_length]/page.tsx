@@ -53,19 +53,13 @@ const Termo = ({
           href={`/minigames/termo/${params.word_length}/uno`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
-          <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-700 bg-zinc-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              U
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-lime-600 bg-lime-500 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              N
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-yellow-500 bg-yellow-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              O
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
+          <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit *:w-14 *:py-2 *:aspect-1 *:uppercase *:rounded-lg *:text-white *:font-bold *:text-3xl *:text-center">
+            <span className="dark:bg-zinc-700 bg-zinc-400">U</span>
+            <span className="dark:bg-lime-600 bg-lime-500">N</span>
+            <span className="dark:bg-yellow-500 bg-yellow-400">O</span>
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
           </div>
         </Link>
 
@@ -107,53 +101,29 @@ const Termo = ({
           href={`/minigames/termo/${params.word_length}/trio`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
-          <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
-            <span className="w-14 py-2 aspect-1 dark:bg-lime-600 bg-lime-500 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              T
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-yellow-500 bg-yellow-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              R
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-yellow-500 bg-yellow-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              I
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-700 bg-zinc-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              O
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
+          <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit *:w-14 *:py-2 *:aspect-1 *:uppercase *:rounded-lg *:text-white *:font-bold *:text-3xl *:text-center">
+            <span className="dark:bg-lime-600 bg-lime-500">T</span>
+            <span className="dark:bg-yellow-500 bg-yellow-400">R</span>
+            <span className="dark:bg-yellow-500 bg-yellow-400">I</span>
+            <span className="dark:bg-zinc-700 bg-zinc-400">O</span>
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
           </div>
-          <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
-            <span className="w-14 py-2 aspect-1 dark:bg-lime-600 bg-lime-500 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              T
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-700 bg-zinc-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              R
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-yellow-500 bg-yellow-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              I
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-700 bg-zinc-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              O
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
+          <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit *:w-14 *:py-2 *:aspect-1 *:uppercase *:rounded-lg *:text-white *:font-bold *:text-3xl *:text-center">
+            <span className="dark:bg-lime-600 bg-lime-500">T</span>
+            <span className="dark:bg-zinc-700 bg-zinc-400">R</span>
+            <span className="dark:bg-yellow-500 bg-yellow-400">I</span>
+            <span className="dark:bg-zinc-700 bg-zinc-400">O</span>
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
           </div>
-          <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
-            <span className="w-14 py-2 aspect-1 dark:bg-yellow-500 bg-yellow-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              T
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-lime-600 bg-lime-500 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              R
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-700 bg-zinc-400 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              I
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-lime-600 bg-lime-500 text-white font-bold text-3xl text-center uppercase rounded-lg">
-              O
-            </span>
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
-            <span className="w-14 py-2 aspect-1 dark:bg-zinc-800 bg-zinc-200 text-white font-bold text-3xl text-center uppercase rounded-lg" />
+          <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit *:w-14 *:py-2 *:aspect-1 *:uppercase *:rounded-lg *:text-white *:font-bold *:text-3xl *:text-center">
+            <span className="dark:bg-yellow-500 bg-yellow-400">T</span>
+            <span className="dark:bg-lime-600 bg-lime-500">R</span>
+            <span className="dark:bg-zinc-700 bg-zinc-400">I</span>
+            <span className="dark:bg-lime-600 bg-lime-500">O</span>
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
+            <span className="dark:bg-zinc-800 bg-zinc-200" />
           </div>
         </Link>
 
