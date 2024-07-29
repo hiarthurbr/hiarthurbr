@@ -4,7 +4,7 @@ import Link from "next/link";
 const Minigames = () => {
   return (
     <div className="select-none">
-      <h1 className="flex flex-row items-center font-bold place-self-start">
+      <h1 className="flex flex-row items-center font-bold place-self-start text-5xl justify-center">
         Minigames
         <Chip
           variant="shadow"

@@ -1,6 +1,8 @@
-import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+"use client";
+import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Image } from "@nextui-org/image";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useReducer } from "react";
 // import { GeistMono } from 'geist/font/mono';
 
@@ -98,7 +100,7 @@ declare global {
   }
 }
 
-const Index = () => {
+export default function Home() {
   const router = useRouter();
   const [{ konami, keys }, dispatch_key] = useReducer(
     (state: { konami: boolean; keys: Keys[] }, action: { type: Keys }) => {
@@ -139,7 +141,7 @@ const Index = () => {
 
   return (
     <>
-      <div className="w-full min-h-full select-none transition-all duration-700 grid max-4xl:grid-flow-row grid-flow-col">
+      <div className="w-full min-h-full select-none transition-all duration-700 grid max-4xl:grid-flow-row grid-flow-col px-2 md:px-12">
         <div className="flex flex-col justify-center">
           <div className="text-left relative max-w-3xl 2xl:ml-12 mb-12">
             <div className="md:py-8 py-4 max-md:pl-4 max-md:-translate-y-2 max-lg:-translate-y-4">
@@ -179,7 +181,9 @@ const Index = () => {
           </div>
         </div>
         <div className="flex flex-col col-span-3 4xl:pt-24">
-          <h2 className="pb-8 text-2xl font-black">Some projects I made</h2>
+          <h2 className="pb-8 text-2xl font-black text-center">
+            Some projects I made
+          </h2>
           <div className="grid grid-cols-[repeat(auto-fit,_minmax(20rem,_1fr))] place-items-center gap-3">
             {PROJECTS.map(({ link, image, delay, title, description }) => (
               <Card
@@ -191,6 +195,7 @@ const Index = () => {
                 }}
                 as={NextLink}
                 href={link}
+                target="_blank"
                 rel="noopener noreferrer"
                 key={title}
               >
@@ -219,6 +224,4 @@ const Index = () => {
       {/* <Gaming className="fill-black dark:fill-white sticky bottom-0 right-0 w-20 h-20 bg-slate-800 p-4 rounded-2xl" /> */}
     </>
   );
-};
-
-export default Index;
+}

@@ -1,10 +1,10 @@
+import { Button } from "@nextui-org/button";
 import {
-  Button,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from "@nextui-org/react";
+} from "@nextui-org/navbar";
 import NextLink from "next/link";
 import Darkmode from "./DarkMode";
 

@@ -1,3 +1,4 @@
+"use client";
 import {
   ArrowDown,
   Circle,
@@ -126,7 +127,7 @@ const QUESTION: QuestionProps = {
   ],
 };
 
-export default function Test() {
+export default function Test({ params }: { params: { question_id: string } }) {
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <div className="min-h-[36rem] 2lg:w-7/12 w-11/12 pb-12">

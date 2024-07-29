@@ -1,21 +1,22 @@
+"use client";
 import { Clipboard, Exclamation, PaperClip } from "@components/svgs";
 import type { Resume, ResumeIndex, ResumeLink } from "@global";
 import axios from "@lib/axios";
 import copyToClipboard from "@lib/copyToClipboard";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const warnDialog = "warn-dialog";
 
-type StaticProps = Awaited<ReturnType<typeof getStaticProps>>["props"];
-
-export default function RPC(props: StaticProps) {
-  const router = useRouter();
-  const params = props.params ?? router.query;
+export default function RPC({
+  params,
+}: {
+  params: { type: string; resume: string };
+}) {
   const [visible, setVisible] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const [copiedSuccessful, setCopiedSuccess] = useState<boolean | null>(null);
   const [title, setTitle] = useState<Resume["title"]>("");
+  const [warn, setWarn] = useState<string | undefined>(undefined);
   const [resume, setResume] = useState<Resume["chapters"]>({});
   const [origin, setOrigin] = useState<Resume["origin"]>("");
   const [isDialogOpen, setDialog] = useState<boolean>(false);
@@ -26,18 +27,30 @@ export default function RPC(props: StaticProps) {
       : sessionStorage.getItem(warnDialog) !== "closed" ?? true);
 
   useEffect(() => {
-    if (typeof params.resume === "undefined") return;
-    if (props.hasWarn)
-      setDialog(
-        typeof sessionStorage === "undefined"
-          ? true
-          : sessionStorage.getItem(warnDialog) !== "closed" ?? true,
-      );
-    const { title, chapters, origin } = props.resume;
-    setTitle(title);
-    setResume(chapters);
-    setOrigin(origin);
-  }, [params, props]);
+    axios
+      .get(`/summaries/${params.type}/${params.resume}.json`)
+      .then((req) => JSON.parse(req.data) as Resume)
+      .then((resume) => {
+        const { title, chapters, origin } = resume;
+        setTitle(title);
+        setResume(chapters);
+        setOrigin(origin);
+      });
+    const index = axios
+      .get("/summaries/summaries.json")
+      .then((req) => JSON.parse(req.data)[params.type] as ResumeIndex)
+      .then((req) => {
+        const [, , hasWarn, warn] = req;
+        if (hasWarn) {
+          setDialog(
+            typeof sessionStorage === "undefined"
+              ? true
+              : sessionStorage.getItem(warnDialog) !== "closed" ?? true,
+          );
+          setWarn(warn);
+        }
+      });
+  }, [params]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: should update when resume changes
   useEffect(() => {
@@ -70,7 +83,7 @@ export default function RPC(props: StaticProps) {
 
   return (
     <>
-      <article className="prose dark:prose-invert select-none">
+      <article className="prose dark:prose-invert select-none mx-auto py-8">
         <div
           className={`bg-red-500 dark:bg-red-700 dark:saturate-[.8] bg-opacity-60 dark:bg-opacity-50 dark:border-opacity-30 backdrop-blur-[8px] dark:border-red-700 border-red-500 border-[6px] border-opacity-40 rounded-3xl h-14 flex w-full max-w-screen-lg left-2/4 -translate-x-2/4 flex-wrap px-4 md:px-6 max-md:h-28 ${
             isDialogOpen ? "fixed" : "hidden"
@@ -84,7 +97,7 @@ export default function RPC(props: StaticProps) {
               Atenção!
             </strong>
             <p className="font-xl font-semibold pl-24 mt-2 max-md:mt-10 max-md:pl-0 max-md:text-left md:max-lg:pl-20 md:whitespace-nowrap pr-4">
-              {props.warn}
+              {warn}
             </p>
             <div className="text-2xl font-extrabold absolute right-1 top-0.5">
               <button
@@ -204,56 +217,6 @@ export default function RPC(props: StaticProps) {
       </article>
     </>
   );
-}
-
-interface GetStaticProps {
-  params?: Record<string, string>;
-  locale?: string;
-  locales?: string[];
-  defaultLocale?: string;
-}
-
-export async function getStaticProps(context: GetStaticProps) {
-  try {
-    const resume = require(
-      `public/summaries/${context.params?.type}/${context.params?.resume}.json`,
-    ) as Resume;
-    const [, , hasWarn, warn] = require("public/summaries/summaries.json")[
-      context.params!.type
-    ] as ResumeIndex;
-    return {
-      props: {
-        resume,
-        hasWarn,
-        warn: hasWarn ? warn : null,
-        params: {
-          type: context.params?.type,
-          resume: context.params?.resume,
-        },
-      },
-    };
-  } catch (e) {
-    console.error("Error while parsing resume:", e);
-    console.log("Trying to fetch from latest deployed version");
-    const request = await axios.get(
-      `/summaries/${context.params?.type}/${context.params?.resume}.json`,
-    );
-    const [, , hasWarn, warn] = JSON.parse(
-      await axios.get("/summaries/summaries.json"),
-    )[context.params!.type] as ResumeIndex;
-    const resume = JSON.parse(request.data) as Resume;
-    return {
-      props: {
-        resume,
-        hasWarn,
-        warn: hasWarn ? warn : null,
-        params: {
-          type: context.params?.type,
-          resume: context.params?.resume,
-        },
-      },
-    };
-  }
 }
 
 interface GetStaticPaths {

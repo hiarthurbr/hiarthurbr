@@ -1,0 +1,9 @@
+{
+  "buildCommand": "bun run build",
+  "crons": [
+    {
+      "path": "/minigames/termo/words",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
-import { Switch } from "@nextui-org/react";
-import { useEffect, useRef, useState } from "react";
+"use client";
+import { Switch } from "@nextui-org/switch";
+import { useEffect, useState } from "react";
 import { Moon, Sun } from "./svgs";
 
 export default function DarkMode() {

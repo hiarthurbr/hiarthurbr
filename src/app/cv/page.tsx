@@ -1,3 +1,4 @@
+"use client";
 import { Anchor } from "@components/svgs";
 import {
   Card,
@@ -149,7 +150,7 @@ const CV = () => {
     .otherwise(() => <About />);
 
   return (
-    <div className="w-full max-w-7xl max-xl:max-w-2xl max-sm:px-0 max-xl:px-8 max-sm:max-w-full select-none flex flex-row max-xl:flex-col justify-center items-center gap-10 dark:bg-slate-900 bg-slate-300 max-xl:rounded-xl rounded-2xl shadow-2xl bg-opacity-75 backdrop-blur-sm p-16 transition-all duration-500">
+    <div className="w-full max-w-7xl max-xl:max-w-2xl max-sm:px-0 max-xl:px-8 max-sm:max-w-full select-none flex flex-row max-xl:flex-col justify-center items-center gap-10 dark:bg-slate-900 bg-slate-300 max-xl:rounded-xl rounded-2xl shadow-2xl bg-opacity-75 backdrop-blur-sm p-16 transition-all duration-500 mx-auto h-full">
       <div className="relative w-fit h-fit">
         <div className="-animate-[spin_30s_linear_infinite] absolute top-0 left-0 z-10">
           <Image

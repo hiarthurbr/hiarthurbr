@@ -272,22 +272,22 @@ export default function Termo({
     }
 
     for (const [i, c] of canvasRefs.entries()) {
-      c.current.confetti =
-        c.current.confetti || create(c.current, { resize: false });
+      // c.current.confetti =
+      //   c.current.confetti || create(c.current, { resize: false });
       if (
         globalStatus.won[i][0] &&
         globalStatus.won[i][1] === globalStatus.round_num - 1
       ) {
         setTimeout(
           () => {
-            c.current.confetti!({
-              spread: 100,
-              origin: { y: 1 },
-              gravity: 0.5,
-              particleCount: 200,
-              startVelocity: 25,
-              ticks: 1000,
-            });
+            // c.current.confetti!({
+            //   spread: 100,
+            //   origin: { y: 1 },
+            //   gravity: 0.5,
+            //   particleCount: 200,
+            //   startVelocity: 25,
+            //   ticks: 1000,
+            // });
           },
           (globalStatus.WORD_LENGTH + 1) * base_timer,
         );

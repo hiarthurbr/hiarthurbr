@@ -1,7 +1,3 @@
-import million from 'million/compiler';
-// @ts-check
-import axios from "axios";
-
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
@@ -22,6 +18,4 @@ const config = {
   // }
 };
 
-export default million.next(
-  config, { auto: { threshold: 0.005 }, rsc: true, optimize: true }
-);
+export default config;
