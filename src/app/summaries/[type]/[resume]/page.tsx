@@ -219,70 +219,70 @@ export default function RPC({
   );
 }
 
-interface GetStaticPaths {
-  paths: Array<{ params: { type: string; resume: string } }>;
-  fallback?: boolean | "blocking";
-}
+// interface GetStaticPaths {
+//   paths: Array<{ params: { type: string; resume: string } }>;
+//   fallback?: boolean | "blocking";
+// }
 
-export async function getStaticPaths(): Promise<GetStaticPaths> {
-  try {
-    const json = require("public/summaries/summaries.json") as ResumeLink;
-    const summaryTypes = Object.keys(json);
-    const summaries: Array<{ params: { type: string; resume: string } }>[] =
-      summaryTypes.map((index) => {
-        const s: Array<{ params: { type: string; resume: string } }> = [];
-        json[index][1].forEach((i) => {
-          s.push({ params: { type: index, resume: i.link } });
-        });
-        return s;
-      });
+// export async function getStaticPaths(): Promise<GetStaticPaths> {
+//   try {
+//     const json = require("public/summaries/summaries.json") as ResumeLink;
+//     const summaryTypes = Object.keys(json);
+//     const summaries: Array<{ params: { type: string; resume: string } }>[] =
+//       summaryTypes.map((index) => {
+//         const s: Array<{ params: { type: string; resume: string } }> = [];
+//         json[index][1].forEach((i) => {
+//           s.push({ params: { type: index, resume: i.link } });
+//         });
+//         return s;
+//       });
 
-    const flattenSummaries: Array<{
-      params: { type: string; resume: string };
-    }> = [];
+//     const flattenSummaries: Array<{
+//       params: { type: string; resume: string };
+//     }> = [];
 
-    summaries.forEach((i) => {
-      i.forEach((o) => flattenSummaries.push(o));
-    });
+//     summaries.forEach((i) => {
+//       i.forEach((o) => flattenSummaries.push(o));
+//     });
 
-    return {
-      paths: flattenSummaries,
-      fallback: false,
-    };
-  } catch (e) {
-    try {
-      console.error("Error while parsing local files:", e);
-      console.log("Trying to parse from latest deployed version.");
-      const request = await axios.get("/summaries/summaries.json");
-      const json = JSON.parse(request.data) as ResumeLink;
-      const summaryTypes = Object.keys(json);
-      const summaries: Array<{ params: { type: string; resume: string } }>[] =
-        summaryTypes.map((index) => {
-          const s: Array<{ params: { type: string; resume: string } }> = [];
-          json[index][1].forEach((i) => {
-            s.push({ params: { type: index, resume: i.link } });
-          });
-          return s;
-        });
+//     return {
+//       paths: flattenSummaries,
+//       fallback: false,
+//     };
+//   } catch (e) {
+//     try {
+//       console.error("Error while parsing local files:", e);
+//       console.log("Trying to parse from latest deployed version.");
+//       const request = await axios.get("/summaries/summaries.json");
+//       const json = JSON.parse(request.data) as ResumeLink;
+//       const summaryTypes = Object.keys(json);
+//       const summaries: Array<{ params: { type: string; resume: string } }>[] =
+//         summaryTypes.map((index) => {
+//           const s: Array<{ params: { type: string; resume: string } }> = [];
+//           json[index][1].forEach((i) => {
+//             s.push({ params: { type: index, resume: i.link } });
+//           });
+//           return s;
+//         });
 
-      const flattenSummaries: Array<{
-        params: { type: string; resume: string };
-      }> = [];
+//       const flattenSummaries: Array<{
+//         params: { type: string; resume: string };
+//       }> = [];
 
-      summaries.forEach((i) => {
-        i.forEach((o) => flattenSummaries.push(o));
-      });
+//       summaries.forEach((i) => {
+//         i.forEach((o) => flattenSummaries.push(o));
+//       });
 
-      return {
-        paths: flattenSummaries,
-        fallback: false,
-      };
-    } catch (e) {
-      console.error("Error while parsing summaries, returning empty paths:", e);
-      return {
-        paths: [],
-        fallback: false,
-      };
-    }
-  }
-}
+//       return {
+//         paths: flattenSummaries,
+//         fallback: false,
+//       };
+//     } catch (e) {
+//       console.error("Error while parsing summaries, returning empty paths:", e);
+//       return {
+//         paths: [],
+//         fallback: false,
+//       };
+//     }
+//   }
+// }
