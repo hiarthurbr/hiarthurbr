@@ -1,13 +1,35 @@
 import { DuckEmoji } from "@components/svgs";
+import type { TermoMap } from "@lib/types";
 import { Chip } from "@nextui-org/react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-const Termo = () => {
+const title_map = {
+  "4tro": (
+    <span className="flex flex-row items-center text-5xl">
+      <DuckEmoji className="w-12 h-12" />
+      tro
+    </span>
+  ),
+  cinco: <span className="flex flex-row items-center text-5xl">Cinco</span>,
+  sextou: <span className="flex flex-row items-center text-5xl">Sextou</span>,
+} satisfies Record<keyof TermoMap["word_length"], React.ReactNode>;
+
+const Termo = ({
+  params,
+}: {
+  params: {
+    word_length: keyof TermoMap["word_length"];
+  };
+}) => {
+  const title = title_map[params.word_length];
+
+  if (title == null) return notFound();
+
   return (
     <div className="select-none flex flex-col justify-center items-center w-full">
       <h1 className="flex flex-row items-center font-bold">
-        <DuckEmoji className="w-12 h-12" />
-        tro
+        {title}
         <Chip
           variant="shadow"
           classNames={{
@@ -19,11 +41,13 @@ const Termo = () => {
           Alpha
         </Chip>
       </h1>
-      <h2 className="text-2xl font-bold my-6">Selecione o modo de jogo:</h2>
-      <p className="px-5 py-3 bg-red-600 bg-opacity-20 border-red-600 border-3 border-opacity-70 rounded-xl font-semibold">
-        <span className="font-extrabold">Aviso: </span>Termo atualmente não é
-        compatível com dispositivos móveis.
-      </p>
+      <div className="flex flex-col items-center pb-8">
+        <h2 className="text-2xl font-bold my-6">Selecione o modo de jogo:</h2>
+        <p className="px-5 py-3 bg-red-600 bg-opacity-20 border-red-600 border-3 border-opacity-70 rounded-xl font-semibold">
+          <span className="font-extrabold">Aviso: </span>Termo atualmente não é
+          compatível com dispositivos móveis.
+        </p>
+      </div>
       <div className="min-h-full flex flex-row items-center justify-center gap-16">
         <Link
           href="/minigames/termo/4tro/uno"

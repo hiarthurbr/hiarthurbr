@@ -1,3 +1,5 @@
+import { map } from "./const";
+
 export enum LetterStatus {
   UNTESTED = 0,
   WRONG_LETTER = 1,
@@ -67,3 +69,5 @@ export function isError(e: unknown): e is WordError {
     (e as WordError) < WordError.INSTANCE
   );
 }
+
+export type TermoMap = typeof map;

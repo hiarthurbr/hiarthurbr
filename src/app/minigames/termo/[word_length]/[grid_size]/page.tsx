@@ -4,126 +4,12 @@ import five_letter_words from "@assets/5-letter-words.json";
 import six_letter_words from "@assets/6-letter-words.json";
 import TermoLoading from "@components/TermoLoading";
 import Termo from "@components/Termo";
-import type { NonEmptyArray } from "@lib/types";
+import type { NonEmptyArray, TermoMap } from "@lib/types";
 import { useEffect, useMemo, useState } from "react";
 import { notFound } from "next/navigation";
-
-const layout_map = Object.freeze({
-  4: {
-    1: [[null]],
-    2: [[null, null]],
-    3: [[null, null], [null]],
-    4: [
-      [null, null],
-      [null, null],
-    ],
-  },
-  5: {
-    1: [[null]],
-    2: [[null, null]],
-    3: [[null, null], [null]],
-    4: [
-      [null, null],
-      [null, null],
-    ],
-  },
-  6: {
-    1: [[null]],
-    2: [[null, null]],
-    3: [[null, null], [null]],
-    4: [
-      [null, null],
-      [null, null],
-    ],
-  },
-} as const);
-
-const max_tries_map = Object.freeze({
-  4: {
-    1: {
-      easy: 8,
-      normal: 6,
-      hard: 4,
-    },
-    2: {
-      easy: 10,
-      normal: 7,
-      hard: 5,
-    },
-    3: {
-      easy: 11,
-      normal: 8,
-      hard: 6,
-    },
-    4: {
-      easy: 13,
-      normal: 9,
-      hard: 6,
-    },
-  },
-  5: {
-    1: {
-      easy: 8,
-      normal: 6,
-      hard: 4,
-    },
-    2: {
-      easy: 10,
-      normal: 7,
-      hard: 5,
-    },
-    3: {
-      easy: 11,
-      normal: 8,
-      hard: 6,
-    },
-    4: {
-      easy: 13,
-      normal: 9,
-      hard: 6,
-    },
-  },
-  6: {
-    1: {
-      easy: 8,
-      normal: 6,
-      hard: 4,
-    },
-    2: {
-      easy: 10,
-      normal: 7,
-      hard: 5,
-    },
-    3: {
-      easy: 11,
-      normal: 8,
-      hard: 6,
-    },
-    4: {
-      easy: 13,
-      normal: 9,
-      hard: 6,
-    },
-  },
-} as const);
-
-const map = Object.freeze({
-  word_length: {
-    "4tro": 4,
-    cinco: 5,
-    sextou: 6,
-  },
-  grid_size: {
-    uno: 1,
-    duo: 2,
-    trio: 3,
-    quatro: 4,
-  },
-} as const);
+import { layout_map, map, max_tries_map } from "@lib/const";
 
 const default_difficulty = "normal" as const;
-
-type TermoMap = typeof map;
 
 export default function TermoGridView({
   params,
