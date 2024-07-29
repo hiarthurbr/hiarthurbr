@@ -50,7 +50,7 @@ const Termo = ({
       </div>
       <div className="min-h-full flex flex-row items-center justify-center gap-16">
         <Link
-          href="/minigames/termo/4tro/uno"
+          href={`/minigames/termo/${params.word_length}/uno`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
           <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
@@ -70,7 +70,7 @@ const Termo = ({
         </Link>
 
         <Link
-          href="/minigames/termo/4tro/duo"
+          href={`/minigames/termo/${params.word_length}/duo`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
           <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
@@ -104,7 +104,7 @@ const Termo = ({
         </Link>
 
         <Link
-          href="/minigames/termo/4tro/trio"
+          href={`/minigames/termo/${params.word_length}/trio`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
           <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
@@ -158,7 +158,7 @@ const Termo = ({
         </Link>
 
         <Link
-          href="/minigames/termo/4tro/quatro"
+          href={`/minigames/termo/${params.word_length}/quatro`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
           <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
