@@ -14,7 +14,18 @@ export async function GET(request: NextRequest) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
-  const selected_words = { ...gen_words(), at: "cron" };
+  const now = new Date();
+  const selected_words = {
+    ...gen_words(),
+    by: "cron",
+    at: now.getTime(),
+    date: now.toLocaleString(),
+  };
 
-  return NextResponse.json(await kv.set(WORD_KEY, selected_words));
+  return new NextResponse(
+    (await kv.set(WORD_KEY, selected_words)) as "OK" | null,
+    {
+      status: 201,
+    },
+  );
 }
