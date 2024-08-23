@@ -1,6 +1,7 @@
 import { DuckEmoji } from "@components/svgs";
 import type { TermoMap } from "@lib/types";
 import { Chip } from "@nextui-org/react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -15,13 +16,13 @@ const title_map = {
   sextou: <span className="flex flex-row items-center text-5xl">Sextou</span>,
 } satisfies Record<keyof TermoMap["word_length"], React.ReactNode>;
 
-const Termo = ({
+export default function Termo({
   params,
 }: {
   params: {
     word_length: keyof TermoMap["word_length"];
   };
-}) => {
+}) {
   const title = title_map[params.word_length];
 
   if (title == null) return notFound();
@@ -215,6 +216,10 @@ const Termo = ({
       </div>
     </div>
   );
-};
+}
 
-export default Termo;
+export const metadata: Metadata = {
+  title: "Termo",
+  description: "Descubra a palavra secreta antes que suas tentativas acabem!",
+  creator: "Arthur Bufalo",
+};

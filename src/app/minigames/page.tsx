@@ -1,7 +1,8 @@
 import { Chip } from "@nextui-org/react";
+import type { Metadata } from "next";
 import Link from "next/link";
 
-const Minigames = () => {
+export default function Minigames() {
   return (
     <div className="select-none">
       <h1 className="flex flex-row items-center font-bold place-self-start text-5xl justify-center">
@@ -41,6 +42,10 @@ const Minigames = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Minigames;
+export const metadata: Metadata = {
+  title: "Minigames",
+  description: "Jogos rápidos e divertidos para passar o tempo.",
+  creator: "Arthur Bufalo",
+};

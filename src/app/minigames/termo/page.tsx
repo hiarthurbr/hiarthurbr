@@ -1,8 +1,9 @@
 import { DuckEmoji } from "@components/svgs";
 import { Chip } from "@nextui-org/react";
+import type { Metadata } from "next";
 import Link from "next/link";
 
-const Termo = () => {
+export default function Termo() {
   return (
     <div className="select-none flex flex-col justify-center items-center w-full">
       <h1 className="flex flex-row items-center font-bold text-5xl">
@@ -88,6 +89,10 @@ const Termo = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Termo;
+export const metadata: Metadata = {
+  title: "Termo",
+  description: "Descubra a palavra secreta antes que suas tentativas acabem!",
+  creator: "Arthur Bufalo",
+};

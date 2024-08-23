@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 main {
-    color-scheme: dark light;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    color-scheme: dark light !important;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: subpixel-antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
     -webkit-text-size-adjust: 100%;
 }

@@ -2,10 +2,10 @@
 import axios from "@lib/axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import type { ResumeLink } from "@global";
+import type { SummaryLink } from "@global";
 
 export default function RPC() {
-  const [resumes, setResumes] = useState<ResumeLink | null>(null);
+  const [resumes, setResumes] = useState<SummaryLink | null>(null);
 
   useEffect(() => {
     axios.get("/summaries/summaries.json").then((response) => {

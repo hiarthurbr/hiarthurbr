@@ -4,13 +4,18 @@ import { useEffect, useState } from "react";
 import { Moon, Sun } from "./svgs";
 
 export default function DarkMode() {
-  if (typeof localStorage === "undefined") return null;
-  const [disabled, setDisabled] = useState<boolean>(
-    localStorage.getItem("theme") === null
-      ? !window.matchMedia("(prefers-color-scheme: dark)").matches
-      : localStorage.getItem("theme") === "light",
-  );
+  const [disabled, setDisabled] = useState<boolean | undefined>();
+
   useEffect(() => {
+    if (disabled == null) {
+      const value =
+        localStorage.getItem("theme") == null
+          ? !window.matchMedia("(prefers-color-scheme: dark)").matches
+          : localStorage.getItem("theme") === "light";
+      console.log();
+      setDisabled(value);
+      return;
+    }
     console.debug(disabled ? "Disabling dark mode" : "Enabling dark mode");
     if (disabled) {
       document.documentElement.classList.add("light");
