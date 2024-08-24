@@ -60,7 +60,7 @@
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "tailwindcss": "^3.4.10",
-    "typed-css-modules": "^0.7.2",
+    "typed-css-modules": "^0.9.1",
     "typescript": "^5.5.4"
   },
   "reactSnap": {
