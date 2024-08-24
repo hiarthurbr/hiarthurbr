@@ -5,6 +5,7 @@ import Header from "@components/Header";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GeistSans } from "geist/font/sans";
+import Background from "./bg";
 
 export default function RootLayout({
   children,
@@ -19,6 +20,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://arthurbr.me" />
       </head>
       <body className="dark:bg-zinc-950 dark:text-zinc-100 bg-zinc-100 text-zinc-800 m-0 p-0 transition-colors duration-1000 min-w-screen">
+        <Background />
         <Providers>
           <div className="sticky top-0 w-screen z-[999]">
             <Header />

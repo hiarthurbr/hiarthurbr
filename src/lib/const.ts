@@ -111,3 +111,9 @@ export const map = Object.freeze({
     quatro: 4,
   },
 } as const);
+
+export const WARN_DIALOG_KEY = "warn-dialog";
+export const STEP_BY_KEY = "step-by";
+export const GRID_ENABLED_KEY = "grid-enabled";
+export const DOT_SIZE_KEY = "dot-size";
+export const REFRESH_RATE_KEY = "refresh-rate";

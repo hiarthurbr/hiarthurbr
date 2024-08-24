@@ -7,6 +7,7 @@ import {
 } from "@nextui-org/navbar";
 import NextLink from "next/link";
 import Darkmode from "./DarkMode";
+import { Config } from "./Config";
 
 export default function Header() {
   const title = "Arthur Bufalo";
@@ -33,6 +34,9 @@ export default function Header() {
       <NavbarContent justify="end">
         <NavbarItem>
           <Darkmode />
+        </NavbarItem>
+        <NavbarItem>
+          <Config />
         </NavbarItem>
         <NavbarItem>
           <Button

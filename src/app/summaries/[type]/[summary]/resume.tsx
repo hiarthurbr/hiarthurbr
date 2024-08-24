@@ -2,6 +2,7 @@
 import { Clipboard, Close, Exclamation, PaperClip } from "@components/svgs";
 import type { Summary, SummaryIndex, SummaryLink } from "@global";
 import axios from "@lib/axios";
+import { WARN_DIALOG_KEY } from "@lib/const";
 import copyToClipboard from "@lib/copyToClipboard";
 import {
   Button,
@@ -12,8 +13,6 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-
-const warnDialogKey = "warn-dialog";
 
 type SummaryProps = {
   summary: Summary;
@@ -40,10 +39,12 @@ export default function SummaryElement({
   }, [chapters]);
 
   useEffect(() => {
-    if (sessionStorage.getItem(warnDialogKey) == null) {
-      sessionStorage.setItem(warnDialogKey, warn == null ? "closed" : "open");
+    if (sessionStorage.getItem(WARN_DIALOG_KEY) == null) {
+      sessionStorage.setItem(WARN_DIALOG_KEY, warn == null ? "closed" : "open");
     }
-    setDialog(warn != null && sessionStorage.getItem(warnDialogKey) === "open");
+    setDialog(
+      warn != null && sessionStorage.getItem(WARN_DIALOG_KEY) === "open",
+    );
   }, [warn]);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ export default function SummaryElement({
                 size="sm"
                 startContent={<Close />}
                 onClick={() => {
-                  sessionStorage.setItem(warnDialogKey, "closed");
+                  sessionStorage.setItem(WARN_DIALOG_KEY, "closed");
                   setDialog(false);
                 }}
                 isIconOnly
