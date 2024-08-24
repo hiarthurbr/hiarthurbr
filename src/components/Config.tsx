@@ -43,6 +43,7 @@ export function Config() {
   useLayoutEffect(() => {
     if (gridEnabled === null) return;
     localStorage.setItem(GRID_ENABLED_KEY, `${gridEnabled}`);
+    console.log("config set");
   }, [gridEnabled]);
 
   useLayoutEffect(() => {

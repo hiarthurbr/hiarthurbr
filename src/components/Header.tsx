@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <Navbar
       classNames={{
-        base: "w-11/12 md:w-5/6 mx-auto max-w-[96rem] bg-transparent backdrop-blur-sm absolute top-2 data-[hidden]:top-0",
+        base: "w-11/12 md:w-5/6 mx-auto max-w-[96rem] bg-transparent backdrop-blur-sm absolute top-2 data-[hidden]:top-0 select-none",
         wrapper:
           "dark:bg-zinc-900 bg-zinc-200 bg-opacity-70 dark:bg-opacity-70 rounded-2xl px-6 md:px-16 max-w-full",
       }}

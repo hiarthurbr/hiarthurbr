@@ -222,8 +222,12 @@ export default function Background(_: { children?: never }) {
         !/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
           navigator.userAgent,
         );
-      localStorage.setItem(GRID_ENABLED_KEY, `${isMobile ?? isMobileReader}`);
-      gridEnabled.current = isMobile ?? isMobileReader;
+      localStorage.setItem(
+        GRID_ENABLED_KEY,
+        `${!(isMobile ?? isMobileReader)}`,
+      );
+      console.log("bg set");
+      gridEnabled.current = !(isMobile ?? isMobileReader);
     } else if (enabled === "false") {
       gridEnabled.current = false;
     }

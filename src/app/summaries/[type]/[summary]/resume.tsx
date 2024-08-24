@@ -66,7 +66,7 @@ export default function SummaryElement({
       {isDialogOpen && warn != null && (
         <Navbar
           classNames={{
-            base: "w-2/3 mx-auto max-w-[64rem] bg-transparent backdrop-blur-sm fixed !translate-y-20 data-[hidden]:!translate-y-4 transition-transform",
+            base: "w-2/3 mx-auto max-w-[64rem] bg-transparent backdrop-blur-sm fixed !translate-y-20 data-[hidden]:!translate-y-4 transition-transform select-none",
             wrapper:
               "!bg-danger-300 bg-zinc-200 !bg-opacity-70 dark:bg-opacity-70 rounded-2xl max-w-full",
           }}
