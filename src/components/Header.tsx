@@ -8,6 +8,7 @@ import {
 import NextLink from "next/link";
 import Darkmode from "./DarkMode";
 import { Config } from "./Config";
+import { Exclamation } from "./svgs";
 
 export default function Header() {
   const title = "Arthur Bufalo";

@@ -261,12 +261,15 @@ export default function Background(_: { children?: never }) {
   }, []);
 
   return (
-    <div className="fixed size-full top-0 left-0">
+    <div className="fixed size-full top-0 left-0 pointer-events-none">
       <div
         ref={debug_target}
-        className="absolute top-0 left-0 z-[9999] p-4 bg-white dark:bg-black bg-opacity-75 select-none"
+        className="absolute top-0 left-0 z-[9999] p-4 bg-white dark:bg-black bg-opacity-75 select-none pointer-events-none"
       />
-      <canvas ref={canvas} className="absolute top-0 left-0 size-full" />
+      <canvas
+        ref={canvas}
+        className="absolute top-0 left-0 size-full pointer-events-none"
+      />
     </div>
   );
 }
