@@ -1,6 +1,8 @@
 import type { Summary, SummaryIndex, SummaryLink } from "@global";
 import SummaryElement from "./resume";
 import axios from "@lib/axios";
+import { OPEN_GRAPH_EMAILS } from "@lib/const";
+import type { Metadata } from "next";
 
 export default async function RPC({
   params,
@@ -59,4 +61,30 @@ export async function generateStaticParams(): Promise<GetStaticPaths> {
       return [];
     }
   }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { type: string; summary: string };
+}): Promise<Metadata> {
+  const summary = await axios
+    .get(`/summaries/${params.type}/${params.summary}.json`)
+    .then((req) => JSON.parse(req.data) as Summary);
+  const description = `Resumo de ${summary.title} em ${Object.keys(summary.chapters).length} capítulos.`;
+  const title = `${summary.title} | Resumo - Arthur Bufalo`;
+  return {
+    title,
+    description,
+    openGraph: {
+      type: "article",
+      emails: OPEN_GRAPH_EMAILS,
+      description,
+      title,
+      locale: "pt_BR",
+      countryName: "Brazil",
+      url: `https://arthurbr.me/summaries/${params.type}/${params.summary}`,
+      siteName: "Arthur Bufalo",
+    },
+  };
 }
