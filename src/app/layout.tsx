@@ -19,8 +19,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://arthurbr.me" />
         <link rel="dns-prefetch" href="https://arthurbr.me" />
       </head>
-      <body className="dark:bg-zinc-950 dark:text-zinc-100 bg-zinc-100 text-zinc-800 m-0 p-0 transition-colors duration-1000 min-w-screen">
-        <Background />
+      <body className="dark:text-zinc-100 text-zinc-800 m-0 p-0 transition-colors duration-1000 min-w-screen">
         <Providers>
           <div className="sticky top-0 w-screen z-[999]">
             <Header />
@@ -31,6 +30,7 @@ export default function RootLayout({
         </Providers>
         <SpeedInsights />
         <Analytics />
+        <Background />
       </body>
     </html>
   );

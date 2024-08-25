@@ -22,15 +22,21 @@ export function Config() {
   useEffect(() => {
     // @ts-ignore
     const isMobile = navigator.userAgentData?.mobile;
+    const gridEnabled = localStorage.getItem(GRID_ENABLED_KEY);
     const isMobileReader =
       !/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
         navigator.userAgent,
       );
+    localStorage.setItem(
+      GRID_ENABLED_KEY,
+      `${gridEnabled ?? !(isMobile ?? isMobileReader)}`,
+    );
     setStepBy(Number(localStorage.getItem(STEP_BY_KEY) ?? 25));
     setDotSize(Number(localStorage.getItem(DOT_SIZE_KEY) ?? 0.75));
     setGridEnabled(
-      localStorage.getItem(GRID_ENABLED_KEY) !==
-        `${!(isMobile ?? isMobileReader)}`,
+      gridEnabled == null
+        ? !(isMobile ?? isMobileReader)
+        : gridEnabled !== "false",
     );
     setRefreshRate(localStorage.getItem(REFRESH_RATE_KEY) ?? "normal");
   }, []);
@@ -43,7 +49,6 @@ export function Config() {
   useLayoutEffect(() => {
     if (gridEnabled === null) return;
     localStorage.setItem(GRID_ENABLED_KEY, `${gridEnabled}`);
-    console.log("config set");
   }, [gridEnabled]);
 
   useLayoutEffect(() => {

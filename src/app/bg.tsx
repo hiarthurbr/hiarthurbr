@@ -214,21 +214,7 @@ export default function Background(_: { children?: never }) {
 
   useEffect(() => {
     const enabled = localStorage.getItem(GRID_ENABLED_KEY);
-
-    if (enabled == null) {
-      // @ts-ignore
-      const isMobile = navigator.userAgentData?.mobile;
-      const isMobileReader =
-        !/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-          navigator.userAgent,
-        );
-      localStorage.setItem(
-        GRID_ENABLED_KEY,
-        `${!(isMobile ?? isMobileReader)}`,
-      );
-      console.log("bg set");
-      gridEnabled.current = !(isMobile ?? isMobileReader);
-    } else if (enabled === "false") {
+    if (enabled === "false") {
       gridEnabled.current = false;
     }
 
@@ -261,7 +247,7 @@ export default function Background(_: { children?: never }) {
   }, []);
 
   return (
-    <div className="fixed size-full top-0 left-0 pointer-events-none">
+    <div className="fixed size-full top-0 left-0 pointer-events-none -z-10 dark:bg-zinc-950 bg-zinc-100">
       <div
         ref={debug_target}
         className="absolute top-0 left-0 z-[9999] p-4 bg-white dark:bg-black bg-opacity-75 select-none pointer-events-none"
