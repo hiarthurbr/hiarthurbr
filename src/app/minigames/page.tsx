@@ -1,3 +1,4 @@
+import { OPEN_GRAPH_EMAILS } from "@lib/const";
 import { Chip } from "@nextui-org/react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -44,8 +45,19 @@ export default function Minigames() {
   );
 }
 
+const title = "Arthur Bufalo | Minigames";
+const description = "Jogos rápidos e divertidos para passar o tempo.";
 export const metadata: Metadata = {
-  title: "Minigames",
-  description: "Jogos rápidos e divertidos para passar o tempo.",
+  title,
+  description,
   creator: "Arthur Bufalo",
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    url: "https://arthurbr.me/minigames",
+    emails: OPEN_GRAPH_EMAILS,
+    locale: "pt_BR",
+    siteName: "Arthur Bufalo",
+  },
 };

@@ -1,4 +1,5 @@
 import { DuckEmoji } from "@components/svgs";
+import { OPEN_GRAPH_EMAILS } from "@lib/const";
 import { Chip } from "@nextui-org/react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -91,8 +92,22 @@ export default function Termo() {
   );
 }
 
+const title = "Arthur Bufalo | Minigames - Termo";
+const description =
+  "Descubra a palavra secreta antes que suas tentativas acabem!";
+
 export const metadata: Metadata = {
-  title: "Termo",
-  description: "Descubra a palavra secreta antes que suas tentativas acabem!",
+  title,
+  description,
   creator: "Arthur Bufalo",
+  openGraph: {
+    type: "website",
+    url: "https://arthurbr.me/minigames/termo",
+    emails: OPEN_GRAPH_EMAILS,
+    countryName: "Brazil",
+    locale: "pt-BR",
+    title,
+    description,
+    siteName: "Arthur Bufalo",
+  },
 };

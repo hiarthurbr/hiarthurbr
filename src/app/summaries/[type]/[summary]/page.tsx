@@ -30,6 +30,7 @@ export async function generateStaticParams(): Promise<GetStaticPaths> {
     const summaries: GetStaticPaths[] = summaryTypes.map((index) => {
       const s: GetStaticPaths = [];
       json[index][1].forEach((i) => {
+        if (i.name === "Local test") return;
         s.push({ type: index, summary: i.link });
       });
       return s;
@@ -46,6 +47,7 @@ export async function generateStaticParams(): Promise<GetStaticPaths> {
       const summaries: GetStaticPaths[] = summaryTypes.map((index) => {
         const s: GetStaticPaths = [];
         json[index][1].forEach((i) => {
+          if (i.name === "Local test") return;
           s.push({ type: index, summary: i.link });
         });
         return s;

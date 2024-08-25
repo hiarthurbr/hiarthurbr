@@ -117,3 +117,5 @@ export const STEP_BY_KEY = "step-by";
 export const GRID_ENABLED_KEY = "grid-enabled";
 export const DOT_SIZE_KEY = "dot-size";
 export const REFRESH_RATE_KEY = "refresh-rate";
+
+export const OPEN_GRAPH_EMAILS = ["contact@arthurbr.me", "arthurbr@cdmd.dev"];
