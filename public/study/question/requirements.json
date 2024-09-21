@@ -1,0 +1,22 @@
+{
+  "math": [
+    {
+      "id": "probability",
+      "i18n": {
+        "pt-BR": "Probabilidade"
+      }
+    },
+    {
+      "id": "fraction",
+      "i18n": {
+        "pt-BR": "Fração"
+      }
+    },
+    {
+      "id": "multiplication",
+      "i18n": {
+        "pt-BR": "Multiplicação"
+      }
+    }
+  ]
+}

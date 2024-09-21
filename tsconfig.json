@@ -22,7 +22,7 @@
       "@components/*": ["src/components/*"],
       "@lib/*": ["src/lib/*"],
       "@assets/*": ["src/assets/*"],
-      "@public/*": ["src/public/*"],
+      "@public/*": ["public/*"],
       "@global": ["global.d.ts"]
     },
     "plugins": [

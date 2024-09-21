@@ -112,10 +112,16 @@ export const map = Object.freeze({
   },
 } as const);
 
-export const WARN_DIALOG_KEY = "warn-dialog";
-export const STEP_BY_KEY = "step-by";
-export const GRID_ENABLED_KEY = "grid-enabled";
-export const DOT_SIZE_KEY = "dot-size";
-export const REFRESH_RATE_KEY = "refresh-rate";
+export const WARN_DIALOG_KEY = /*  */ "study:read:summary:warn-dialog";
+export const GRID_ENABLED_KEY = /* */ "config:grid:grid-enabled";
+export const REFRESH_RATE_KEY = /* */ "config:grid:refresh-rate";
+export const DOT_SIZE_KEY = /*     */ "config:grid:dot-size";
+export const STEP_BY_KEY = /*      */ "config:grid:step-by";
+export const VOLUME_KEY = /*       */ "study:question:speech:volume";
+export const PITCH_KEY = /*        */ "study:question:speech:pitch";
+export const VOICE_KEY = /*        */ "study:question:speech:voice";
+export const SPEECH_RATE_KEY = /*  */ "study:question:speech:rate";
+export const READ_KEY = /*         */ "study:question:speech:read";
 
 export const OPEN_GRAPH_EMAILS = ["contact@arthurbr.me", "arthurbr@cdmd.dev"];
+export const LANGUAGE = "pt-BR";

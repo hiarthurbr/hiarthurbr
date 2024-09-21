@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <Navbar
       classNames={{
-        base: "w-11/12 md:w-5/6 mx-auto max-w-[96rem] bg-transparent backdrop-blur-sm absolute top-2 data-[hidden]:top-0 select-none",
+        base: "w-11/12 md:w-5/6 mx-auto max-w-[96rem] bg-transparent backdrop-blur-sm absolute top-2 data-[hidden]:top-0 select-none *:!transition-all *:!duration-1000 !transition-all !duration-1000",
         wrapper:
           "dark:bg-zinc-900 bg-zinc-200 bg-opacity-70 dark:bg-opacity-70 rounded-2xl px-6 md:px-16 max-w-full",
       }}
@@ -39,23 +39,13 @@ export default function Header() {
         <NavbarItem>
           <Config />
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem className="*:!transition-all *:!duration-1000">
           <Button
             as={NextLink}
             href="/register"
             color="primary"
             radius="sm"
-            className="max-lg:hidden font-bold hover:text-white"
-            isDisabled
-          >
-            Registre-se
-          </Button>
-          <Button
-            as={NextLink}
-            href="/register"
-            color="primary"
-            radius="sm"
-            className="lg:hidden font-bold hover:text-white"
+            className="max-lg:size-10 max-lg:min-w-10 px-0 lg:px-4 font-bold hover:text-white"
             startContent={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +54,7 @@ export default function Header() {
                 strokeWidth={1.5}
                 stroke="currentColor"
                 role="presentation"
-                className="size-5 scale-110"
+                className="lg:hidden size-5 scale-110"
               >
                 <path
                   strokeLinecap="round"
@@ -73,9 +63,12 @@ export default function Header() {
                 />
               </svg>
             }
-            isIconOnly
             isDisabled
-          />
+          >
+            <span className="max-lg:hidden font-bold hover:text-white">
+              Registre-se
+            </span>
+          </Button>
         </NavbarItem>
       </NavbarContent>
     </Navbar>

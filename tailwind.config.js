@@ -27,6 +27,14 @@ module.exports = {
             transform: "translateY(-20px) ",
           },
         },
+        float: {
+          "0%, 100%": {
+            transform: "translateY(0px) ",
+          },
+          "50%": {
+            transform: "translateY(-5px) ",
+          },
+        },
         gradient: {
           "0%": {
             "background-position": "0% 50%",
@@ -38,6 +46,7 @@ module.exports = {
       },
       animation: {
         swing: "swing 7.5s ease-in-out infinite",
+        float: "float 7.5s ease-in-out infinite",
         gradient: "gradient 2.5s ease-out 2",
       },
     },

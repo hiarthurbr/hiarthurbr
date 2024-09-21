@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/button";
 import { Switch } from "@nextui-org/switch";
 import { Tab, Tabs } from "@nextui-org/tabs";
 import { Cog } from "./svgs";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   DOT_SIZE_KEY,
   GRID_ENABLED_KEY,
@@ -20,45 +20,51 @@ export function Config() {
   const [refreshRate, setRefreshRate] = useState<string | null>(null);
 
   useEffect(() => {
-    // @ts-ignore
-    const isMobile = navigator.userAgentData?.mobile;
-    const gridEnabled = localStorage.getItem(GRID_ENABLED_KEY);
-    const isMobileReader =
-      !/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent,
-      );
-    localStorage.setItem(
-      GRID_ENABLED_KEY,
-      `${gridEnabled ?? !(isMobile ?? isMobileReader)}`,
-    );
-    setStepBy(Number(localStorage.getItem(STEP_BY_KEY) ?? 25));
-    setDotSize(Number(localStorage.getItem(DOT_SIZE_KEY) ?? 0.75));
-    setGridEnabled(
-      gridEnabled == null
-        ? !(isMobile ?? isMobileReader)
-        : gridEnabled !== "false",
-    );
-    setRefreshRate(localStorage.getItem(REFRESH_RATE_KEY) ?? "normal");
-  }, []);
-
-  useLayoutEffect(() => {
-    if (stepBy === null) return;
-    localStorage.setItem(STEP_BY_KEY, `${stepBy}`);
+    if (stepBy === null)
+      setStepBy(Number(localStorage.getItem(STEP_BY_KEY) ?? 25));
+    else localStorage.setItem(STEP_BY_KEY, `${stepBy}`);
   }, [stepBy]);
 
-  useLayoutEffect(() => {
-    if (gridEnabled === null) return;
-    localStorage.setItem(GRID_ENABLED_KEY, `${gridEnabled}`);
+  useEffect(() => {
+    if (gridEnabled === null) {
+      // @ts-ignore
+      const isMobile: boolean | undefined = navigator.userAgentData?.mobile;
+      const gridEnabled = localStorage.getItem(GRID_ENABLED_KEY);
+      const isTouchScreen = "ontouchstart" in globalThis;
+
+      console.log(
+        { gridEnabled, isMobile, isTouchScreen },
+        gridEnabled == null
+          ? !(isMobile ?? isTouchScreen)
+          : gridEnabled !== "false",
+      );
+
+      if (gridEnabled != null) {
+        setGridEnabled(gridEnabled !== "false");
+        return;
+      }
+
+      if (isMobile != null) {
+        setGridEnabled(!isMobile);
+        localStorage.setItem(GRID_ENABLED_KEY, `${!isMobile}`);
+      }
+
+      setGridEnabled(!isTouchScreen);
+      localStorage.setItem(GRID_ENABLED_KEY, `${!isTouchScreen}`);
+    } else localStorage.setItem(GRID_ENABLED_KEY, `${gridEnabled}`);
+    console.log("gridEnabled", gridEnabled);
   }, [gridEnabled]);
 
-  useLayoutEffect(() => {
-    if (dotSize === null) return;
-    localStorage.setItem(DOT_SIZE_KEY, `${dotSize}`);
+  useEffect(() => {
+    if (dotSize === null)
+      setDotSize(Number(localStorage.getItem(DOT_SIZE_KEY) ?? 0.75));
+    else localStorage.setItem(DOT_SIZE_KEY, `${dotSize}`);
   }, [dotSize]);
 
-  useLayoutEffect(() => {
-    if (refreshRate === null) return;
-    localStorage.setItem(REFRESH_RATE_KEY, refreshRate ?? "normal");
+  useEffect(() => {
+    if (refreshRate === null)
+      setRefreshRate(localStorage.getItem(REFRESH_RATE_KEY) ?? "normal");
+    else localStorage.setItem(REFRESH_RATE_KEY, refreshRate ?? "normal");
   }, [refreshRate]);
 
   return (

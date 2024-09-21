@@ -1,0 +1,35 @@
+{
+  "category": {
+    "i18n": {
+      "pt-BR": "Categoria"
+    },
+    "options": [{ "id": "math", "i18n": { "pt-BR": "Matemática" } }]
+  },
+  "internal": {
+    "i18n": {
+      "pt-BR": "Interno"
+    },
+    "options": [
+      { "id": "is-dynamic", "i18n": { "pt-BR": "Dinâmica" } },
+      { "id": "is-dynamic-plus", "i18n": { "pt-BR": "Dinâmica+" } }
+    ]
+  },
+  "source": {
+    "i18n": {
+      "pt-BR": "Fonte"
+    },
+    "options": [{ "id": "enem", "i18n": { "pt-BR": "ENEM" } }]
+  },
+  "subject": {
+    "i18n": {
+      "pt-BR": "Matéria"
+    },
+    "options": [{ "id": "probability", "i18n": { "pt-BR": "Probabilidade" } }]
+  },
+  "year": {
+    "i18n": {
+      "pt-BR": "Ano"
+    },
+    "options": [{ "id": "2023", "i18n": { "pt-BR": "2023" } }]
+  }
+}
