@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Minigames() {
   return (
     <div className="select-none">
-      <h1 className="flex flex-row items-center font-bold place-self-start text-5xl justify-center">
+      <h1 className="w-full flex flex-row items-center font-bold place-self-start text-5xl justify-center">
         Minigames
         <Chip
           variant="shadow"

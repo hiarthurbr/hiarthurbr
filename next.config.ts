@@ -1,14 +1,27 @@
 import { withSentryConfig } from "@sentry/nextjs";
-/** @type {import("next").NextConfig} */
-const config = {
+import type { NextConfig } from "next";
+
+const config: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   amp: {
     canonicalBase: "https://arthurbr.me",
   },
   compress: true,
   crossOrigin: "anonymous",
   transpilePackages: ["geist"],
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+        ],
+      },
+    ];
+  },
   // generateBuildId: async () => {
   //   const { sha, commit } = await axios.get('https://api.github.com/repos/Ar7hurz1nh0/Ar7hurz1nh0/commits').then(d => d.data)
   //   const buildId = {

@@ -1,9 +1,11 @@
 "use client";
+import { Gaming } from "@components/svgs";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
+import { Button } from "@nextui-org/react";
 import NextLink from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 // import { GeistMono } from 'geist/font/mono';
 
 const now = Date.now();
@@ -101,43 +103,62 @@ declare global {
 }
 
 export function Home() {
-  const router = useRouter();
-  const [{ konami, keys }, dispatch_key] = useReducer(
-    (state: { konami: boolean; keys: Keys[] }, action: { type: Keys }) => {
-      if (state.konami) return state;
-      const keys = [...state.keys, action.type];
-      if (action.type !== konami_code[keys.length - 1])
-        return { ...state, keys: [] };
-      if (keys.length > konami_code.length) return { ...state, keys: [] };
-      if (keys.length < konami_code.length) return { ...state, keys };
-      if (keys.join("") === konami_code_serial) {
-        return { konami: true, keys: [] };
-      }
-      return { ...state, keys };
-    },
-    (() => {
-      return { konami: false, keys: [] };
-    })(),
+  // const router = useRouter();
+  // const [{ konami, keys }, dispatch_key] = useReducer(
+  //   (state: { konami: boolean; keys: Keys[] }, action: { type: Keys }) => {
+  //     if (state.konami) return state;
+  //     const keys = [...state.keys, action.type];
+  //     if (action.type !== konami_code[keys.length - 1])
+  //       return { ...state, keys: [] };
+  //     if (keys.length > konami_code.length) return { ...state, keys: [] };
+  //     if (keys.length < konami_code.length) return { ...state, keys };
+  //     if (keys.join("") === konami_code_serial) {
+  //       return { konami: true, keys: [] };
+  //     }
+  //     return { ...state, keys };
+  //   },
+  //   (() => {
+  //     return { konami: false, keys: [] };
+  //   })(),
+  // );
+
+  // useEffect(() => {
+  //   const callback = (e: KeyboardEvent) => {
+  //     dispatch_key({ type: e.code as Keys });
+  //   };
+  //   if (window.konami) return;
+  //   document.addEventListener("keydown", callback);
+  //   window.konami = true;
+
+  //   return () => {
+  //     document.removeEventListener("keydown", callback);
+  //   };
+  // });
+
+  // useEffect(() => {
+  //   if (konami) {
+  //     router.push("/minigames");
+  //   }
+  // }, [konami, router.push]);
+
+  const [animationDelay, setAnimationDelay] = useState(
+    () =>
+      Object.fromEntries(PROJECTS.map(({ title }) => [title, 0])) as Record<
+        string,
+        number
+      >,
   );
 
   useEffect(() => {
-    const callback = (e: KeyboardEvent) => {
-      dispatch_key({ type: e.code as Keys });
-    };
-    if (window.konami) return;
-    document.addEventListener("keydown", callback);
-    window.konami = true;
-
-    return () => {
-      document.removeEventListener("keydown", callback);
-    };
-  });
-
-  useEffect(() => {
-    if (konami) {
-      router.push("/minigames");
-    }
-  }, [konami, router.push]);
+    setAnimationDelay(
+      Object.fromEntries(
+        PROJECTS.map(({ title }) => [
+          title,
+          (performance.now() * Math.random()) % 3500,
+        ]),
+      ) as Record<string, number>,
+    );
+  }, []);
 
   return (
     <>
@@ -189,9 +210,7 @@ export function Home() {
               <Card
                 className={`w-80 h-max animate-swing delay my-5 dark:hover:text-white hover:text-black ${delay}`}
                 style={{
-                  animationDelay: `${
-                    (performance.now() * Math.random()) % 3500
-                  }ms`,
+                  animationDelay: `${animationDelay[title].toFixed(0)}ms`,
                 }}
                 as={NextLink}
                 href={link}
@@ -221,7 +240,15 @@ export function Home() {
           </div>
         </div>
       </div>
-      {/* <Gaming className="fill-black dark:fill-white sticky bottom-0 right-0 w-20 h-20 bg-slate-800 p-4 rounded-2xl" /> */}
+      <div className="sticky bottom-8 w-full flex flex-row justify-end pr-8">
+        <Button
+          startContent={<Gaming className="fill-black dark:fill-white p-1.5" />}
+          as={NextLink}
+          href="/minigames"
+          size="lg"
+          isIconOnly
+        />
+      </div>
     </>
   );
 }

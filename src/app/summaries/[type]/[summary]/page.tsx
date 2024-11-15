@@ -5,10 +5,11 @@ import { OPEN_GRAPH_EMAILS } from "@lib/const";
 import type { Metadata } from "next";
 
 export default async function RPC({
-  params,
+  params: _P,
 }: {
-  params: { type: string; summary: string };
+  params: Promise<{ type: string; summary: string }>;
 }) {
+  const params = await _P;
   const summary = await axios
     .get(`/summaries/${params.type}/${params.summary}.json`)
     .then((req) => JSON.parse(req.data) as Summary);
@@ -64,10 +65,11 @@ export async function generateStaticParams(): Promise<GetStaticPaths> {
 }
 
 export async function generateMetadata({
-  params,
+  params: _P,
 }: {
-  params: { type: string; summary: string };
+  params: Promise<{ type: string; summary: string }>;
 }): Promise<Metadata> {
+  const params = await _P;
   const summary = await axios
     .get(`/summaries/${params.type}/${params.summary}.json`)
     .then((req) => JSON.parse(req.data) as Summary);

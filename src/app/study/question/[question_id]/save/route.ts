@@ -5,7 +5,7 @@ import { writeFile } from "node:fs/promises";
 export async function PUT(
   req: NextRequest,
   context: {
-    params: { question_id: string };
+    params: Promise<{ question_id: string }>;
   },
 ): Promise<NextResponse> {
   if (process.env.NODE_ENV !== "development")
@@ -19,7 +19,7 @@ export async function PUT(
   if (question.success) {
     try {
       await writeFile(
-        `${process.cwd()}/public/study/question/questions/${context.params.question_id}.json`,
+        `${process.cwd()}/public/study/question/questions/${(await context.params).question_id}.json`,
         JSON.stringify(question.data),
       );
 

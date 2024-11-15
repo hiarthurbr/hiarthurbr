@@ -24,7 +24,9 @@ export default function RootLayout({
           <div className="sticky top-0 w-screen z-[999]">
             <Header />
           </div>
-          <main className={`${GeistSans.className} min-h-[93vh] pt-24`}>
+          <main
+            className={`${GeistSans.className} min-h-[93vh] pt-24 relative`}
+          >
             {children}
           </main>
         </Providers>

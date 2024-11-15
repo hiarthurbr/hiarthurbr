@@ -3,11 +3,12 @@ import { readQuestion } from "@components/question_inner/utils/server/read_quest
 import { notFound } from "next/navigation";
 
 export default async function Test({
-  params: { question_id },
+  params,
 }: {
-  params: { question_id: string };
+  params: Promise<{ question_id: string }>;
 }) {
-  const question = await readQuestion("ByYwyx5debI" ?? question_id);
+  const { question_id } = await params;
+  const question = await readQuestion(question_id);
 
   if (!question) {
     return notFound();

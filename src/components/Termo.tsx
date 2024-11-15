@@ -12,7 +12,7 @@ import {
 } from "@lib/types";
 import { Link, Tab, Tabs } from "@nextui-org/react";
 import styles from "@styles/termo.module.css";
-import confetti, { create } from "canvas-confetti";
+import confetti, { type create } from "canvas-confetti";
 import { useLayoutEffect, useReducer, useRef, useState } from "react";
 
 type Payload =

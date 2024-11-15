@@ -1,4 +1,4 @@
-import { map } from "./const";
+import type { map } from "./const";
 
 export enum LetterStatus {
   UNTESTED = 0,

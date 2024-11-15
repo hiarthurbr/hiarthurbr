@@ -11,14 +11,15 @@ import { layout_map, map, max_tries_map } from "@lib/const";
 
 const default_difficulty = "normal" as const;
 
-export default function TermoGridView({
-  params,
+export default async function TermoGridView({
+  params: _params,
 }: {
-  params: {
+  params: Promise<{
     word_length: keyof TermoMap["word_length"];
     grid_size: keyof TermoMap["grid_size"];
-  };
+  }>;
 }) {
+  const params = await _params;
   const [data, setData] = useState<null | Record<
     4 | 5 | 6,
     Record<1 | 2 | 3 | 4, [string, ...string[]]>

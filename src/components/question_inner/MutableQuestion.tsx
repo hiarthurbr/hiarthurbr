@@ -38,7 +38,9 @@ function AddTag(_: { children?: never }) {
         />
       </PopoverTrigger>
       <PopoverContent>
-        <Autocomplete variant="underlined"></Autocomplete>
+        <Autocomplete variant="underlined">
+          <div />
+        </Autocomplete>
       </PopoverContent>
     </Popover>
   );

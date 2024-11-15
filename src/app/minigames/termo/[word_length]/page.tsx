@@ -5,6 +5,7 @@ import { Chip } from "@nextui-org/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { use } from "react";
 
 const title_map = {
   "4tro": (
@@ -17,14 +18,15 @@ const title_map = {
   sextou: <span className="flex flex-row items-center text-5xl">Sextou</span>,
 } satisfies Record<keyof TermoMap["word_length"], React.ReactNode>;
 
-export default function Termo({
+export default async function Termo({
   params,
 }: {
-  params: {
+  params: Promise<{
     word_length: keyof TermoMap["word_length"];
-  };
+  }>;
 }) {
-  const title = title_map[params.word_length];
+  const { word_length } = await params;
+  const title = title_map[word_length];
 
   if (title == null) return notFound();
 
@@ -52,7 +54,7 @@ export default function Termo({
       </div>
       <div className="min-h-full flex flex-row items-center justify-center gap-16">
         <Link
-          href={`/minigames/termo/${params.word_length}/uno`}
+          href={`/minigames/termo/${word_length}/uno`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
           <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit *:w-14 *:py-2 *:aspect-1 *:uppercase *:rounded-lg *:text-white *:font-bold *:text-3xl *:text-center">
@@ -66,7 +68,7 @@ export default function Termo({
         </Link>
 
         <Link
-          href={`/minigames/termo/${params.word_length}/duo`}
+          href={`/minigames/termo/${word_length}/duo`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
           <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">
@@ -100,7 +102,7 @@ export default function Termo({
         </Link>
 
         <Link
-          href={`/minigames/termo/${params.word_length}/trio`}
+          href={`/minigames/termo/${word_length}/trio`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
           <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit *:w-14 *:py-2 *:aspect-1 *:uppercase *:rounded-lg *:text-white *:font-bold *:text-3xl *:text-center">
@@ -130,7 +132,7 @@ export default function Termo({
         </Link>
 
         <Link
-          href={`/minigames/termo/${params.word_length}/quatro`}
+          href={`/minigames/termo/${word_length}/quatro`}
           className="flex flex-row justify-center items-center gap-4 px-3 py-2.5 rounded-xl dark:bg-zinc-800 bg-zinc-200 shadow-xl h-fit w-fit"
         >
           <div className="flex flex-col justify-center items-center gap-1 px-3 py-2.5 rounded-xl dark:bg-zinc-900 bg-zinc-100 shadow-xl h-fit w-fit">

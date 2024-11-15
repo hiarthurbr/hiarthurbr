@@ -1,28 +1,32 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { kv } from "@vercel/kv";
 import { WORD_KEY } from "@lib/const";
-import type { gen_words } from "@lib/gen_words";
+import { gen_words } from "@lib/gen_words";
 
 export const runtime = "edge";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const now = new Date();
-  const midnight = new Date(now).setUTCHours(23, 59, 30, 0);
+  const today = `${now.getUTCDate()}-${now.getUTCMonth()}-${now.getUTCFullYear()}`;
 
-  const words = (await kv.get<
+  let words = (await kv.get<
     ReturnType<typeof gen_words> & {
-      by: "edge" | "cron";
-      at: number;
       date: string;
     }
   >(WORD_KEY))!;
 
+  if (words.date !== today) {
+    const selected_words = {
+      ...gen_words(),
+      date: today,
+    };
+    await kv.set(WORD_KEY, selected_words);
+
+    words = selected_words;
+  }
+
   const headers = {
-    "Cache-Control": `public, max-age=${Math.floor((midnight - words.at) / 1000)}, must-revalidate, immutable`,
-    Expires: new Date(
-      new Date(words.at).setUTCHours(23, 59, 30, 0),
-    ).toUTCString(),
-    Date: new Date(words.at).toUTCString(),
+    "Cache-Control": "public, max-age=31536000, immutable",
   };
 
   return NextResponse.json(words, {
