@@ -1,5 +1,5 @@
 "use client";
-import { Gaming } from "@components/svgs";
+import { Gaming, Study } from "@components/svgs";
 import { Card, CardBody, CardHeader } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { Button } from "@nextui-org/react";
@@ -163,31 +163,31 @@ export function Home() {
   return (
     <>
       <div className="w-full min-h-full select-none transition-all duration-700 grid max-4xl:grid-flow-row grid-flow-col px-2 md:px-12">
-        <div className="flex flex-col justify-center">
-          <div className="text-left relative max-w-3xl 2xl:ml-12 mb-12">
-            <div className="md:py-8 py-4 max-md:pl-4 max-md:-translate-y-2 max-lg:-translate-y-4">
-              <h2 className="font-extrabold pl-4 text-3xl md:text-5xl">
+        <div className="flex flex-col justify-center md:col-span-1 col-span-3">
+          <div className="text-left relative max-w-3xl 2xl:ml-12 mdmb-12 transition-all duration-1000">
+            <div className="lg:py-8 md:py-4 py-3 max-md:pl-4 max-md:-translate-y-2 max-lg:-translate-y-4 transition-all duration-1000">
+              <h2 className="font-extrabold pl-4 text-2xl sm:text-3xl md:text-5xl transition-all duration-1000">
                 Hi! I am
               </h2>
-              <h1 className="font-extrabold min-w-max text-5xl md:text-7xl lg:text-8xl">
+              <h1 className="font-extrabold min-w-max text-4xl sm:text-5xl md:text-7xl lg:text-8xl transition-all duration-1000">
                 Arthur Bufalo
               </h1>
             </div>
             <div className="absolute top-0 left-0 min-w-max max-md:translate-x-3">
-              <h3 className="font-extrabold opacity-20 text-5xl md:text-7xl lg:text-8xl">
+              <h3 className="font-extrabold opacity-20 text-4xl sm:text-5xl md:text-7xl lg:text-8xl transition-all duration-1000">
                 Web Developer
                 <br />
                 System Engineer
               </h3>
             </div>
-            <p className="text-justify text-xl max-md:pl-3 w-11/12 md:w-full">
+            <p className="text-justify text-xl w-full transition-all duration-1000">
               I am a {calcYears(BIRTH)} years old Brazilian programmer, a
               full-stack web developer and a system engineer, making native
               apps. I also like photography, music, cinema, all sorts of
               paintings, and to learn new things. I am always looking for new
               challenges.
             </p>
-            <div className="mt-12 mr-12 block text-right">
+            <div className="my-8 mr-12 block text-right">
               <NextLink
                 href="/cv"
                 className="py-4 px-8 rounded-lg dark:bg-zinc-200 bg-zinc-800 text-zinc-200 hover:text-zinc-200 dark:text-zinc-800 font-bold group"
@@ -240,14 +240,25 @@ export function Home() {
           </div>
         </div>
       </div>
-      <div className="sticky bottom-8 w-full flex flex-row justify-end pr-8">
-        <Button
-          startContent={<Gaming className="fill-black dark:fill-white p-1.5" />}
-          as={NextLink}
-          href="/minigames"
-          size="lg"
-          isIconOnly
-        />
+      <div className="sticky bottom-8 w-full flex flex-row justify-end md:pr-8 pr-4 pointer-events-none transition-all duration-1000">
+        <div className="flex flex-col gap-4 pointer-events-auto *:sm:size-14 *:size-12 *:rounded-large transition-all duration-1000">
+          <Button
+            startContent={
+              <Study className="fill-black dark:fill-white p-1.5" />
+            }
+            as={NextLink}
+            href="/study/questions"
+            isIconOnly
+          />
+          <Button
+            startContent={
+              <Gaming className="fill-black dark:fill-white p-1.5" />
+            }
+            as={NextLink}
+            href="/minigames"
+            isIconOnly
+          />
+        </div>
       </div>
     </>
   );

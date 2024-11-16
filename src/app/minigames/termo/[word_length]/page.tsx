@@ -5,7 +5,6 @@ import { Chip } from "@nextui-org/react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { use } from "react";
 
 const title_map = {
   "4tro": (
